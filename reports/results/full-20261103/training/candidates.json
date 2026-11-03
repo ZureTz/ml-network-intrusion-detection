@@ -1,0 +1,721 @@
+[
+  {
+    "order": 0,
+    "spec": {
+      "name": "dummy",
+      "family": "dummy",
+      "params": {}
+    },
+    "training": {
+      "seconds": 0.40589687498868443,
+      "peak_rss_bytes": 621985792,
+      "memory_sampling_incomplete": true,
+      "memory_method": "process RSS sampled every 50ms; child enumeration unavailable"
+    },
+    "warnings": [],
+    "validation": {
+      "rows": 32927,
+      "accuracy": 0.6717283688158654,
+      "precision": 0.6717283688158654,
+      "recall": 1.0,
+      "f1": 0.803633390862022,
+      "false_positive_rate": 1.0,
+      "roc_auc": 0.5,
+      "average_precision": 0.6717283688158654,
+      "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+      "confusion_matrix": [
+        [
+          0,
+          10809
+        ],
+        [
+          0,
+          22118
+        ]
+      ],
+      "class_order": [
+        "normal",
+        "attack"
+      ],
+      "per_class": {
+        "normal": {
+          "precision": null,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 10809
+        },
+        "attack": {
+          "precision": 0.6717283688158654,
+          "recall": 1.0,
+          "f1": 0.803633390862022,
+          "support": 22118
+        }
+      },
+      "macro": {
+        "precision": null,
+        "recall": 0.5,
+        "f1": 0.401816695431011
+      },
+      "threshold": 0.5,
+      "undefined_reasons": {
+        "normal.precision": "zero denominator",
+        "macro.precision": "one or more class metrics undefined"
+      }
+    },
+    "status": "completed"
+  },
+  {
+    "order": 1,
+    "spec": {
+      "name": "lr-c0.1-None",
+      "family": "logistic_regression",
+      "params": {
+        "C": 0.1,
+        "class_weight": null
+      }
+    },
+    "training": {
+      "seconds": 1.3209839169867337,
+      "peak_rss_bytes": 805601280,
+      "memory_sampling_incomplete": true,
+      "memory_method": "process RSS sampled every 50ms; child enumeration unavailable"
+    },
+    "warnings": [],
+    "validation": {
+      "rows": 32927,
+      "accuracy": 0.9338233061013758,
+      "precision": 0.919045017023244,
+      "recall": 0.9885613527443711,
+      "f1": 0.9525365396763162,
+      "false_positive_rate": 0.1781848459616986,
+      "roc_auc": 0.9837119437371934,
+      "average_precision": 0.9914418980520652,
+      "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+      "confusion_matrix": [
+        [
+          8883,
+          1926
+        ],
+        [
+          253,
+          21865
+        ]
+      ],
+      "class_order": [
+        "normal",
+        "attack"
+      ],
+      "per_class": {
+        "normal": {
+          "precision": 0.9723073555166375,
+          "recall": 0.8218151540383014,
+          "f1": 0.8907495612935573,
+          "support": 10809
+        },
+        "attack": {
+          "precision": 0.919045017023244,
+          "recall": 0.9885613527443711,
+          "f1": 0.9525365396763162,
+          "support": 22118
+        }
+      },
+      "macro": {
+        "precision": 0.9456761862699408,
+        "recall": 0.9051882533913362,
+        "f1": 0.9216430504849368
+      },
+      "threshold": 0.5,
+      "undefined_reasons": {}
+    },
+    "status": "completed"
+  },
+  {
+    "order": 2,
+    "spec": {
+      "name": "lr-c0.1-balanced",
+      "family": "logistic_regression",
+      "params": {
+        "C": 0.1,
+        "class_weight": "balanced"
+      }
+    },
+    "training": {
+      "seconds": 1.5381613749777898,
+      "peak_rss_bytes": 821149696,
+      "memory_sampling_incomplete": true,
+      "memory_method": "process RSS sampled every 50ms; child enumeration unavailable"
+    },
+    "warnings": [],
+    "validation": {
+      "rows": 32927,
+      "accuracy": 0.9304825826829046,
+      "precision": 0.9435025721315142,
+      "recall": 0.9536124423546433,
+      "f1": 0.9485305691093473,
+      "false_positive_rate": 0.11684707188454066,
+      "roc_auc": 0.9838370266290785,
+      "average_precision": 0.9916276775422003,
+      "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+      "confusion_matrix": [
+        [
+          9546,
+          1263
+        ],
+        [
+          1026,
+          21092
+        ]
+      ],
+      "class_order": [
+        "normal",
+        "attack"
+      ],
+      "per_class": {
+        "normal": {
+          "precision": 0.9029511918274687,
+          "recall": 0.8831529281154593,
+          "f1": 0.8929423319769889,
+          "support": 10809
+        },
+        "attack": {
+          "precision": 0.9435025721315142,
+          "recall": 0.9536124423546433,
+          "f1": 0.9485305691093473,
+          "support": 22118
+        }
+      },
+      "macro": {
+        "precision": 0.9232268819794915,
+        "recall": 0.9183826852350513,
+        "f1": 0.9207364505431681
+      },
+      "threshold": 0.5,
+      "undefined_reasons": {}
+    },
+    "status": "completed"
+  },
+  {
+    "order": 3,
+    "spec": {
+      "name": "lr-c1-None",
+      "family": "logistic_regression",
+      "params": {
+        "C": 1,
+        "class_weight": null
+      }
+    },
+    "training": {
+      "seconds": 2.324396583979251,
+      "peak_rss_bytes": 821313536,
+      "memory_sampling_incomplete": true,
+      "memory_method": "process RSS sampled every 50ms; child enumeration unavailable"
+    },
+    "warnings": [],
+    "validation": {
+      "rows": 32927,
+      "accuracy": 0.9346433018495459,
+      "precision": 0.9210814914796693,
+      "recall": 0.9872954154986888,
+      "f1": 0.953039759088727,
+      "false_positive_rate": 0.1730964936626885,
+      "roc_auc": 0.9842839269211737,
+      "average_precision": 0.991664600778962,
+      "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+      "confusion_matrix": [
+        [
+          8938,
+          1871
+        ],
+        [
+          281,
+          21837
+        ]
+      ],
+      "class_order": [
+        "normal",
+        "attack"
+      ],
+      "per_class": {
+        "normal": {
+          "precision": 0.9695194706584228,
+          "recall": 0.8269035063373115,
+          "f1": 0.8925504293988417,
+          "support": 10809
+        },
+        "attack": {
+          "precision": 0.9210814914796693,
+          "recall": 0.9872954154986888,
+          "f1": 0.953039759088727,
+          "support": 22118
+        }
+      },
+      "macro": {
+        "precision": 0.9453004810690461,
+        "recall": 0.9070994609180001,
+        "f1": 0.9227950942437844
+      },
+      "threshold": 0.5,
+      "undefined_reasons": {}
+    },
+    "status": "completed"
+  },
+  {
+    "order": 4,
+    "spec": {
+      "name": "lr-c1-balanced",
+      "family": "logistic_regression",
+      "params": {
+        "C": 1,
+        "class_weight": "balanced"
+      }
+    },
+    "training": {
+      "seconds": 2.427348750003148,
+      "peak_rss_bytes": 821346304,
+      "memory_sampling_incomplete": true,
+      "memory_method": "process RSS sampled every 50ms; child enumeration unavailable"
+    },
+    "warnings": [],
+    "validation": {
+      "rows": 32927,
+      "accuracy": 0.9305129528957998,
+      "precision": 0.945818345323741,
+      "recall": 0.9510353558187902,
+      "f1": 0.9484196762703458,
+      "false_positive_rate": 0.11148117309649366,
+      "roc_auc": 0.9843305402085993,
+      "average_precision": 0.9918461563259705,
+      "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+      "confusion_matrix": [
+        [
+          9604,
+          1205
+        ],
+        [
+          1083,
+          21035
+        ]
+      ],
+      "class_order": [
+        "normal",
+        "attack"
+      ],
+      "per_class": {
+        "normal": {
+          "precision": 0.8986619257041265,
+          "recall": 0.8885188269035064,
+          "f1": 0.8935615928544846,
+          "support": 10809
+        },
+        "attack": {
+          "precision": 0.945818345323741,
+          "recall": 0.9510353558187902,
+          "f1": 0.9484196762703458,
+          "support": 22118
+        }
+      },
+      "macro": {
+        "precision": 0.9222401355139338,
+        "recall": 0.9197770913611483,
+        "f1": 0.9209906345624153
+      },
+      "threshold": 0.5,
+      "undefined_reasons": {}
+    },
+    "status": "completed"
+  },
+  {
+    "order": 5,
+    "spec": {
+      "name": "lr-c10-None",
+      "family": "logistic_regression",
+      "params": {
+        "C": 10,
+        "class_weight": null
+      }
+    },
+    "training": {
+      "seconds": 3.3452025839942507,
+      "peak_rss_bytes": 821575680,
+      "memory_sampling_incomplete": true,
+      "memory_method": "process RSS sampled every 50ms; child enumeration unavailable"
+    },
+    "warnings": [],
+    "validation": {
+      "rows": 32927,
+      "accuracy": 0.935918850791144,
+      "precision": 0.9227161328488126,
+      "recall": 0.9872954154986888,
+      "f1": 0.9539140311025686,
+      "false_positive_rate": 0.1692108428161717,
+      "roc_auc": 0.9843856027817925,
+      "average_precision": 0.9913912502820015,
+      "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+      "confusion_matrix": [
+        [
+          8980,
+          1829
+        ],
+        [
+          281,
+          21837
+        ]
+      ],
+      "class_order": [
+        "normal",
+        "attack"
+      ],
+      "per_class": {
+        "normal": {
+          "precision": 0.9696577043515819,
+          "recall": 0.8307891571838283,
+          "f1": 0.8948679621325362,
+          "support": 10809
+        },
+        "attack": {
+          "precision": 0.9227161328488126,
+          "recall": 0.9872954154986888,
+          "f1": 0.9539140311025686,
+          "support": 22118
+        }
+      },
+      "macro": {
+        "precision": 0.9461869186001972,
+        "recall": 0.9090422863412586,
+        "f1": 0.9243909966175523
+      },
+      "threshold": 0.5,
+      "undefined_reasons": {}
+    },
+    "status": "completed"
+  },
+  {
+    "order": 6,
+    "spec": {
+      "name": "lr-c10-balanced",
+      "family": "logistic_regression",
+      "params": {
+        "C": 10,
+        "class_weight": "balanced"
+      }
+    },
+    "training": {
+      "seconds": 2.2495153330091853,
+      "peak_rss_bytes": 774406144,
+      "memory_sampling_incomplete": true,
+      "memory_method": "process RSS sampled every 50ms; child enumeration unavailable"
+    },
+    "warnings": [],
+    "validation": {
+      "rows": 32927,
+      "accuracy": 0.9309685060892277,
+      "precision": 0.947140732729485,
+      "recall": 0.950266751062483,
+      "f1": 0.9487011668058408,
+      "false_positive_rate": 0.10852067721343325,
+      "roc_auc": 0.9842862316520936,
+      "average_precision": 0.9914557250710461,
+      "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+      "confusion_matrix": [
+        [
+          9636,
+          1173
+        ],
+        [
+          1100,
+          21018
+        ]
+      ],
+      "class_order": [
+        "normal",
+        "attack"
+      ],
+      "per_class": {
+        "normal": {
+          "precision": 0.8975409836065574,
+          "recall": 0.8914793227865667,
+          "f1": 0.8944998839637966,
+          "support": 10809
+        },
+        "attack": {
+          "precision": 0.947140732729485,
+          "recall": 0.950266751062483,
+          "f1": 0.9487011668058408,
+          "support": 22118
+        }
+      },
+      "macro": {
+        "precision": 0.9223408581680212,
+        "recall": 0.9208730369245248,
+        "f1": 0.9216005253848187
+      },
+      "threshold": 0.5,
+      "undefined_reasons": {}
+    },
+    "status": "completed"
+  },
+  {
+    "order": 7,
+    "spec": {
+      "name": "rf-depthNone-leaf1",
+      "family": "random_forest",
+      "params": {
+        "n_estimators": 200,
+        "max_depth": null,
+        "min_samples_leaf": 1
+      }
+    },
+    "training": {
+      "seconds": 28.679192958021304,
+      "peak_rss_bytes": 1027375104,
+      "memory_sampling_incomplete": true,
+      "memory_method": "process RSS sampled every 50ms; child enumeration unavailable"
+    },
+    "warnings": [],
+    "validation": {
+      "rows": 32927,
+      "accuracy": 0.9539283870379931,
+      "precision": 0.9554317548746518,
+      "recall": 0.9769870693552762,
+      "f1": 0.9660891919079021,
+      "false_positive_rate": 0.093255620316403,
+      "roc_auc": 0.9928852057197382,
+      "average_precision": 0.9963135585470416,
+      "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+      "confusion_matrix": [
+        [
+          9801,
+          1008
+        ],
+        [
+          509,
+          21609
+        ]
+      ],
+      "class_order": [
+        "normal",
+        "attack"
+      ],
+      "per_class": {
+        "normal": {
+          "precision": 0.9506304558680893,
+          "recall": 0.906744379683597,
+          "f1": 0.9281689473933424,
+          "support": 10809
+        },
+        "attack": {
+          "precision": 0.9554317548746518,
+          "recall": 0.9769870693552762,
+          "f1": 0.9660891919079021,
+          "support": 22118
+        }
+      },
+      "macro": {
+        "precision": 0.9530311053713705,
+        "recall": 0.9418657245194366,
+        "f1": 0.9471290696506223
+      },
+      "threshold": 0.5,
+      "undefined_reasons": {}
+    },
+    "status": "completed"
+  },
+  {
+    "order": 8,
+    "spec": {
+      "name": "rf-depthNone-leaf5",
+      "family": "random_forest",
+      "params": {
+        "n_estimators": 200,
+        "max_depth": null,
+        "min_samples_leaf": 5
+      }
+    },
+    "training": {
+      "seconds": 12.425309834012296,
+      "peak_rss_bytes": 1007927296,
+      "memory_sampling_incomplete": true,
+      "memory_method": "process RSS sampled every 50ms; child enumeration unavailable"
+    },
+    "warnings": [],
+    "validation": {
+      "rows": 32927,
+      "accuracy": 0.9512861785161114,
+      "precision": 0.9702026221692491,
+      "recall": 0.9568677095578262,
+      "f1": 0.9634890284985888,
+      "false_positive_rate": 0.06013507262466463,
+      "roc_auc": 0.9927547897390635,
+      "average_precision": 0.9964278089041594,
+      "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+      "confusion_matrix": [
+        [
+          10159,
+          650
+        ],
+        [
+          954,
+          21164
+        ]
+      ],
+      "class_order": [
+        "normal",
+        "attack"
+      ],
+      "per_class": {
+        "normal": {
+          "precision": 0.9141545937190677,
+          "recall": 0.9398649273753353,
+          "f1": 0.9268314934768725,
+          "support": 10809
+        },
+        "attack": {
+          "precision": 0.9702026221692491,
+          "recall": 0.9568677095578262,
+          "f1": 0.9634890284985888,
+          "support": 22118
+        }
+      },
+      "macro": {
+        "precision": 0.9421786079441584,
+        "recall": 0.9483663184665807,
+        "f1": 0.9451602609877306
+      },
+      "threshold": 0.5,
+      "undefined_reasons": {}
+    },
+    "status": "completed"
+  },
+  {
+    "order": 9,
+    "spec": {
+      "name": "rf-depth20-leaf1",
+      "family": "random_forest",
+      "params": {
+        "n_estimators": 200,
+        "max_depth": 20,
+        "min_samples_leaf": 1
+      }
+    },
+    "training": {
+      "seconds": 15.912817750009708,
+      "peak_rss_bytes": 1008009216,
+      "memory_sampling_incomplete": true,
+      "memory_method": "process RSS sampled every 50ms; child enumeration unavailable"
+    },
+    "warnings": [],
+    "validation": {
+      "rows": 32927,
+      "accuracy": 0.9511950678774258,
+      "precision": 0.9716256610715107,
+      "recall": 0.9552400759562347,
+      "f1": 0.9633631990515925,
+      "false_positive_rate": 0.05708206124525858,
+      "roc_auc": 0.9927910380115716,
+      "average_precision": 0.9964277238454254,
+      "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+      "confusion_matrix": [
+        [
+          10192,
+          617
+        ],
+        [
+          990,
+          21128
+        ]
+      ],
+      "class_order": [
+        "normal",
+        "attack"
+      ],
+      "per_class": {
+        "normal": {
+          "precision": 0.9114648542300126,
+          "recall": 0.9429179387547414,
+          "f1": 0.9269246509935883,
+          "support": 10809
+        },
+        "attack": {
+          "precision": 0.9716256610715107,
+          "recall": 0.9552400759562347,
+          "f1": 0.9633631990515925,
+          "support": 22118
+        }
+      },
+      "macro": {
+        "precision": 0.9415452576507617,
+        "recall": 0.949079007355488,
+        "f1": 0.9451439250225904
+      },
+      "threshold": 0.5,
+      "undefined_reasons": {}
+    },
+    "status": "completed"
+  },
+  {
+    "order": 10,
+    "spec": {
+      "name": "rf-depth20-leaf5",
+      "family": "random_forest",
+      "params": {
+        "n_estimators": 200,
+        "max_depth": 20,
+        "min_samples_leaf": 5
+      }
+    },
+    "training": {
+      "seconds": 10.274484624998877,
+      "peak_rss_bytes": 879935488,
+      "memory_sampling_incomplete": true,
+      "memory_method": "process RSS sampled every 50ms; child enumeration unavailable"
+    },
+    "warnings": [],
+    "validation": {
+      "rows": 32927,
+      "accuracy": 0.949798038084247,
+      "precision": 0.9746718003432759,
+      "recall": 0.9499502667510625,
+      "f1": 0.9621522610188895,
+      "false_positive_rate": 0.05051346100471829,
+      "roc_auc": 0.9925572876842349,
+      "average_precision": 0.9963288878081924,
+      "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+      "confusion_matrix": [
+        [
+          10263,
+          546
+        ],
+        [
+          1107,
+          21011
+        ]
+      ],
+      "class_order": [
+        "normal",
+        "attack"
+      ],
+      "per_class": {
+        "normal": {
+          "precision": 0.9026385224274406,
+          "recall": 0.9494865389952817,
+          "f1": 0.9254700392262951,
+          "support": 10809
+        },
+        "attack": {
+          "precision": 0.9746718003432759,
+          "recall": 0.9499502667510625,
+          "f1": 0.9621522610188895,
+          "support": 22118
+        }
+      },
+      "macro": {
+        "precision": 0.9386551613853582,
+        "recall": 0.9497184028731721,
+        "f1": 0.9438111501225923
+      },
+      "threshold": 0.5,
+      "undefined_reasons": {}
+    },
+    "status": "completed"
+  }
+]

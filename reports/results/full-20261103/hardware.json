@@ -1,0 +1,6 @@
+{
+  "cpu": "Apple M1 Pro",
+  "source_command": "sysctl -n machdep.cpu.brand_string",
+  "logical_cpus": 8,
+  "memory_gib": 16
+}

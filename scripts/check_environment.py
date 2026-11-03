@@ -14,6 +14,9 @@ from sklearn.datasets import make_classification
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
+from threadpoolctl import threadpool_info
+
+from ml_network_intrusion_detection.common import environment
 
 
 def main() -> None:
@@ -48,7 +51,9 @@ def main() -> None:
                 "platform": platform.platform(),
                 "architecture": platform.machine(),
                 "logical_cpu_count": psutil.cpu_count(),
-                "memory_gib": round(psutil.virtual_memory().total / 1024**3, 2),
+                "memory_bytes": environment()["memory_bytes"],
+                "numpy_build_config": np.show_config(mode="dicts"),
+                "threadpools": threadpool_info(),
                 "dependencies": {name: version(name) for name in dependencies},
                 "smoke_check": "passed: fit, predict, save, load, prediction consistency",
                 "note": "合成数据仅用于环境检查，不代表入侵检测性能。",

@@ -1,0 +1,6 @@
+{
+  "files": [
+    "src/ml_network_intrusion_detection/training/metrics.py"
+  ],
+  "reason": "Confusion matrix values_format changed to d; exact integer counts in figures. No metric formula, preprocessing, model, selection or threshold change."
+}

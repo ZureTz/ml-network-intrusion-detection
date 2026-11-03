@@ -17,6 +17,7 @@ dependencies = [
     "scikit-learn>=1.9.1",
     "scipy>=1.18.1",
     "seaborn>=0.13.2",
+    "threadpoolctl>=3.7.0",
 ]
 
 [project.scripts]

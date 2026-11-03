@@ -1,0 +1,9 @@
+# 路径相对本文件；只在训练集拟合，测试集不用于选择。
+seed: 42
+threads: 4
+batch_size: 10000
+sample_size: null
+profile: full
+conflict_policy: quarantine_development
+train_csv: ../data/raw/UNSW_NB15_training-set.csv
+test_csv: ../data/raw/UNSW_NB15_testing-set.csv

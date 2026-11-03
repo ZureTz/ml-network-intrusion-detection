@@ -1,0 +1,21 @@
+{
+  "reason": "RSS child enumeration denied; retain self RSS after instrumentation repair",
+  "first_training_run": "models/full-20261103",
+  "final_training_run": "models/full-20261103-v2",
+  "all_11_validation_metrics_unchanged": true,
+  "all_3_test_metrics_unchanged": true,
+  "model_selection_unchanged": true,
+  "initial_training_seconds": {
+    "dummy": 0.41895512500195764,
+    "lr-c0.1-None": 1.3140741669922136,
+    "lr-c0.1-balanced": 1.5565764580096584,
+    "lr-c1-None": 2.3211196250049397,
+    "lr-c1-balanced": 2.420708709018072,
+    "lr-c10-None": 3.349965750006959,
+    "lr-c10-balanced": 2.2536981249868404,
+    "rf-depthNone-leaf1": 28.514925041992683,
+    "rf-depthNone-leaf5": 12.426104875019519,
+    "rf-depth20-leaf1": 15.8227827080118,
+    "rf-depth20-leaf5": 10.317431333998684
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "selection": {
+    "best": "rf-depthNone-leaf1",
+    "family_winners": {
+      "dummy": "dummy",
+      "logistic_regression": "lr-c10-None",
+      "random_forest": "rf-depthNone-leaf1"
+    },
+    "criterion": "validation attack F1 desc, FPR asc, recall desc, candidate order asc",
+    "threshold": 0.5,
+    "refit_train_validation": false
+  },
+  "selection_sha256": "19477d6e99f1295bf1d7e207723460224e26137cb7edbe66227894788cf85a8a",
+  "test_sha256": "adaf3c1cc75bc9a3674b707df24b4bf71d9d5feb80cce4aaab6762a78caf015b"
+}

@@ -1,3 +1,7 @@
+"""基于机器学习的离线网络流量入侵检测。"""
+
+
 def main() -> None:
-    print("网络流量入侵检测项目已初始化；训练和推理功能待实现。")
-    print("环境检查：uv run python scripts/check_environment.py")
+    from ml_network_intrusion_detection.cli import main as cli_main
+
+    cli_main()

@@ -1,0 +1,156 @@
+{
+  "note": "JSON local absolute paths normalized; hashes refer to original source files",
+  "sources": {
+    "training/run.json": {
+      "source": "models/full-20261103-v2/run.json",
+      "sha256": "5d84657831506d7092918fdf8136506b4e1264d6e9282881672c510ecb6f5388"
+    },
+    "training/candidates.json": {
+      "source": "models/full-20261103-v2/candidates.json",
+      "sha256": "a80c249d57bd17ae038a7e2e7cc6e2a93e6d7198863eba6d1aadda19a24b1881"
+    },
+    "training/selection.json": {
+      "source": "models/full-20261103-v2/selection.json",
+      "sha256": "19477d6e99f1295bf1d7e207723460224e26137cb7edbe66227894788cf85a8a"
+    },
+    "training/threadpools.json": {
+      "source": "models/full-20261103-v2/threadpools.json",
+      "sha256": "6b8209bafc22b0dbe1f7e818d1fa2c65ba01bde1393204a4825a3c0b2b08761c"
+    },
+    "data/audit.json": {
+      "source": "data/processed/full-20261103/audit.json",
+      "sha256": "d5466f0fbf17e48c9d1a11fc0022204ad2a8349a5a7e3feb0a775f0ff265c1da"
+    },
+    "data/manifest.json": {
+      "source": "data/processed/full-20261103/manifest.json",
+      "sha256": "1c593644d2942cc0b37c3e22468b45901e837a313b50d13524a97492aadfc52e"
+    },
+    "data/run.json": {
+      "source": "data/processed/full-20261103/run.json",
+      "sha256": "26f735274c4b8cce607b443d2add4313e8cb0cda9568c6690b5c78c3e5f8ba6f"
+    },
+    "evaluation/run.json": {
+      "source": "outputs/full-20261103-v2/run.json",
+      "sha256": "5b03fbc3a38be740f46ed9826aff575bd9b550d489afbd52383d0bba4476e4ed"
+    },
+    "evaluation/frozen_selection.json": {
+      "source": "outputs/full-20261103-v2/frozen_selection.json",
+      "sha256": "ecdb8ae1a1d672983ef08355361df76efc3ad3d012601c6c241ee4133a61cfd1"
+    },
+    "source_manifest.json": {
+      "source": "data/raw/source_manifest.json",
+      "sha256": "9e1ae5a8c8e5a07c9943fda0fabaccaffea42a4f4466554251c96d34b64cb0b7"
+    },
+    "environment.json": {
+      "source": "outputs/full-20261103-v2/environment.json",
+      "sha256": "691fc8eb994bb8a60ab6b2ae41b23618fbfe0885f2a9cc80ed201742c4970993"
+    },
+    "evaluation/dummy/metrics.json": {
+      "source": "outputs/full-20261103-v2/dummy/metrics.json",
+      "sha256": "b95824b2ffeffc34244f3e57bfa0c27ca040b2e44bff3f59a00c39137e18f1f7"
+    },
+    "evaluation/dummy/performance.json": {
+      "source": "outputs/full-20261103-v2/dummy/performance.json",
+      "sha256": "2ab3e5c4526dc678999dde9d2c3d735a103036074c1e62e44e98bad610706a20"
+    },
+    "evaluation/dummy/run.json": {
+      "source": "outputs/full-20261103-v2/dummy/run.json",
+      "sha256": "5cbb9ee71d265d82d272460a1c560addd5dc9b90b8778e3ceba257387eea2d6b"
+    },
+    "evaluation/dummy/model_metadata.json": {
+      "source": "models/full-20261103-v2/dummy/metadata.json",
+      "sha256": "0307b7d265cd67b7e957b2e3bd6abd2811d6bc9aa113fe05b68714a8d568a6c2"
+    },
+    "evaluation/dummy/confusion_matrix.png": {
+      "source": "outputs/full-20261103-v2/dummy/confusion_matrix.png",
+      "sha256": "8ea9289d3782234e2558b024721f859b23bded1d47b2b76896af96d2a22c6e30",
+      "render_note": "Integer display formatting; matrix unchanged, regenerated from metrics.json"
+    },
+    "evaluation/dummy/roc.png": {
+      "source": "outputs/full-20261103-v2/dummy/roc.png",
+      "sha256": "b74545b43a6adf718d2d4d2093455323c8bed78d0aa0d5cb642209d95dc6b3a3"
+    },
+    "evaluation/dummy/precision_recall.png": {
+      "source": "outputs/full-20261103-v2/dummy/precision_recall.png",
+      "sha256": "332b052c8279eb23508ac1344dffd0003d7c5bbe207fd4abec8bf49b60d15941"
+    },
+    "evaluation/dummy/category_breakdown.csv": {
+      "source": "outputs/full-20261103-v2/dummy/category_breakdown.csv",
+      "sha256": "9ef9c2dbb9fb39fedde5b81a32a1fd274b6c8a7a2da073b39c3bf5ca5a0fbd96"
+    },
+    "evaluation/logistic_regression/metrics.json": {
+      "source": "outputs/full-20261103-v2/logistic_regression/metrics.json",
+      "sha256": "04f3be5710a535e7783adfe1f24fc8e2268814b2e3bc96e45bd7779575cc4023"
+    },
+    "evaluation/logistic_regression/performance.json": {
+      "source": "outputs/full-20261103-v2/logistic_regression/performance.json",
+      "sha256": "f7a73c92da66a1ac787e7617646c32143de16e95d23e2e14f31229df66d8956f"
+    },
+    "evaluation/logistic_regression/run.json": {
+      "source": "outputs/full-20261103-v2/logistic_regression/run.json",
+      "sha256": "83e8726f08c9062e3b133299d0f93926b64da8a4ea074bf1c78ffd09b3f416c1"
+    },
+    "evaluation/logistic_regression/model_metadata.json": {
+      "source": "models/full-20261103-v2/lr-c10-None/metadata.json",
+      "sha256": "a429d8de92f20674c9cf5a012e388156ab6d52d502e316a79343c769c2e16d38"
+    },
+    "evaluation/logistic_regression/confusion_matrix.png": {
+      "source": "outputs/full-20261103-v2/logistic_regression/confusion_matrix.png",
+      "sha256": "f2b14768fb714b60cf659e2313b05d5934d9437f9ac7fd8bce83ce053b2fef6c",
+      "render_note": "Integer display formatting; matrix unchanged, regenerated from metrics.json"
+    },
+    "evaluation/logistic_regression/roc.png": {
+      "source": "outputs/full-20261103-v2/logistic_regression/roc.png",
+      "sha256": "1a1cb77145679d638928e144762739141d8b97a158d135da2f979d8862b558ed"
+    },
+    "evaluation/logistic_regression/precision_recall.png": {
+      "source": "outputs/full-20261103-v2/logistic_regression/precision_recall.png",
+      "sha256": "c70d276d9f93595369b462135f1086e77f28c23a296a38dcb11ea7af2c5aa6ca"
+    },
+    "evaluation/logistic_regression/category_breakdown.csv": {
+      "source": "outputs/full-20261103-v2/logistic_regression/category_breakdown.csv",
+      "sha256": "941fad059aa3870a3093a00742cfedcf072bd9ae34da2c3364d63f88244f7a4c"
+    },
+    "evaluation/random_forest/metrics.json": {
+      "source": "outputs/full-20261103-v2/random_forest/metrics.json",
+      "sha256": "89653e0d33666b8e222eb14545ec005a899eaa3a9952f4d7551a71aef133dc15"
+    },
+    "evaluation/random_forest/performance.json": {
+      "source": "outputs/full-20261103-v2/random_forest/performance.json",
+      "sha256": "e48729cc9dc1c6350a3055a12f073a931b9cf37737c92d4b18cca5d127d7f393"
+    },
+    "evaluation/random_forest/run.json": {
+      "source": "outputs/full-20261103-v2/random_forest/run.json",
+      "sha256": "a4c0d832113e52c71f4487e14531cf56f440697b25745c794ace09d11b0ace71"
+    },
+    "evaluation/random_forest/model_metadata.json": {
+      "source": "models/full-20261103-v2/rf-depthNone-leaf1/metadata.json",
+      "sha256": "4b4fd3a7d896a3a8045c2dfde77859efee582242a4595c196c559f2bf19a8676"
+    },
+    "evaluation/random_forest/confusion_matrix.png": {
+      "source": "outputs/full-20261103-v2/random_forest/confusion_matrix.png",
+      "sha256": "729b49c18bd9762c99dc81c5953af18a84c5304b499a13d1b3cd97c254362b35",
+      "render_note": "Integer display formatting; matrix unchanged, regenerated from metrics.json"
+    },
+    "evaluation/random_forest/roc.png": {
+      "source": "outputs/full-20261103-v2/random_forest/roc.png",
+      "sha256": "1c1af123c40b398e539d01a1d64c4fb8b684508ae5e0138e5e0b7e7de515c57f"
+    },
+    "evaluation/random_forest/precision_recall.png": {
+      "source": "outputs/full-20261103-v2/random_forest/precision_recall.png",
+      "sha256": "f90e185f04f8eef4381c4e28053688ad481aaad953f0b5bf301988ff6c3e755c"
+    },
+    "evaluation/random_forest/category_breakdown.csv": {
+      "source": "outputs/full-20261103-v2/random_forest/category_breakdown.csv",
+      "sha256": "f75b9fe07db32bc10af2f39a3e085192b19d9eca9b35895d9c4243f3a366e41e"
+    },
+    "verification.json": {
+      "source": "outputs/verification-full-20261103/verification.json",
+      "sha256": "c44e18bb1574bee14aee0ea423259994e1531c1253e4b840dbf781f48ea36607"
+    },
+    "predictions.csv.json": {
+      "source": "outputs/verification-full-20261103/predictions.csv.json",
+      "sha256": "d41f576ac3a78690050b941ba610aec807e4cbe4451e32b8d3afe303993fd34f"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "run_id": "smoke-20261103",
+  "kind": "prepare",
+  "status": "failed",
+  "started_at": "2026-11-03T05:43:47.091965+00:00",
+  "config": {
+    "seed": 42,
+    "threads": 2,
+    "batch_size": 10000,
+    "sample_size": 5000,
+    "profile": "smoke",
+    "train_csv": "data/raw/UNSW_NB15_training-set.csv",
+    "test_csv": "data/raw/UNSW_NB15_testing-set.csv"
+  },
+  "environment": {
+    "python": "3.12.13",
+    "platform": "macOS-27.2-arm64-arm-64bit",
+    "architecture": "arm64",
+    "logical_cpus": 8,
+    "memory_bytes": 17179869184,
+    "versions": {
+      "numpy": "2.5.4",
+      "pandas": "3.1.0",
+      "scipy": "1.18.1",
+      "scikit-learn": "1.9.1",
+      "joblib": "1.6.0",
+      "psutil": "7.2.2",
+      "pyyaml": "6.0.3"
+    },
+    "git_commit": "6961f50f2abfea640ade53b843880fe5c7cf5807",
+    "git_dirty": true
+  },
+  "error": "ValueError: development 存在同特征冲突标签，请检查 audit.json",
+  "elapsed_seconds": 0.30557333302567713
+}

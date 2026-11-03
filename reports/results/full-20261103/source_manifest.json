@@ -1,0 +1,24 @@
+{
+  "official_reference": "https://research.unsw.edu.au/projects/unsw-nb15-dataset",
+  "mirror": "https://huggingface.co/datasets/Mireu-Lab/UNSW-NB15",
+  "revision": "3eb02c4a0a29866b7abcb5ef77c45cf4fcc8f6b0",
+  "retrieved_at": "2026-11-03T05:43:45.627616+00:00",
+  "verification_limit": "Official SharePoint requires login; no official bytewise comparison",
+  "filename_mapping": "Mirror test.csv is the 175341-row official training partition; mirror train.csv is the 82332-row official testing partition",
+  "mirror_license_note": "Mirror card says GPL-3.0; original academic-use terms take precedence",
+  "usage": "Academic research; cite the five papers requested by the official dataset page",
+  "files": [
+    {
+      "filename": "UNSW_NB15_training-set.csv",
+      "url": "https://huggingface.co/datasets/Mireu-Lab/UNSW-NB15/resolve/3eb02c4a0a29866b7abcb5ef77c45cf4fcc8f6b0/test.csv",
+      "sha256": "bec7dd5ec88dc2a0ccc7a07879d338395ed7421750f675fd0339e07dfe0648fa",
+      "rows": 175341
+    },
+    {
+      "filename": "UNSW_NB15_testing-set.csv",
+      "url": "https://huggingface.co/datasets/Mireu-Lab/UNSW-NB15/resolve/3eb02c4a0a29866b7abcb5ef77c45cf4fcc8f6b0/train.csv",
+      "sha256": "734fe6642edf758f7c94d7d9149426b49d202fe8e7bf0bef47392489c3c0a559",
+      "rows": 82332
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "run_id": "logistic_regression",
+  "kind": "evaluate",
+  "status": "completed",
+  "started_at": "2026-11-03T05:49:23.635420+00:00",
+  "config": {
+    "batch_size": 10000
+  },
+  "environment": {
+    "python": "3.12.13",
+    "platform": "macOS-27.2-arm64-arm-64bit",
+    "architecture": "arm64",
+    "logical_cpus": 8,
+    "memory_bytes": 17179869184,
+    "versions": {
+      "numpy": "2.5.4",
+      "pandas": "3.1.0",
+      "scipy": "1.18.1",
+      "scikit-learn": "1.9.1",
+      "joblib": "1.6.0",
+      "psutil": "7.2.2",
+      "pyyaml": "6.0.3"
+    },
+    "git_commit": "6961f50f2abfea640ade53b843880fe5c7cf5807",
+    "git_dirty": true,
+    "source_sha256": {
+      "src/ml_network_intrusion_detection/__init__.py": "e5764db342a05c937154e2052054cd38dc7374c71ab9e5bb040f8c31b4cdee5e",
+      "src/ml_network_intrusion_detection/__main__.py": "e1f66018e1bd993671b0e3510ccd20bc5e5ecb7affb80200ae3d3a11814309e3",
+      "src/ml_network_intrusion_detection/cli.py": "b2152a271ca5c11f8526498b21050da804ddc6b483e4e4206a4f27555ad5916b",
+      "src/ml_network_intrusion_detection/common.py": "f6f880c54e6743d3c946002d4988342a817ef7a3c844038ad40bb6c0bcf74903",
+      "src/ml_network_intrusion_detection/data/__init__.py": "6e12368e5de366189653eb43ec47070c95a46f48158e8c74caaae6f42586190d",
+      "src/ml_network_intrusion_detection/data/prepare.py": "6853cf5a27cb52ff3e3ce96f0c3e70840cbee9ab1ac60cba34642233f1edc0b4",
+      "src/ml_network_intrusion_detection/data/schema.py": "3d938aeb2994d5b97c9425eb3979d4dbd49eace1654d1e892ff851754d8be922",
+      "src/ml_network_intrusion_detection/inference/__init__.py": "d55c8efc3d0b972027d6e23d18e94e01cbf4daaf8a316ee534b274c97f41c620",
+      "src/ml_network_intrusion_detection/inference/predict.py": "840d8c936a23ea042e096242013f4fd1fd7a1bf2191c0d2d74ab570e8e99f280",
+      "src/ml_network_intrusion_detection/training/__init__.py": "4a557475d0c315b92ec3718f045600e78b33cc8cec678a46a4c29752565fe054",
+      "src/ml_network_intrusion_detection/training/evaluate.py": "f4b524bfca483d84b442308af5d758ed950f8640ea68813bc394ddf4da0a09e5",
+      "src/ml_network_intrusion_detection/training/metrics.py": "5dae45524fd3bba9638c7af155d00413e3282885900d932de8e3bf449303c082",
+      "src/ml_network_intrusion_detection/training/models.py": "505266e67399c944e36713fac15c6260437c8e661b1e180c5155a477137bb9df",
+      "src/ml_network_intrusion_detection/training/train.py": "80b50ee41db08168624141e7282f8eb0b727a5e17cae9253b292a421cb34f2cb"
+    },
+    "lock_sha256": "494baeb1fcfbdde1660d7fe8b3d2680545004279f621d5156f8ff27ce44a1dbb"
+  },
+  "elapsed_seconds": 1.0513648749911226
+}
