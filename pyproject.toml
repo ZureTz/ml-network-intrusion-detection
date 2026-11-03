@@ -1,0 +1,43 @@
+[project]
+name = "ml-network-intrusion-detection"
+version = "0.1.0"
+description = "基于机器学习的网络流量入侵检测系统的设计与实现"
+readme = "README.md"
+authors = [
+    { name = "ZureTz", email = "2819058133@qq.com" }
+]
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "joblib>=1.6.0",
+    "matplotlib>=3.11.2",
+    "numpy>=2.5.4",
+    "pandas>=3.1.0",
+    "psutil>=7.2.2",
+    "pyyaml>=6.0.3",
+    "scikit-learn>=1.9.1",
+    "scipy>=1.18.1",
+    "seaborn>=0.13.2",
+]
+
+[project.scripts]
+ml-network-intrusion-detection = "ml_network_intrusion_detection:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+    "ruff>=0.17.3",
+]
