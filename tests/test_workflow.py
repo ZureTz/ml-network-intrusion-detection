@@ -24,6 +24,9 @@ def trained(tmp_path_factory):
     config = {
         "seed": 42,
         "threads": 1,
+        "device": "cpu",
+        "epochs": 4,
+        "train_batch_size": 32,
         "batch_size": 17,
         "sample_size": None,
         "profile": "smoke",
@@ -39,7 +42,9 @@ def test_end_to_end_subprocess_and_chunk_consistency(trained):
     root = trained
     frame = read_frame(root / "test.csv")[list(reversed(FEATURES))]
     frame.to_csv(root / "unlabeled.csv", index=False)
-    model, _ = load_model(root / "models" / "best")
+    selection = read_json(root / "models" / "selection.json")
+    model_dir = root / "models" / selection["family_winners"]["mlp"]
+    model, _ = load_model(model_dir, "cpu")
     expected = model.predict_proba(validate_features(frame)[0])[:, 1]
     result = subprocess.run(
         [
@@ -48,13 +53,15 @@ def test_end_to_end_subprocess_and_chunk_consistency(trained):
             "ml_network_intrusion_detection",
             "predict",
             "--model",
-            str(root / "models" / "best"),
+            str(model_dir),
             "--input",
             str(root / "unlabeled.csv"),
             "--output",
             str(root / "predictions.csv"),
             "--batch-size",
             "7",
+            "--device",
+            "cpu",
         ],
         capture_output=True,
         text=True,
@@ -62,12 +69,12 @@ def test_end_to_end_subprocess_and_chunk_consistency(trained):
     )
     assert result.returncode == 0, result.stderr
     actual = pd.read_csv(root / "predictions.csv")
-    np.testing.assert_allclose(actual.attack_probability, expected, atol=1e-12)
+    np.testing.assert_allclose(actual.attack_probability, expected, atol=1e-6, rtol=1e-5)
     np.testing.assert_array_equal(actual.predicted_label, expected >= 0.5)
     assert actual.row_index.tolist() == list(range(1, 41))
-    predict(root / "models" / "best", root / "unlabeled.csv", root / "whole.csv", 1000)
-    pd.testing.assert_frame_equal(actual, pd.read_csv(root / "whole.csv"))
-    evaluate(root / "models" / "best", root / "test.csv", root / "evaluation", 7)
+    predict(model_dir, root / "unlabeled.csv", root / "whole.csv", 1000, "cpu")
+    pd.testing.assert_frame_equal(actual, pd.read_csv(root / "whole.csv"), atol=1e-6, rtol=1e-5)
+    evaluate(model_dir, root / "test.csv", root / "evaluation", 7, "cpu")
     assert read_json(root / "evaluation" / "metrics.json")["rows"] == 40
     assert (root / "evaluation" / "confusion_matrix.png").exists()
 
@@ -110,9 +117,9 @@ def test_model_metadata_version_and_hash(trained, tmp_path):
     write_json(target / "metadata.json", metadata)
     with pytest.raises(ValueError, match="不兼容"):
         load_model(target)
-    metadata["schema_version"] = 1
+    metadata["schema_version"] = 2
     write_json(target / "metadata.json", metadata)
-    with (target / "pipeline.joblib").open("ab") as handle:
+    with (target / "weights.pt").open("ab") as handle:
         handle.write(b"corrupted")
     with pytest.raises(ValueError, match="校验和"):
         load_model(target)

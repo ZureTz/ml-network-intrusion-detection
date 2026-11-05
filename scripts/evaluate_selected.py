@@ -14,6 +14,7 @@ def main() -> None:
     parser.add_argument("--data", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--batch-size", type=int, default=10000)
+    parser.add_argument("--device", default="auto", help="auto/cpu/mps/cuda/cuda:N")
     args = parser.parse_args()
     if args.batch_size < 1:
         raise ValueError("batch-size 必须为正整数")
@@ -24,7 +25,9 @@ def main() -> None:
     test_path = args.data / "test.csv"
     if sha256(test_path) != manifest["splits"]["test"]["sha256"]:
         raise ValueError("测试数据与训练记录中的冻结划分不一致")
-    with run_directory(args.output, "final_evaluation", {"batch_size": args.batch_size}):
+    with run_directory(
+        args.output, "final_evaluation", {"batch_size": args.batch_size, "device": args.device}
+    ):
         write_json(
             args.output / "frozen_selection.json",
             {
@@ -48,6 +51,8 @@ def main() -> None:
                     str(args.output / family),
                     "--batch-size",
                     str(args.batch_size),
+                    "--device",
+                    args.device,
                 ],
                 check=True,
             )

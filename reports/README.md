@@ -1,202 +1,95 @@
-# 基于机器学习的网络流量入侵检测系统的设计与实现
+# 基于 Torch 的网络流量入侵检测系统
 
-课程实验报告，实验日期：2026-11-03。正式证据目录：[results/full-20261103](results/full-20261103/)。本文指标均来自真实 UNSW-NB15 镜像数据运行；环境检查和自动化测试中的合成数据不用于效果结论。
+2026-11-04 完成 PyTorch 重构及小样本验证。当前已验证 Apple MPS 与 CPU，CUDA 设备路径已实现，尚无 NVIDIA 硬件实测。本文明确区分工程验证和正式检测实验；[原 scikit-learn 实验报告](sklearn-20261103.md) 与 [历史证据](results/full-20261103/) 保留，不将旧模型指标用于描述 Torch 模型。
 
-## 1. 摘要与关键词
+## 1. 问题定义与数据集
 
-本项目实现了命令行网络流量入侵检测系统，将输入特征校验、训练集拟合的预处理、分类模型、持久化和独立推理串联为可复现流程。在遵循预定义训练/测试边界的基础上，审计重复特征与冲突标签，使用分层分组划分验证集，对多数类基线、逻辑回归和随机森林进行比较。验证集选出的随机森林在 82,332 条测试记录上获得 Accuracy 86.83%、攻击类 Precision 81.31%、Recall 98.78%、F1 89.20%，误报率为 27.82%。结果说明该配置能够检出大部分攻击，但对正常流量的误报仍明显，尚不能据此认定具备生产部署能力。
+使用 UNSW-NB15 的 42 个流量特征做离线二分类，`0 = normal`、`1 = attack`，攻击为正类。来源、镜像固定版本、SHA-256、许可说明、标签与特征含义见 [dataset.md](dataset.md)。不包含实时抓包、Web 服务或线上部署。
 
-关键词：网络入侵检测；UNSW-NB15；随机森林；逻辑回归；数据泄漏；离线推理。
+数据处理沿用原实现：优先遵守官方训练/测试角色，隔离训练侧冲突标签组，移除与测试集完全重叠的开发记录，按特征组分层划分训练/验证。同组不跨训练/验证；所有预处理仅在训练集拟合，标签、攻击类型与 ID 不进入特征。缺少时间、主机和会话字段，不能证明这些层面的隔离。
 
-## 2. 问题定义与需求分析
+## 2. 系统设计与实现
 
-输入为预先提取的网络流量 CSV，每条记录包含 42 个指定特征。输出为正常/攻击二分类标签及攻击概率，攻击为正类。系统须具备可追溯数据处理、可复现训练、独立模型加载、无标签预测、异常输入提示及实验结果留存能力。
+命令仍为 `prepare → train → evaluate / predict`，完整用法见 [根目录 README](../README.md)。CPU 上的 `ColumnTransformer` 对数值进行中位数填充与标准化，对类别做 One-Hot；Pipeline 最后一步是 Torch 分类器。预处理保留稀疏矩阵，每次只将一批转成 float32 稠密 tensor，网络、梯度和优化器在所选设备执行。
 
-系统不采集报文，不计算原始网络特征，不提供图形界面或 Web 接口。离线数据集效果与实时网络检测是不同问题：特征生成的一致性、概念漂移、流量延迟和误报处置均未在本实验验证。
+设备选择支持 `auto`（CUDA → MPS → CPU）、`cpu`、`mps`、`cuda` 和 `cuda:N`。显式设备不可用时抛错；算子、内存或非有限数值错误会记录失败，不自动重跑其他设备。固定种子控制初始化与样本打乱，跨设备和版本不保证逐位一致。
 
-## 3. 数据集、预处理与划分
+Torch 实现多数类基线、单层线性分类器和 ReLU MLP。训练采用 AdamW 与 BCEWithLogitsLoss，固定轮数并记录逐轮损失。类别加权只使用训练集计数。模型保存为 `preprocess.joblib`、CPU `weights.pt` 和包含架构/类别/字段/阈值/哈希/依赖版本的 `metadata.json`。推理先校验，再用 `weights_only=True` 加载权重，重建完整 Pipeline 并移到本机选择的设备。预处理 joblib 仍只允许可信来源。
 
-来源、许可、固定镜像提交、文件哈希、完整字段含义及特征选择依据见 [dataset.md](dataset.md)。官方入口当时要求登录，使用公开镜像已获得用户许可；未经官方字节核验的限制保留在来源清单。镜像训练/测试文件命名相反，本项目按官方划分角色映射，没有直接沿用镜像文件名。
+新格式版本为 2。旧 `pipeline.joblib` 不能直接加载到 Torch 流程，应重新训练；历史结果需要对应历史代码及锁文件。数据契约、无标签输入、额外列告警、未知类别统计、分批输出和行顺序保持原有语义。
 
-### 原始分布与质量审计
+## 3. 环境与测量方法
 
-| 集合 | 总数 | 正常 | 攻击 | 重复特征行数（不计每组首行） | 冲突组 / 行 |
+实际小样本运行环境为 Python 3.12.13、PyTorch 2.15.0、macOS 27.2 arm64、8 逻辑 CPU、16 GiB 内存；训练及独立验证评估使用 MPS、2 个 CPU 算子线程，训练批量 512、3 轮，独立评估批量 256。完整依赖、实际设备、种子、配置、代码与锁文件哈希见 [evidence.json](results/torch-smoke-20261104-v2/evidence.json)。Git 状态为有未提交修改，基线提交不等于重构后的完整代码，以记录的源码哈希为准。
+
+训练耗时包含预处理拟合、网络初始化和优化，结束前同步 GPU。评估预热一批后测量三次，包含 CPU 预处理、数据传输与已同步的 GPU 预测，加载耗时单独记录。进程 RSS 每 50 ms 采样，不是 GPU 显存；CUDA 训练额外支持分配峰值，MPS 显存峰值未测量。小样本首次初始化开销明显，这些数据不能证明 GPU 加速比。
+
+## 4. 实验方案与当前结果
+
+正式方案为 [full.yaml](../configs/full.yaml) 的 7 个候选：多数类基线、线性分类器（加权/不加权）、MLP 64/32 和 128/64（各加权/不加权），20 轮。仅以验证集攻击 F1、较低误报率、较高 Recall 和候选顺序选优；阈值固定 0.5。正式训练、完整测试集评估、多种子和 CPU/CUDA/MPS 对比仍待完成。
+
+本次只运行 [smoke.yaml](../configs/smoke.yaml)：从真实开发数据抽取 5,000 条，得到 4,000 条训练、1,000 条验证；三个候选均成功。未用正式测试指标调参，未运行 Torch 正式测试集评估。以下只是参与选优的验证集结果，不是独立泛化性能：
+
+| Torch 候选 | Accuracy | Precision | Recall | F1 | 误报率 |
 |---|---:|---:|---:|---:|---:|
-| 原始官方训练角色 | 175341 | 56000 | 119341 | 74301 | 229 / 940 |
-| 原始官方测试角色 | 82332 | 37000 | 45332 | 28386 | 6 / 14 |
+| 多数类 | 0.6720 | 0.6720 | 1.0000 | 0.8038 | 1.0000 |
+| 线性 | 0.7610 | 0.9017 | 0.7232 | 0.8026 | 0.1616 |
+| MLP 64/32 | 0.9010 | 0.8952 | 0.9658 | 0.9291 | 0.2317 |
 
-本次文件未发现缺失值或无穷值，相关检查仍保留在程序和审计中。首次采用严格冲突策略时准备阶段失败，记录见 [initial_prepare_failure.json](results/full-20261103/initial_prepare_failure.json)。检查确认真实数据存在同特征不同标签后，增加并显式启用 `quarantine_development`：隔离训练侧 940 条冲突记录，保留原始行号清单；测试集中的 14 条冲突记录完整保留。
+选择 `mlp-64x32-balancedFalse`。其验证混淆矩阵（行是真实 `[normal, attack]`，列是预测）为 `[[252, 76], [23, 649]]`；ROC-AUC 为 0.9199，Average Precision 为 0.9492。误报率为 `FP/(FP+TN)`；AP 使用召回增量加权精度，与 PR 曲线梯形面积不同。所有候选的类别指标、宏平均和未定义指标原因保存在证据中。
 
-随后从开发集移除与测试集特征完全重叠的 9,768 条记录，得到 164,633 条可用于开发的记录。使用特征指纹作为组，以固定种子 42 的 `StratifiedGroupKFold(n_splits=5)` 第一折形成验证集。同一特征组不能跨训练/验证，同标签组内重复记录保留；因此重复记录的权重影响仍存在。
+MLP 的验证 F1 高于本次其他候选，但只有三轮和一次划分，正常类仍有明显误报。不能据此与历史随机森林完整测试结果直接比较，也不能推断已达到生产部署要求。
 
-| 最终集合 | 总数 | 正常 | 攻击 | 用途 |
-|---|---:|---:|---:|---|
-| 训练 | 131706 | 43237 | 88469 | 拟合全部预处理和分类器 |
-| 验证 | 32927 | 10809 | 22118 | 比较候选并冻结选择 |
-| 测试 | 82332 | 37000 | 45332 | 选择完成后评估 |
+## 5. 工程验证
 
-排除 `id`、`label`、`attack_cat`。数值空值与无穷值采用训练集中位数填充，全空列保留并填 0；逻辑回归额外标准化。类别使用固定缺失标记及 One-Hot 编码，未知类别编码为该字段的全零向量并统计。未进行特征选择或过采样。
+本机完整测试为 **39 passed、1 skipped**，跳过项为缺少 NVIDIA 硬件的 CUDA 实测；MPS 实测通过。覆盖实际梯度学习、CPU 固定种子复现、自动设备优先级和显式不可用设备报错、稀疏输入、分批结果一致性、GPU 权重转 CPU、独立进程无标签预测、数据隔离、预处理不泄漏、输入校验、产物哈希与失败记录。合成样本仅作工程检查。
 
-划分依据、文件哈希及逐字段审计见 [manifest.json](results/full-20261103/data/manifest.json) 和 [audit.json](results/full-20261103/data/audit.json)。缺少会话、主机与时间字段，无法验证这些层面的隔离；测试输入用于重叠审计，但测试标签和分数不参与模型选择。
+`uv sync --locked`、Ruff 检查、格式检查及 Torch MPS 环境检查通过。沙箱内 MPS 不可见时测试为 38 passed、2 skipped；本机权限下才实际执行 MPS 测试，未将跳过视为 GPU 验证成功。
 
-## 4. 系统设计
+真实验证集 1,000 行移除标签后，在独立进程中用 CPU 加载 MPS 训练的获选模型。概率与直接 CPU 加载结果在 `atol=1e-6, rtol=1e-5` 内一致，标签和行顺序完全一致。17 条未知 `proto` 记录被统计并正常预测。结果见证据的 `cpu_verification` 和 `cpu_prediction`。跨设备数值接近性另由 MPS 自动化测试验证，不承诺边界附近的标签在所有设备逐位一致。
 
-```mermaid
-flowchart LR
-    A[原始训练与测试 CSV] --> B[prepare: 校验 审计 分组划分]
-    B --> C[训练 CSV]
-    B --> D[验证 CSV]
-    B --> E[固定测试 CSV]
-    C --> F[train: Pipeline 拟合]
-    D --> G[验证指标选择]
-    F --> G
-    G --> H[模型与元数据]
-    H --> I[evaluate: 独立评估]
-    E --> I
-    H --> J[predict: 分批预测]
-    K[无标签特征 CSV] --> J
-    I --> L[报告证据]
-```
+## 6. 复现与证据生成
 
-数据模块负责字段契约和划分，训练模块负责 Pipeline、模型选择与指标，推理模块只负责加载和预测。公共模块管理安全 YAML、JSON、唯一输出目录、哈希及资源测量。每次运行创建新目录，记录成功或失败，不覆盖既有证据。
-
-模型目录包含完整 `pipeline.joblib` 与 `metadata.json`，后者记录特征顺序、类型、类别映射、阈值、训练配置、依赖版本、模型哈希及数据清单哈希。推理先校验这些信息，重排列顺序；额外列忽略并提示，必需列缺失及类型错误直接报错。
-
-## 5. 模型与实现
-
-使用 scikit-learn `Pipeline` 和 `ColumnTransformer` 将预处理与模型共同保存，避免训练/推理变换不一致。核心接口带类型注解，配置安全加载，未定义指标用 JSON `null` 和原因表示。
-
-| 模型 | 候选设置 | 配置数 |
-|---|---|---:|
-| Dummy | `strategy=most_frequent` | 1 |
-| 逻辑回归 | `C={0.1,1,10}` × `class_weight={None,balanced}`；`lbfgs`，最多 2000 轮 | 6 |
-| 随机森林 | 200 棵树；`max_depth={None,20}` × `min_samples_leaf={1,5}`；`max_features=sqrt`、`class_weight=balanced_subsample` | 4 |
-
-候选按固定顺序串行执行；未收敛或异常的候选不参与选择。本次 11 个候选全部成功，逻辑回归未产生收敛警告。选择规则为验证集攻击类 F1 降序、误报率升序、Recall 降序、固定候选顺序；阈值始终为 0.5。
-
-最终选出 `rf-depthNone-leaf1`；逻辑回归族最佳配置为 `C=10, class_weight=None`。模型只在训练集拟合，不把验证集重新合并训练。完整候选指标见 [candidates.json](results/full-20261103/training/candidates.json)，冻结选择见 [selection.json](results/full-20261103/training/selection.json)。
-
-## 6. 实验环境
-
-| 项目 | 实际记录 |
-|---|---|
-| CPU / 内存 | Apple M1 Pro，8 个逻辑核，16 GiB |
-| 系统 / 架构 | macOS 27.2，arm64 |
-| Python | 3.12.13 |
-| NumPy / SciPy / pandas | 2.5.4 / 1.18.1 / 3.1.0 |
-| scikit-learn / joblib | 1.9.1 / 1.6.0 |
-| 数值后端 | NumPy BLAS/LAPACK 为 Apple Accelerate |
-| 正式线程 / 预测批量 | 最多 4 线程 / 10000 行 |
-
-环境证据见 [environment.json](results/full-20261103/environment.json)、[hardware.json](results/full-20261103/hardware.json) 和 [threadpools.json](results/full-20261103/training/threadpools.json)。`VECLIB_MAXIMUM_THREADS` 在数值库导入前设置，OpenMP 与森林线程同时受控。threadpoolctl 能显示 OpenMP 线程数，但不提供当前 Accelerate 的实际线程池枚举；不能仅据配置声称所有运算都使用了 4 核。
-
-本实验确认了原生架构及数值库后端，没有实施 Rosetta、其他 BLAS 或 GPU 对照，因而不声称具体加速倍数。基线 Git 提交及未提交修改状态被记录，另保存逐个源码文件和锁文件哈希，避免把项目骨架提交误认为完整实现的提交。
-
-## 7. 实验方案与指标
-
-先使用固定合成样本验证程序，再在真实开发数据抽取 5,000 行完成轻量训练与独立加载预测。此阶段不查看正式测试效果。完整候选训练和验证选择完成后，每个模型族的获选配置在独立进程中评估固定测试集。
-
-以攻击为正类，指标定义如下：
-
-- Accuracy = `(TP + TN) / N`。
-- Precision = `TP / (TP + FP)`；Recall = `TP / (TP + FN)`。
-- F1 = `2TP / (2TP + FP + FN)`；误报率 = `FP / (FP + TN)`。
-- 宏平均指标为正常和攻击两类指标的等权平均；任一组成指标未定义时，对应宏平均也标为未定义。
-- ROC-AUC 使用连续攻击概率。Average Precision（AP）按召回增量加权精确率计算，不是梯形积分 PR-AUC。
-
-训练耗时覆盖 Pipeline 的 fit。预测吞吐覆盖已校验内存数据上的完整预处理与 `predict_proba`，不含模型加载与 CSV 读写；预热一批后完整预测三次取中位数。加载耗时包括模型哈希检查和反序列化，不包括 Python 进程启动。评估整体耗时另含数据读取、指标计算与图表写入，不能与单次预测耗时相加混用。
-
-内存每 50 ms 采样。当前沙箱拒绝枚举子进程，因此正式值是**当前进程绝对 RSS 峰值**，包含已经加载的数据、解释器和分配器保留内存，不是模型增量内存或整个系统峰值。第一轮资源采集将该限制误处理为空值，修正采样后按完全相同配置重跑；11 个验证指标字典及 3 个测试指标字典均完全一致，见 [rerun_verification.json](results/full-20261103/rerun_verification.json)。重跑未改变超参数、阈值或选择规则。
-
-## 8. 实验结果与分析
-
-### 分类效果
-
-下表均为 0–1 数值，来源：[comparison.csv](results/full-20261103/comparison.csv)。
-
-| 模型 | 验证 F1 | 测试 Accuracy | Precision | Recall | F1 | FPR | Macro F1 | ROC-AUC | AP |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| Dummy | 0.8036 | 0.5506 | 0.5506 | 1.0000 | 0.7102 | 1.0000 | 0.3551 | 0.5000 | 0.5506 |
-| 逻辑回归 | 0.9539 | 0.8113 | 0.7552 | 0.9725 | 0.8502 | 0.3861 | 0.7977 | 0.9561 | 0.9662 |
-| 随机森林（获选） | 0.9661 | 0.8683 | 0.8131 | 0.9878 | 0.8920 | 0.2782 | 0.8616 | 0.9794 | 0.9826 |
-
-Dummy 将所有记录判为攻击，所以攻击 Recall 为 1，同时正常类 Recall 为 0、误报率为 1；这说明单看攻击召回率会产生误导。逻辑回归与随机森林均显著改善区分能力，但较高 AUC/AP 不意味着固定阈值下误报足够低。
-
-随机森林验证 F1 为 0.9661，测试 F1 降至 0.8920，下降约 7.41 个百分点。原始训练与测试攻击占比不同，数据划分的分布差异、重复记录权重和实验室流量结构均可能有关；本实验没有隔离这些因素的因果贡献，因此只将其作为局限和后续研究方向。
-
-### 混淆矩阵与错误分析
-
-| 真实类别 / 预测类别 | 正常 | 攻击 |
-|---|---:|---:|
-| 正常 | 26706（TN） | 10294（FP） |
-| 攻击 | 552（FN） | 44780（TP） |
-
-![随机森林测试混淆矩阵](results/full-20261103/evaluation/random_forest/confusion_matrix.png)
-
-随机森林正常类 Precision / Recall / F1 分别为 0.9797 / 0.7218 / 0.8312；攻击类为 0.8131 / 0.9878 / 0.8920。10,294 条正常流量被误报，意味着该配置不适合直接承担生产告警。552 条漏报中，Fuzzers 占 502 条，其余包括 Exploits 40 条、Shellcode 4 条、DoS 3 条、Reconnaissance 3 条。各攻击类别的统计是在二分类预测上计算的检出比例，不是多分类识别准确率。
-
-完整细分见 [category_breakdown.csv](results/full-20261103/evaluation/random_forest/category_breakdown.csv)。Worms 只有 44 条测试记录，其全部检出不能证明对该类别的稳健泛化能力。原始测试的冲突标签也意味着某些完全同特征记录不可能全部被确定性分类器正确区分。
-
-![随机森林 ROC](results/full-20261103/evaluation/random_forest/roc.png)
-
-![随机森林 Precision–Recall](results/full-20261103/evaluation/random_forest/precision_recall.png)
-
-### 运行成本
-
-| 模型 | 训练秒数 | 训练进程峰值 RSS（MiB） | 加载秒数 | 完整测试预测中位秒数 | 吞吐（行/秒） |
-|---|---:|---:|---:|---:|---:|
-| Dummy | 0.406 | 593.2 | 0.115 | 0.087 | 947045 |
-| 逻辑回归 | 3.345 | 783.5 | 0.107 | 0.106 | 773095 |
-| 随机森林 | 28.679 | 979.8 | 0.351 | 0.495 | 166199 |
-
-随机森林三次完整预测耗时约为 0.499、0.495、0.490 秒；预测阶段进程峰值 RSS 约为 638.4 MiB。该模型预测成本高于逻辑回归，但在本测试上有更好的分类效果。各候选顺序训练，RSS 包含可能尚未归还给系统的先前分配，不能据此精确比较模型本身的内存需求。吞吐是批处理离线指标，不是实时链路容量。
-
-## 9. 独立推理与验证
-
-自动化测试覆盖数据隔离、冲突标签、非法类型、未知类别、全空数值列、预处理不泄漏、序列化前后概率及标签一致、错误指标边界、选择排序、候选失败记录和推理文件发布行为。
-
-交付检查结果：`uv sync --locked`、Ruff 检查、Ruff 格式检查、环境检查均成功，`uv run pytest -q` 为 25 项通过。测试中的额外列告警是故意构造的输入行为，不是正式实验错误。报告内本地链接与 Git 差异空白检查也已通过。
-
-真实数据验证移除全部标签与辅助列，只保留 42 个特征，在独立 Python 进程加载 `models/full-20261103-v2/best` 并分批预测全部 82,332 行。验证标签与直接加载模型的结果完全一致、概率在 `atol=rtol=1e-12` 内一致、行顺序完全一致。测试输入存在 5 条训练时未见的 `state` 值，程序统计告警后继续处理。
-
-可使用以下命令复现独立验证，输出目录必须是新的：
+本次运行目录均为新建目录，重跑时更换名称：
 
 ```bash
-uv run python scripts/verify_inference.py --model models/full-20261103-v2/best --input data/processed/full-20261103/test.csv --output outputs/my-inference-verification
+uv run ml-network-intrusion-detection prepare --config configs/smoke.yaml --output data/processed/torch-smoke-20261104
+uv run ml-network-intrusion-detection train --config configs/smoke.yaml --data data/processed/torch-smoke-20261104 --output models/torch-smoke-20261104-v2 --device mps
+uv run ml-network-intrusion-detection evaluate --model models/torch-smoke-20261104-v2/best --input data/processed/torch-smoke-20261104/validation.csv --output outputs/torch-smoke-20261104-v2-validation --batch-size 256 --device mps
+uv run python scripts/verify_inference.py --model models/torch-smoke-20261104-v2/best --input data/processed/torch-smoke-20261104/validation.csv --output outputs/torch-smoke-20261104-v2-cpu-verification --device cpu
 ```
 
-验证证据见 [verification.json](results/full-20261103/verification.json)；它验证工程一致性，不额外提供独立数据上的泛化证据。
+精简证据的 `sources` 映射逐项记录原 JSON 路径和 SHA-256；`records` 对应这些 JSON 的内容，使用 `scripts.export_results.portable` 将本机路径转为相对路径。没有复制数据或模型二进制。可按下列方法重建到新文件，并检查原始文件哈希：
 
-## 10. 总结与局限
-
-系统已完成数据处理、训练比较、模型保存、独立评估和批量推理闭环，并提供可追溯结果及中文复现说明。当前随机森林在该离线基准上有较高攻击召回率，但误报率仍高，应把结果理解为课程实验而非上线验收。
-
-主要限制包括镜像来源未经官方字节核验；缺少会话/主机/时间隔离证据；保留重复记录造成权重偏差；TCP、TTL 和聚合特征可能依赖采集环境；只使用一个种子和一个数据集；未进行阈值调优、概率校准、多种子统计、消融或真实网络评估。
-
-后续若扩展实验，应在新的预先约定方案中仅用验证数据选择阈值，研究误报约束和召回的权衡，使用独立数据验证并补充时间或主机隔离。不能根据本次测试结果反复调参后仍把同一测试集称为未见数据。
-
-## 11. 参考文献与复现说明
-
-官方要求引用的数据相关资料：
-
-1. Moustafa, N.; Slay, J. *UNSW-NB15: a comprehensive data set for network intrusion detection systems (UNSW-NB15 network data set).* MilCIS, 2015. [IEEE 记录](https://ieeexplore.ieee.org/abstract/document/7348942)。
-2. Moustafa, N.; Slay, J. *The evaluation of Network Anomaly Detection Systems: Statistical analysis of the UNSW-NB15 data set and the comparison with the KDD99 data set.* Information Security Journal, 2016. [DOI](https://doi.org/10.1080/19393555.2015.1125974)。
-3. Moustafa, N., et al. *Novel Geometric Area Analysis Technique for Anomaly Detection Using Trapezoidal Area Estimation on Large-Scale Networks.* IEEE Transactions on Big Data，官方数据页列为 2017 年在线资料。[IEEE 记录](https://ieeexplore.ieee.org/abstract/document/7948715)。
-4. Moustafa, N.; Creech, G.; Slay, J. *Big Data Analytics for Intrusion Detection System: Statistical Decision-Making Using Finite Dirichlet Mixture Models.* 2017, pp. 127–156. [Springer](https://link.springer.com/chapter/10.1007/978-3-319-59439-2_5)。
-5. Sarhan, M.; Layeghy, S.; Moustafa, N.; Portmann, M. *NetFlow Datasets for Machine Learning-based Network Intrusion Detection Systems.* [arXiv:2011.09144](https://arxiv.org/abs/2011.09144)。本项目使用原始划分特征 CSV，未改用该文的 NetFlow 版本。
-
-工具与方法： [scikit-learn 用户指南](https://scikit-learn.org/stable/user_guide.html)、[Average Precision 定义](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.average_precision_score.html)、[Apple Accelerate](https://developer.apple.com/accelerate/)。部分出版商页面在本次网络访问中限制自动抓取，文献题名和链接由官方数据页交叉核对；未声称阅读受限全文。
-
-复现从根目录 [README](../README.md) 的安装、下载、小样本、正式训练与评估命令开始。当前报告使用：
-
-```text
-配置：configs/full.yaml
-划分：data/processed/full-20261103
-训练：models/full-20261103-v2
-评估：outputs/full-20261103-v2
-报告：reports/results/full-20261103
+```bash
+uv run python - <<'PY'
+from pathlib import Path
+from ml_network_intrusion_detection.common import read_json, sha256, write_json
+from scripts.export_results import portable
+root = Path.cwd()
+record = read_json(Path('reports/results/torch-smoke-20261104-v2/evidence.json'))
+for source in record['sources'].values():
+    assert sha256(root / source['path']) == source['sha256']
+record['records'] = {
+    key: portable(read_json(root / source['path']), root)
+    for key, source in record['sources'].items()
+}
+write_json(Path('outputs/torch-smoke-evidence-rebuilt.json'), record)
+PY
 ```
 
-精简证据包含配置、依赖环境、数据/模型哈希、代码哈希、所有候选验证指标、各模型族测试指标和图表。大体积原始数据、处理数据、模型二进制及错误逐行明细保留在被 Git 忽略的目录，通过文档命令重新生成；报告引用的精简材料随仓库保留。实验生成时尚未提交实现，记录中的 Git 基线不是最终交付提交；最终提交请以仓库历史为准。
+重训会产生新的时间、权重和环境哈希，须生成新的来源清单，不应强行匹配旧运行哈希。正式完整实验的导出使用根目录 README 中的 `scripts/export_results.py`，本次验证子集未冒充正式测试导出。
 
-训练完成后仅调整了混淆矩阵图片的数字显示格式，使其显示完整整数；未改动指标计算、模型或选择。记录见 [post_training_changes.json](results/full-20261103/post_training_changes.json)。
+## 7. 局限与后续实验
+
+当前仍是离线、单设备、单种子实验，不包含多 GPU、混合精度、阈值调优、早停、概率校准或实时网络验证。训练数据与独立评估数据仍需放入 CPU 内存；只有推理 CSV 分批读取。当前默认依赖在 Apple Silicon 与 Linux CUDA 上可使用对应后端，其他构建需重新配置官方索引；NVIDIA、AMD 和 Windows 加速尚无本机实测。
+
+GPU 是否优于 CPU 需要同模型、相同批量及测量范围的受控实验。正式报告应完成七候选训练与冻结测试评估，再分析误报、资源使用和泛化限制；不得沿用旧 sklearn 指标，也不得用当前验证分数代替测试分数。
+
+## 8. 参考资料
+
+数据集论文与来源见 [数据说明](dataset.md) 和 [历史报告参考文献](sklearn-20261103.md#11-参考文献与复现说明)。重构所依据的官方资料：
+
+- [PyTorch MPS backend](https://docs.pytorch.org/docs/2.15/notes/mps.html)：设备可用性与 MPS tensor。
+- [PyTorch Serialization semantics](https://docs.pytorch.org/docs/2.15/notes/serialization.html)：state_dict 与 weights_only 加载。
+- [uv 与 PyTorch 集成](https://docs.astral.sh/uv/guides/integration/pytorch/)：不同平台的构建与索引。

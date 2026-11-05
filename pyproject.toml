@@ -18,6 +18,7 @@ dependencies = [
     "scipy>=1.18.1",
     "seaborn>=0.13.2",
     "threadpoolctl>=3.7.0",
+    "torch>=2.6,<3",
 ]
 
 [project.scripts]

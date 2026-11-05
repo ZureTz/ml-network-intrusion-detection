@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import importlib.metadata
 import json
+import math
 import os
 import platform
 import subprocess
@@ -22,6 +23,11 @@ DEFAULTS = {
     "seed": 42,
     "threads": 4,
     "batch_size": 10000,
+    "device": "auto",
+    "epochs": 20,
+    "train_batch_size": 512,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
     "sample_size": None,
     "profile": "full",
     "conflict_policy": "error",
@@ -36,11 +42,25 @@ def load_config(path: Path) -> dict[str, Any]:
     if not isinstance(raw, dict) or set(raw) - set(DEFAULTS):
         raise ValueError("配置必须为映射，且只能包含文档列出的字段")
     config = DEFAULTS | raw
-    for key in ("seed", "threads", "batch_size"):
+    for key in ("seed", "threads", "batch_size", "epochs", "train_batch_size"):
         value = config[key]
         minimum = 0 if key == "seed" else 1
         if type(value) is not int or value < minimum:
             raise ValueError(f"{key} 必须为 >= {minimum} 的整数")
+    if config["seed"] > 2**32 - 1:
+        raise ValueError("seed 必须小于 2**32")
+    from ml_network_intrusion_detection.device import validate_device_name
+
+    validate_device_name(config["device"])
+    for key in ("learning_rate", "weight_decay"):
+        value = config[key]
+        if (
+            type(value) not in (int, float)
+            or not math.isfinite(value)
+            or value < 0
+            or (key == "learning_rate" and value == 0)
+        ):
+            raise ValueError(f"{key} 必须为有限{'正' if key == 'learning_rate' else '非负'}数")
     size = config["sample_size"]
     if size is not None and (type(size) is not int or size < 20):
         raise ValueError("sample_size 必须为空或 >= 20 的整数")
@@ -78,7 +98,7 @@ def environment() -> dict[str, Any]:
         result = subprocess.run(["git", *args], capture_output=True, text=True, check=False)
         return result.stdout.strip() if result.returncode == 0 else None
 
-    packages = ("numpy", "pandas", "scipy", "scikit-learn", "joblib", "psutil", "pyyaml")
+    packages = ("numpy", "pandas", "scipy", "scikit-learn", "joblib", "psutil", "pyyaml", "torch")
     try:
         memory = psutil.virtual_memory().total
     except (OSError, PermissionError):

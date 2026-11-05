@@ -1,10 +1,11 @@
-import joblib
 import numpy as np
 import pytest
+import torch
 
 from ml_network_intrusion_detection.common import read_json
 from ml_network_intrusion_detection.data.prepare import prepare
 from ml_network_intrusion_detection.data.schema import validate_features
+from ml_network_intrusion_detection.training.artifacts import restore_pipeline, save_pipeline
 from ml_network_intrusion_detection.training.models import build_pipeline, candidates
 from ml_network_intrusion_detection.training.train import selection_key, train
 
@@ -15,14 +16,15 @@ from .conftest import fixed_frame
 def test_full_pipeline_predictions_survive_serialization(tmp_path, candidate_index):
     frame = fixed_frame(100)
     x, _ = validate_features(frame)
-    model = build_pipeline(candidates("smoke")[candidate_index], 42, 1)
+    model = build_pipeline(candidates("smoke")[candidate_index], 42, 1, device="cpu", epochs=3)
     model.fit(x.iloc[:80], frame.label.iloc[:80])
     probabilities = model.predict_proba(x.iloc[80:])
     labels = model.predict(x.iloc[80:])
-    path = tmp_path / "pipeline.joblib"
-    joblib.dump(model, path)
-    restored = joblib.load(path)
-    np.testing.assert_allclose(restored.predict_proba(x.iloc[80:]), probabilities, atol=1e-12)
+    metadata = save_pipeline(model, tmp_path)
+    weights = torch.load(tmp_path / "weights.pt", map_location="cpu", weights_only=True)
+    assert all(tensor.device.type == "cpu" for tensor in weights.values())
+    restored = restore_pipeline(tmp_path, metadata, "cpu", 7)
+    np.testing.assert_allclose(restored.predict_proba(x.iloc[80:]), probabilities, atol=1e-6)
     np.testing.assert_array_equal(restored.predict(x.iloc[80:]), labels)
 
 

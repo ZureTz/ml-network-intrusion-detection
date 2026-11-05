@@ -4,11 +4,10 @@ import shutil
 import warnings
 from pathlib import Path
 
-import joblib
-from sklearn.exceptions import ConvergenceWarning
 from threadpoolctl import threadpool_info, threadpool_limits
 
 from ml_network_intrusion_detection.common import (
+    DEFAULTS,
     ResourceMonitor,
     environment,
     read_json,
@@ -24,6 +23,8 @@ from ml_network_intrusion_detection.data.schema import (
     validate_features,
     validate_labels,
 )
+from ml_network_intrusion_detection.device import resolve_device
+from ml_network_intrusion_detection.training.artifacts import save_pipeline
 from ml_network_intrusion_detection.training.metrics import binary_metrics
 from ml_network_intrusion_detection.training.models import build_pipeline, candidates
 
@@ -35,7 +36,10 @@ def selection_key(result: dict) -> tuple:
 
 def train(config: dict, data_dir: Path, output: Path) -> None:
     """比较候选模型并保存获选 Pipeline；失败候选记入 JSON。"""
+    config = DEFAULTS | config
     with run_directory(output, "train", config), threadpool_limits(limits=config["threads"]):
+        actual_device = resolve_device(config["device"])
+        print(f"Torch 训练设备: {actual_device}", flush=True)
         manifest = read_json(data_dir / "manifest.json")
         if manifest["seed"] != config["seed"]:
             raise ValueError("训练种子与数据划分种子不一致")
@@ -59,21 +63,33 @@ def train(config: dict, data_dir: Path, output: Path) -> None:
             model_dir = output / spec["name"]
             model_dir.mkdir()
             try:
-                model = build_pipeline(spec, config["seed"], config["threads"])
+                model = build_pipeline(
+                    spec,
+                    config["seed"],
+                    config["threads"],
+                    device=str(actual_device),
+                    epochs=config["epochs"],
+                    batch_size=config["train_batch_size"],
+                    learning_rate=config["learning_rate"],
+                    weight_decay=config["weight_decay"],
+                )
                 with ResourceMonitor() as monitor, warnings.catch_warnings(record=True) as captured:
                     warnings.simplefilter("always")
                     model.fit(*data["train"])
                 result["training"] = monitor.result
+                classifier = model.named_steps["classifier"]
+                result["runtime"] = classifier.runtime_
+                result["loss_history"] = classifier.loss_history_
+                result["positive_weight"] = classifier.positive_weight_
                 result["warnings"] = [str(w.message) for w in captured]
-                if any(issubclass(w.category, ConvergenceWarning) for w in captured):
-                    raise ValueError("模型未收敛，不参与选择")
                 scores = model.predict_proba(data["validation"][0])[:, 1]
                 result["validation"] = binary_metrics(data["validation"][1], scores)
-                result["status"] = "completed"
-                joblib.dump(model, model_dir / "pipeline.joblib")
+                artifact = save_pipeline(model, model_dir)
                 encoder = model.named_steps["preprocess"].named_transformers_["categorical"]
                 metadata = {
-                    "schema_version": 1,
+                    "schema_version": 2,
+                    **artifact,
+                    "runtime": classifier.runtime_,
                     "features": FEATURES,
                     "numeric": NUMERIC,
                     "categorical": CATEGORICAL,
@@ -91,10 +107,10 @@ def train(config: dict, data_dir: Path, output: Path) -> None:
                     "config": config,
                     "spec": spec,
                     "environment": environment(),
-                    "pipeline_sha256": sha256(model_dir / "pipeline.joblib"),
                     "data_manifest_sha256": sha256(output / "data_manifest.json"),
                 }
                 write_json(model_dir / "metadata.json", metadata)
+                result["status"] = "completed"
             except Exception as error:
                 result.update(status="failed", error=f"{type(error).__name__}: {error}")
             write_json(model_dir / "result.json", result)
@@ -104,7 +120,7 @@ def train(config: dict, data_dir: Path, output: Path) -> None:
         if not successful:
             raise ValueError("全部候选失败；查看 candidates.json")
         winners = {}
-        for family in ("dummy", "logistic_regression", "random_forest"):
+        for family in ("dummy", "linear", "mlp"):
             choices = [r for r in successful if r["spec"]["family"] == family]
             if not choices:
                 raise ValueError(f"模型族 {family} 全部失败，正式比较未完成")

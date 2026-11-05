@@ -13,18 +13,21 @@ from ml_network_intrusion_detection.data.schema import (
     validate_features,
     validate_labels,
 )
+from ml_network_intrusion_detection.device import device_info
 from ml_network_intrusion_detection.inference.predict import load_model, unknown_categories
 from ml_network_intrusion_detection.training.metrics import binary_metrics, save_figures
 
 
-def evaluate(model_dir: Path, input_csv: Path, output: Path, batch_size: int = 10000) -> None:
+def evaluate(
+    model_dir: Path, input_csv: Path, output: Path, batch_size: int = 10000, device: str = "auto"
+) -> None:
     """标签用于指标计算；不拟合任何参数。预测预热一次、测量三次取中位数。"""
     if batch_size < 1:
         raise ValueError("batch_size 必须为正整数")
-    with run_directory(output, "evaluate", {"batch_size": batch_size}):
+    with run_directory(output, "evaluate", {"batch_size": batch_size, "device": device}):
         with ResourceMonitor() as total:
             started = time.perf_counter()
-            model, metadata = load_model(model_dir)
+            model, metadata = load_model(model_dir, device, batch_size)
             load_seconds = time.perf_counter() - started
             started = time.perf_counter()
             frame = read_frame(input_csv)
@@ -90,7 +93,10 @@ def evaluate(model_dir: Path, input_csv: Path, output: Path, batch_size: int = 1
                 "prediction_resources": prediction_resources.result,
                 "end_to_end": total.result,
                 "input_sha256": sha256(input_csv),
-                "model_sha256": metadata["pipeline_sha256"],
+                "model_sha256": sha256(model_dir / "metadata.json"),
+                "model_artifacts": metadata["artifacts"],
+                "runtime": device_info(model.named_steps["classifier"].device_),
+                "prediction_scope": "CPU preprocessing + transfers + synchronized Torch inference",
                 "audit": audit,
                 "unknown_categories": unknown_categories(x, metadata),
                 "spec": metadata["spec"],

@@ -1,25 +1,26 @@
-"""检查依赖、CPU 信息和模型序列化；合成数据不用于正式实验。"""
+"""检查 Torch 后端、实际训练和跨设备加载；合成数据不用于正式实验。"""
 
+import argparse
 import importlib
 import json
-import platform
 import tempfile
 from importlib.metadata import version
 from pathlib import Path
 
-import joblib
 import numpy as np
-import psutil
+import torch
 from sklearn.datasets import make_classification
-from sklearn.linear_model import LogisticRegression
-from sklearn.pipeline import make_pipeline
-from sklearn.preprocessing import StandardScaler
 from threadpoolctl import threadpool_info
 
 from ml_network_intrusion_detection.common import environment
+from ml_network_intrusion_detection.device import device_info, resolve_device
+from ml_network_intrusion_detection.training.models import TorchClassifier
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--device", default="auto", help="auto/cpu/mps/cuda/cuda:N")
+    args = parser.parse_args()
     dependencies = {
         "numpy": "numpy",
         "pandas": "pandas",
@@ -30,33 +31,41 @@ def main() -> None:
         "joblib": "joblib",
         "pyyaml": "yaml",
         "psutil": "psutil",
+        "torch": "torch",
     }
     for module in dependencies.values():
         importlib.import_module(module)
-
+    device = resolve_device(args.device)
     features, labels = make_classification(n_samples=100, n_features=8, random_state=42)
-    pipeline = make_pipeline(StandardScaler(), LogisticRegression(random_state=42))
-    pipeline.fit(features[:80], labels[:80])
-    predictions = pipeline.predict(features[80:])
-    with tempfile.TemporaryDirectory() as temporary_directory:
-        model_path = Path(temporary_directory) / "smoke-model.joblib"
-        joblib.dump(pipeline, model_path)
-        restored = joblib.load(model_path)
-        np.testing.assert_array_equal(predictions, restored.predict(features[80:]))
-
+    classifier = TorchClassifier(device=str(device), threads=2, epochs=2, batch_size=32)
+    classifier.fit(features[:80], labels[:80])
+    probabilities = classifier.predict_proba(features[80:])
+    with tempfile.TemporaryDirectory() as directory:
+        path = Path(directory) / "weights.pt"
+        torch.save({k: v.cpu() for k, v in classifier.network_.state_dict().items()}, path)
+        restored = TorchClassifier(device="cpu", threads=2).initialize(features.shape[1])
+        restored.network_.load_state_dict(torch.load(path, map_location="cpu", weights_only=True))
+        np.testing.assert_allclose(
+            probabilities, restored.predict_proba(features[80:]), atol=1e-6, rtol=1e-5
+        )
     print(
         json.dumps(
             {
-                "python": platform.python_version(),
-                "platform": platform.platform(),
-                "architecture": platform.machine(),
-                "logical_cpu_count": psutil.cpu_count(),
-                "memory_bytes": environment()["memory_bytes"],
+                **environment(),
+                "accelerators": {
+                    "cuda_available": torch.cuda.is_available(),
+                    "cuda_device_count": torch.cuda.device_count(),
+                    "mps_built": torch.backends.mps.is_built(),
+                    "mps_available": torch.backends.mps.is_available(),
+                },
+                "runtime": device_info(device),
                 "numpy_build_config": np.show_config(mode="dicts"),
                 "threadpools": threadpool_info(),
                 "dependencies": {name: version(name) for name in dependencies},
-                "smoke_check": "passed: fit, predict, save, load, prediction consistency",
-                "note": "合成数据仅用于环境检查，不代表入侵检测性能。",
+                "smoke_check": (
+                    "passed: Torch fit, predict, CPU state_dict save/load, probability consistency"
+                ),
+                "note": "合成数据仅用于环境检查，不代表入侵检测性能；不保证跨设备逐位一致。",
             },
             indent=2,
             ensure_ascii=False,

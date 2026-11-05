@@ -35,6 +35,9 @@ def raw_data(tmp_path: Path) -> tuple[dict, Path]:
     return {
         "seed": 42,
         "threads": 1,
+        "device": "cpu",
+        "epochs": 3,
+        "train_batch_size": 32,
         "batch_size": 17,
         "sample_size": None,
         "profile": "smoke",

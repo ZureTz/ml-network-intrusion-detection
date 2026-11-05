@@ -86,7 +86,7 @@ def test_preprocessing_fits_training_only():
     raw = fixed_frame(40)
     raw["rate"] = np.nan  # 全空数值列须保留。
     x, _ = validate_features(raw)
-    pipeline = build_pipeline(candidates("smoke")[1], seed=42, threads=1)
+    pipeline = build_pipeline(candidates("smoke")[1], seed=42, threads=1, device="cpu", epochs=2)
     pipeline.fit(x, raw.label)
     numeric = pipeline["preprocess"].named_transformers_["numeric"]
     before = numeric["impute"].statistics_.copy()
@@ -100,7 +100,25 @@ def test_preprocessing_fits_training_only():
     assert np.isfinite(probabilities).all()
 
 
-@pytest.mark.parametrize("content", ["[]", "seed: -1", "threads: 0", "typo: 1", "profile: other"])
+@pytest.mark.parametrize(
+    "content",
+    [
+        "[]",
+        "seed: -1",
+        "threads: 0",
+        "typo: 1",
+        "profile: other",
+        "device: metal",
+        "device: null",
+        "epochs: 0",
+        "epochs: true",
+        "train_batch_size: -1",
+        "learning_rate: 0",
+        "learning_rate: .nan",
+        "weight_decay: -1",
+        "seed: 4294967296",
+    ],
+)
 def test_invalid_configuration(tmp_path, content):
     path = tmp_path / "bad.yaml"
     path.write_text(content)

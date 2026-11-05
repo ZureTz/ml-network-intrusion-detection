@@ -18,6 +18,7 @@ def main() -> None:
     parser.add_argument("--model", required=True, type=Path)
     parser.add_argument("--input", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
+    parser.add_argument("--device", default="auto", help="auto/cpu/mps/cuda/cuda:N")
     args = parser.parse_args()
     args.output.mkdir(parents=True, exist_ok=False)
     frame = read_frame(args.input)[FEATURES]
@@ -36,13 +37,15 @@ def main() -> None:
             str(unlabeled),
             "--output",
             str(predictions),
+            "--device",
+            args.device,
         ],
         check=True,
     )
-    model, metadata = load_model(args.model)
+    model, metadata = load_model(args.model, args.device)
     expected = model.predict_proba(validate_features(frame)[0])[:, 1]
     actual = pd.read_csv(predictions)
-    np.testing.assert_allclose(actual.attack_probability, expected, atol=1e-12, rtol=1e-12)
+    np.testing.assert_allclose(actual.attack_probability, expected, atol=1e-6, rtol=1e-5)
     np.testing.assert_array_equal(actual.predicted_label, expected >= metadata["threshold"])
     np.testing.assert_array_equal(actual.row_index, np.arange(1, len(frame) + 1))
     write_json(
@@ -52,11 +55,13 @@ def main() -> None:
             "rows": len(frame),
             "input_has_labels": False,
             "independent_process": True,
-            "probability_atol": 1e-12,
-            "probability_rtol": 1e-12,
+            "probability_atol": 1e-6,
+            "probability_rtol": 1e-5,
             "labels_identical": True,
             "row_order_identical": True,
-            "model_sha256": metadata["pipeline_sha256"],
+            "model_sha256": sha256(args.model / "metadata.json"),
+            "model_artifacts": metadata["artifacts"],
+            "device": str(model.named_steps["classifier"].device_),
             "input_sha256": sha256(unlabeled),
             "prediction_sha256": sha256(predictions),
         },

@@ -1,0 +1,1397 @@
+{
+  "purpose": "Torch migration smoke verification; validation subset only; no final test evaluation",
+  "records": {
+    "training_run": {
+      "run_id": "torch-smoke-20261104-v2",
+      "kind": "train",
+      "status": "completed",
+      "started_at": "2026-11-04T15:40:10.063724+00:00",
+      "config": {
+        "seed": 42,
+        "threads": 2,
+        "batch_size": 10000,
+        "device": "mps",
+        "epochs": 3,
+        "train_batch_size": 512,
+        "learning_rate": 0.001,
+        "weight_decay": 0.0001,
+        "sample_size": 5000,
+        "profile": "smoke",
+        "conflict_policy": "quarantine_development",
+        "train_csv": "data/raw/UNSW_NB15_training-set.csv",
+        "test_csv": "data/raw/UNSW_NB15_testing-set.csv"
+      },
+      "environment": {
+        "python": "3.12.13",
+        "platform": "macOS-27.2-arm64-arm-64bit",
+        "architecture": "arm64",
+        "logical_cpus": 8,
+        "memory_bytes": 17179869184,
+        "versions": {
+          "numpy": "2.5.4",
+          "pandas": "3.1.0",
+          "scipy": "1.18.1",
+          "scikit-learn": "1.9.1",
+          "joblib": "1.6.0",
+          "psutil": "7.2.2",
+          "pyyaml": "6.0.3",
+          "torch": "2.15.0"
+        },
+        "git_commit": "c2e94b3ab39be6c0a0bd7f7eb92a23a53747cf75",
+        "git_dirty": true,
+        "source_sha256": {
+          "src/ml_network_intrusion_detection/__init__.py": "e5764db342a05c937154e2052054cd38dc7374c71ab9e5bb040f8c31b4cdee5e",
+          "src/ml_network_intrusion_detection/__main__.py": "e1f66018e1bd993671b0e3510ccd20bc5e5ecb7affb80200ae3d3a11814309e3",
+          "src/ml_network_intrusion_detection/cli.py": "6e516370e5eb3ba598f720cd374713b4664b5bf8e0297f36f93b292367ebdc7f",
+          "src/ml_network_intrusion_detection/common.py": "4b0c792a5911671127018ab249097f60f088c674a758ff762c77232043c0e2e6",
+          "src/ml_network_intrusion_detection/data/__init__.py": "6e12368e5de366189653eb43ec47070c95a46f48158e8c74caaae6f42586190d",
+          "src/ml_network_intrusion_detection/data/prepare.py": "6853cf5a27cb52ff3e3ce96f0c3e70840cbee9ab1ac60cba34642233f1edc0b4",
+          "src/ml_network_intrusion_detection/data/schema.py": "3d938aeb2994d5b97c9425eb3979d4dbd49eace1654d1e892ff851754d8be922",
+          "src/ml_network_intrusion_detection/device.py": "a6efa0dbc7147c0248ee958347d9e856cc5e9c1dc880b69897511da19487c49f",
+          "src/ml_network_intrusion_detection/inference/__init__.py": "d55c8efc3d0b972027d6e23d18e94e01cbf4daaf8a316ee534b274c97f41c620",
+          "src/ml_network_intrusion_detection/inference/predict.py": "d1f5afa2e8d78b4b2d4a6fa2b14ccbd9d5794757cd15c397461b0d5934a64172",
+          "src/ml_network_intrusion_detection/training/__init__.py": "4a557475d0c315b92ec3718f045600e78b33cc8cec678a46a4c29752565fe054",
+          "src/ml_network_intrusion_detection/training/artifacts.py": "57ce95d7813e0e977afd4b8f25bfcfe9a36b3f1f59fe87323c04ae0cf40e429a",
+          "src/ml_network_intrusion_detection/training/evaluate.py": "104aded9f0bf97eea0673d1ab497594a56a5fa0e664e0b088e7816a7653bc5b1",
+          "src/ml_network_intrusion_detection/training/metrics.py": "476231009f21d40f53687766053b1a93034eeaa128b40acd398cd4c8343bab96",
+          "src/ml_network_intrusion_detection/training/models.py": "0f30a2d3756b524d577c963719519211627a632c3d1d6495dbf526dffdde2b2f",
+          "src/ml_network_intrusion_detection/training/train.py": "33db1a02e9fdda4b3bf149e7404ddacffc6c1a9ee47d21e91c5b06ded8e5baad"
+        },
+        "lock_sha256": "ad44c97e6183dd571afbcbca1ff749599762d4ad909b7531446ef7d404191266"
+      },
+      "elapsed_seconds": 2.395758791011758
+    },
+    "candidates": [
+      {
+        "order": 0,
+        "spec": {
+          "name": "dummy",
+          "family": "dummy",
+          "params": {}
+        },
+        "training": {
+          "seconds": 0.20409037498757243,
+          "peak_rss_bytes": 450838528,
+          "memory_sampling_incomplete": false,
+          "memory_method": "process + children RSS sampled every 50ms; shared pages may repeat"
+        },
+        "runtime": {
+          "device": "mps",
+          "name": "mps",
+          "torch_version": "2.15.0",
+          "cuda_build": null,
+          "hip_build": null,
+          "dtype": "float32",
+          "torch_threads": 2,
+          "memory_note": "RSS measures host process memory, not accelerator peak allocation",
+          "cuda_peak_allocated_bytes": null
+        },
+        "loss_history": [],
+        "positive_weight": 1.0,
+        "warnings": [],
+        "validation": {
+          "rows": 1000,
+          "accuracy": 0.672,
+          "precision": 0.672,
+          "recall": 1.0,
+          "f1": 0.8038277511961722,
+          "false_positive_rate": 1.0,
+          "roc_auc": 0.5,
+          "average_precision": 0.672,
+          "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+          "confusion_matrix": [
+            [
+              0,
+              328
+            ],
+            [
+              0,
+              672
+            ]
+          ],
+          "class_order": [
+            "normal",
+            "attack"
+          ],
+          "per_class": {
+            "normal": {
+              "precision": null,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 328
+            },
+            "attack": {
+              "precision": 0.672,
+              "recall": 1.0,
+              "f1": 0.8038277511961722,
+              "support": 672
+            }
+          },
+          "macro": {
+            "precision": null,
+            "recall": 0.5,
+            "f1": 0.4019138755980861
+          },
+          "threshold": 0.5,
+          "undefined_reasons": {
+            "normal.precision": "zero denominator",
+            "macro.precision": "one or more class metrics undefined"
+          }
+        },
+        "status": "completed"
+      },
+      {
+        "order": 1,
+        "spec": {
+          "name": "linear-balancedFalse",
+          "family": "linear",
+          "params": {
+            "balanced": false
+          }
+        },
+        "training": {
+          "seconds": 1.3268953330116346,
+          "peak_rss_bytes": 592773120,
+          "memory_sampling_incomplete": false,
+          "memory_method": "process + children RSS sampled every 50ms; shared pages may repeat"
+        },
+        "runtime": {
+          "device": "mps",
+          "name": "mps",
+          "torch_version": "2.15.0",
+          "cuda_build": null,
+          "hip_build": null,
+          "dtype": "float32",
+          "torch_threads": 2,
+          "memory_note": "RSS measures host process memory, not accelerator peak allocation",
+          "cuda_peak_allocated_bytes": null
+        },
+        "loss_history": [
+          0.6883509521484374,
+          0.65947021484375,
+          0.6337177734375
+        ],
+        "positive_weight": 1.0,
+        "warnings": [],
+        "validation": {
+          "rows": 1000,
+          "accuracy": 0.761,
+          "precision": 0.9016697588126159,
+          "recall": 0.7232142857142857,
+          "f1": 0.8026424442609413,
+          "false_positive_rate": 0.16158536585365854,
+          "roc_auc": 0.8545568379790941,
+          "average_precision": 0.8946742966105221,
+          "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+          "confusion_matrix": [
+            [
+              275,
+              53
+            ],
+            [
+              186,
+              486
+            ]
+          ],
+          "class_order": [
+            "normal",
+            "attack"
+          ],
+          "per_class": {
+            "normal": {
+              "precision": 0.596529284164859,
+              "recall": 0.8384146341463414,
+              "f1": 0.697084917617237,
+              "support": 328
+            },
+            "attack": {
+              "precision": 0.9016697588126159,
+              "recall": 0.7232142857142857,
+              "f1": 0.8026424442609413,
+              "support": 672
+            }
+          },
+          "macro": {
+            "precision": 0.7490995214887375,
+            "recall": 0.7808144599303135,
+            "f1": 0.7498636809390892
+          },
+          "threshold": 0.5,
+          "undefined_reasons": {}
+        },
+        "status": "completed"
+      },
+      {
+        "order": 2,
+        "spec": {
+          "name": "mlp-64x32-balancedFalse",
+          "family": "mlp",
+          "params": {
+            "hidden_dims": [
+              64,
+              32
+            ],
+            "balanced": false
+          }
+        },
+        "training": {
+          "seconds": 0.2316030829679221,
+          "peak_rss_bytes": 611729408,
+          "memory_sampling_incomplete": false,
+          "memory_method": "process + children RSS sampled every 50ms; shared pages may repeat"
+        },
+        "runtime": {
+          "device": "mps",
+          "name": "mps",
+          "torch_version": "2.15.0",
+          "cuda_build": null,
+          "hip_build": null,
+          "dtype": "float32",
+          "torch_threads": 2,
+          "memory_note": "RSS measures host process memory, not accelerator peak allocation",
+          "cuda_peak_allocated_bytes": null
+        },
+        "loss_history": [
+          0.68785595703125,
+          0.641304443359375,
+          0.5801452026367188
+        ],
+        "positive_weight": 1.0,
+        "warnings": [],
+        "validation": {
+          "rows": 1000,
+          "accuracy": 0.901,
+          "precision": 0.8951724137931034,
+          "recall": 0.9657738095238095,
+          "f1": 0.9291338582677166,
+          "false_positive_rate": 0.23170731707317074,
+          "roc_auc": 0.9198515534262486,
+          "average_precision": 0.9492228905258038,
+          "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+          "confusion_matrix": [
+            [
+              252,
+              76
+            ],
+            [
+              23,
+              649
+            ]
+          ],
+          "class_order": [
+            "normal",
+            "attack"
+          ],
+          "per_class": {
+            "normal": {
+              "precision": 0.9163636363636364,
+              "recall": 0.7682926829268293,
+              "f1": 0.835820895522388,
+              "support": 328
+            },
+            "attack": {
+              "precision": 0.8951724137931034,
+              "recall": 0.9657738095238095,
+              "f1": 0.9291338582677166,
+              "support": 672
+            }
+          },
+          "macro": {
+            "precision": 0.90576802507837,
+            "recall": 0.8670332462253194,
+            "f1": 0.8824773768950522
+          },
+          "threshold": 0.5,
+          "undefined_reasons": {}
+        },
+        "status": "completed"
+      }
+    ],
+    "selection": {
+      "best": "mlp-64x32-balancedFalse",
+      "family_winners": {
+        "dummy": "dummy",
+        "linear": "linear-balancedFalse",
+        "mlp": "mlp-64x32-balancedFalse"
+      },
+      "criterion": "validation attack F1 desc, FPR asc, recall desc, candidate order asc",
+      "threshold": 0.5,
+      "refit_train_validation": false
+    },
+    "model_metadata": {
+      "schema_version": 2,
+      "format": "torch-state-dict-v2",
+      "classifier": {
+        "balanced": false,
+        "batch_size": 512,
+        "device": "mps",
+        "epochs": 3,
+        "family": "mlp",
+        "hidden_dims": [
+          64,
+          32
+        ],
+        "learning_rate": 0.001,
+        "seed": 42,
+        "threads": 2,
+        "weight_decay": 0.0001
+      },
+      "input_dim": 174,
+      "artifacts": {
+        "preprocess.joblib": "98ba3da6548fa6fbaa9dca52f471db9dc1c39abafbf859c18f5a6aae3c595557",
+        "weights.pt": "5006d6e7d18e4a64d35f8b5e2b12b85968458b37853f72505d36c3a9e9f360ec"
+      },
+      "runtime": {
+        "device": "mps",
+        "name": "mps",
+        "torch_version": "2.15.0",
+        "cuda_build": null,
+        "hip_build": null,
+        "dtype": "float32",
+        "torch_threads": 2,
+        "memory_note": "RSS measures host process memory, not accelerator peak allocation",
+        "cuda_peak_allocated_bytes": null
+      },
+      "features": [
+        "dur",
+        "proto",
+        "service",
+        "state",
+        "spkts",
+        "dpkts",
+        "sbytes",
+        "dbytes",
+        "rate",
+        "sttl",
+        "dttl",
+        "sload",
+        "dload",
+        "sloss",
+        "dloss",
+        "sinpkt",
+        "dinpkt",
+        "sjit",
+        "djit",
+        "swin",
+        "stcpb",
+        "dtcpb",
+        "dwin",
+        "tcprtt",
+        "synack",
+        "ackdat",
+        "smean",
+        "dmean",
+        "trans_depth",
+        "response_body_len",
+        "ct_srv_src",
+        "ct_state_ttl",
+        "ct_dst_ltm",
+        "ct_src_dport_ltm",
+        "ct_dst_sport_ltm",
+        "ct_dst_src_ltm",
+        "is_ftp_login",
+        "ct_ftp_cmd",
+        "ct_flw_http_mthd",
+        "ct_src_ltm",
+        "ct_srv_dst",
+        "is_sm_ips_ports"
+      ],
+      "numeric": [
+        "dur",
+        "spkts",
+        "dpkts",
+        "sbytes",
+        "dbytes",
+        "rate",
+        "sttl",
+        "dttl",
+        "sload",
+        "dload",
+        "sloss",
+        "dloss",
+        "sinpkt",
+        "dinpkt",
+        "sjit",
+        "djit",
+        "swin",
+        "stcpb",
+        "dtcpb",
+        "dwin",
+        "tcprtt",
+        "synack",
+        "ackdat",
+        "smean",
+        "dmean",
+        "trans_depth",
+        "response_body_len",
+        "ct_srv_src",
+        "ct_state_ttl",
+        "ct_dst_ltm",
+        "ct_src_dport_ltm",
+        "ct_dst_sport_ltm",
+        "ct_dst_src_ltm",
+        "is_ftp_login",
+        "ct_ftp_cmd",
+        "ct_flw_http_mthd",
+        "ct_src_ltm",
+        "ct_srv_dst",
+        "is_sm_ips_ports"
+      ],
+      "categorical": [
+        "proto",
+        "service",
+        "state"
+      ],
+      "dtypes": {
+        "dur": "float64",
+        "proto": "string",
+        "service": "string",
+        "state": "string",
+        "spkts": "float64",
+        "dpkts": "float64",
+        "sbytes": "float64",
+        "dbytes": "float64",
+        "rate": "float64",
+        "sttl": "float64",
+        "dttl": "float64",
+        "sload": "float64",
+        "dload": "float64",
+        "sloss": "float64",
+        "dloss": "float64",
+        "sinpkt": "float64",
+        "dinpkt": "float64",
+        "sjit": "float64",
+        "djit": "float64",
+        "swin": "float64",
+        "stcpb": "float64",
+        "dtcpb": "float64",
+        "dwin": "float64",
+        "tcprtt": "float64",
+        "synack": "float64",
+        "ackdat": "float64",
+        "smean": "float64",
+        "dmean": "float64",
+        "trans_depth": "float64",
+        "response_body_len": "float64",
+        "ct_srv_src": "float64",
+        "ct_state_ttl": "float64",
+        "ct_dst_ltm": "float64",
+        "ct_src_dport_ltm": "float64",
+        "ct_dst_sport_ltm": "float64",
+        "ct_dst_src_ltm": "float64",
+        "is_ftp_login": "float64",
+        "ct_ftp_cmd": "float64",
+        "ct_flw_http_mthd": "float64",
+        "ct_src_ltm": "float64",
+        "ct_srv_dst": "float64",
+        "is_sm_ips_ports": "float64"
+      },
+      "categories": {
+        "proto": [
+          "3pc",
+          "a/n",
+          "aes-sp3-d",
+          "any",
+          "aris",
+          "arp",
+          "ax.25",
+          "bbn-rcc",
+          "bna",
+          "br-sat-mon",
+          "cbt",
+          "cftp",
+          "chaos",
+          "compaq-peer",
+          "cphb",
+          "cpnx",
+          "crtp",
+          "crudp",
+          "dcn",
+          "ddp",
+          "ddx",
+          "dgp",
+          "egp",
+          "eigrp",
+          "emcon",
+          "etherip",
+          "fc",
+          "fire",
+          "ggp",
+          "gmtp",
+          "gre",
+          "hmp",
+          "iatp",
+          "ib",
+          "idpr",
+          "idpr-cmtp",
+          "idrp",
+          "ifmp",
+          "igp",
+          "il",
+          "ip",
+          "ipcomp",
+          "ipcv",
+          "ipip",
+          "ipnip",
+          "ippc",
+          "ipv6",
+          "ipv6-no",
+          "ipv6-opts",
+          "ipv6-route",
+          "ipx-n-ip",
+          "irtp",
+          "isis",
+          "iso-ip",
+          "iso-tp4",
+          "kryptolan",
+          "l2tp",
+          "larp",
+          "leaf-1",
+          "mfe-nsp",
+          "mhrp",
+          "micp",
+          "mobile",
+          "mtp",
+          "mux",
+          "nsfnet-igp",
+          "nvp",
+          "ospf",
+          "pgm",
+          "pim",
+          "pipe",
+          "pnni",
+          "pri-enc",
+          "prm",
+          "ptp",
+          "pup",
+          "pvp",
+          "qnx",
+          "rdp",
+          "rsvp",
+          "rvd",
+          "sat-expak",
+          "sat-mon",
+          "sccopmce",
+          "scps",
+          "sctp",
+          "sdrp",
+          "secure-vmtp",
+          "sep",
+          "sm",
+          "smp",
+          "snp",
+          "sprite-rpc",
+          "sps",
+          "srp",
+          "st2",
+          "stp",
+          "sun-nd",
+          "swipe",
+          "tcf",
+          "tcp",
+          "tlsp",
+          "tp++",
+          "trunk-2",
+          "ttp",
+          "udp",
+          "unas",
+          "uti",
+          "vines",
+          "visa",
+          "vmtp",
+          "vrrp",
+          "wb-mon",
+          "wsn",
+          "xnet",
+          "xns-idp",
+          "xtp",
+          "zero"
+        ],
+        "service": [
+          "-",
+          "dhcp",
+          "dns",
+          "ftp",
+          "ftp-data",
+          "http",
+          "irc",
+          "pop3",
+          "smtp",
+          "snmp",
+          "ssh",
+          "ssl"
+        ],
+        "state": [
+          "CON",
+          "FIN",
+          "INT",
+          "REQ",
+          "RST"
+        ]
+      },
+      "classes": [
+        0,
+        1
+      ],
+      "label_mapping": {
+        "0": "normal",
+        "1": "attack"
+      },
+      "score": "P(label=1 | features); uncalibrated model probability",
+      "threshold": 0.5,
+      "config": {
+        "seed": 42,
+        "threads": 2,
+        "batch_size": 10000,
+        "device": "mps",
+        "epochs": 3,
+        "train_batch_size": 512,
+        "learning_rate": 0.001,
+        "weight_decay": 0.0001,
+        "sample_size": 5000,
+        "profile": "smoke",
+        "conflict_policy": "quarantine_development",
+        "train_csv": "data/raw/UNSW_NB15_training-set.csv",
+        "test_csv": "data/raw/UNSW_NB15_testing-set.csv"
+      },
+      "spec": {
+        "name": "mlp-64x32-balancedFalse",
+        "family": "mlp",
+        "params": {
+          "hidden_dims": [
+            64,
+            32
+          ],
+          "balanced": false
+        }
+      },
+      "environment": {
+        "python": "3.12.13",
+        "platform": "macOS-27.2-arm64-arm-64bit",
+        "architecture": "arm64",
+        "logical_cpus": 8,
+        "memory_bytes": 17179869184,
+        "versions": {
+          "numpy": "2.5.4",
+          "pandas": "3.1.0",
+          "scipy": "1.18.1",
+          "scikit-learn": "1.9.1",
+          "joblib": "1.6.0",
+          "psutil": "7.2.2",
+          "pyyaml": "6.0.3",
+          "torch": "2.15.0"
+        },
+        "git_commit": "c2e94b3ab39be6c0a0bd7f7eb92a23a53747cf75",
+        "git_dirty": true,
+        "source_sha256": {
+          "src/ml_network_intrusion_detection/__init__.py": "e5764db342a05c937154e2052054cd38dc7374c71ab9e5bb040f8c31b4cdee5e",
+          "src/ml_network_intrusion_detection/__main__.py": "e1f66018e1bd993671b0e3510ccd20bc5e5ecb7affb80200ae3d3a11814309e3",
+          "src/ml_network_intrusion_detection/cli.py": "6e516370e5eb3ba598f720cd374713b4664b5bf8e0297f36f93b292367ebdc7f",
+          "src/ml_network_intrusion_detection/common.py": "4b0c792a5911671127018ab249097f60f088c674a758ff762c77232043c0e2e6",
+          "src/ml_network_intrusion_detection/data/__init__.py": "6e12368e5de366189653eb43ec47070c95a46f48158e8c74caaae6f42586190d",
+          "src/ml_network_intrusion_detection/data/prepare.py": "6853cf5a27cb52ff3e3ce96f0c3e70840cbee9ab1ac60cba34642233f1edc0b4",
+          "src/ml_network_intrusion_detection/data/schema.py": "3d938aeb2994d5b97c9425eb3979d4dbd49eace1654d1e892ff851754d8be922",
+          "src/ml_network_intrusion_detection/device.py": "a6efa0dbc7147c0248ee958347d9e856cc5e9c1dc880b69897511da19487c49f",
+          "src/ml_network_intrusion_detection/inference/__init__.py": "d55c8efc3d0b972027d6e23d18e94e01cbf4daaf8a316ee534b274c97f41c620",
+          "src/ml_network_intrusion_detection/inference/predict.py": "d1f5afa2e8d78b4b2d4a6fa2b14ccbd9d5794757cd15c397461b0d5934a64172",
+          "src/ml_network_intrusion_detection/training/__init__.py": "4a557475d0c315b92ec3718f045600e78b33cc8cec678a46a4c29752565fe054",
+          "src/ml_network_intrusion_detection/training/artifacts.py": "57ce95d7813e0e977afd4b8f25bfcfe9a36b3f1f59fe87323c04ae0cf40e429a",
+          "src/ml_network_intrusion_detection/training/evaluate.py": "104aded9f0bf97eea0673d1ab497594a56a5fa0e664e0b088e7816a7653bc5b1",
+          "src/ml_network_intrusion_detection/training/metrics.py": "476231009f21d40f53687766053b1a93034eeaa128b40acd398cd4c8343bab96",
+          "src/ml_network_intrusion_detection/training/models.py": "0f30a2d3756b524d577c963719519211627a632c3d1d6495dbf526dffdde2b2f",
+          "src/ml_network_intrusion_detection/training/train.py": "33db1a02e9fdda4b3bf149e7404ddacffc6c1a9ee47d21e91c5b06ded8e5baad"
+        },
+        "lock_sha256": "ad44c97e6183dd571afbcbca1ff749599762d4ad909b7531446ef7d404191266"
+      },
+      "data_manifest_sha256": "b2a8387174b56ff5473af76918c1a42538dd599c7be93b03c54bd64c6c47bd31"
+    },
+    "data_manifest": {
+      "seed": 42,
+      "config": {
+        "seed": 42,
+        "threads": 2,
+        "batch_size": 10000,
+        "device": "auto",
+        "epochs": 3,
+        "train_batch_size": 512,
+        "learning_rate": 0.001,
+        "weight_decay": 0.0001,
+        "sample_size": 5000,
+        "profile": "smoke",
+        "conflict_policy": "quarantine_development",
+        "train_csv": "data/raw/UNSW_NB15_training-set.csv",
+        "test_csv": "data/raw/UNSW_NB15_testing-set.csv"
+      },
+      "audit": {
+        "development": {
+          "rows": 175341,
+          "extra_columns": [
+            "attack_cat",
+            "id",
+            "label"
+          ],
+          "missing": {
+            "dur": 0,
+            "proto": 0,
+            "service": 0,
+            "state": 0,
+            "spkts": 0,
+            "dpkts": 0,
+            "sbytes": 0,
+            "dbytes": 0,
+            "rate": 0,
+            "sttl": 0,
+            "dttl": 0,
+            "sload": 0,
+            "dload": 0,
+            "sloss": 0,
+            "dloss": 0,
+            "sinpkt": 0,
+            "dinpkt": 0,
+            "sjit": 0,
+            "djit": 0,
+            "swin": 0,
+            "stcpb": 0,
+            "dtcpb": 0,
+            "dwin": 0,
+            "tcprtt": 0,
+            "synack": 0,
+            "ackdat": 0,
+            "smean": 0,
+            "dmean": 0,
+            "trans_depth": 0,
+            "response_body_len": 0,
+            "ct_srv_src": 0,
+            "ct_state_ttl": 0,
+            "ct_dst_ltm": 0,
+            "ct_src_dport_ltm": 0,
+            "ct_dst_sport_ltm": 0,
+            "ct_dst_src_ltm": 0,
+            "is_ftp_login": 0,
+            "ct_ftp_cmd": 0,
+            "ct_flw_http_mthd": 0,
+            "ct_src_ltm": 0,
+            "ct_srv_dst": 0,
+            "is_sm_ips_ports": 0
+          },
+          "infinite": {
+            "dur": 0,
+            "spkts": 0,
+            "dpkts": 0,
+            "sbytes": 0,
+            "dbytes": 0,
+            "rate": 0,
+            "sttl": 0,
+            "dttl": 0,
+            "sload": 0,
+            "dload": 0,
+            "sloss": 0,
+            "dloss": 0,
+            "sinpkt": 0,
+            "dinpkt": 0,
+            "sjit": 0,
+            "djit": 0,
+            "swin": 0,
+            "stcpb": 0,
+            "dtcpb": 0,
+            "dwin": 0,
+            "tcprtt": 0,
+            "synack": 0,
+            "ackdat": 0,
+            "smean": 0,
+            "dmean": 0,
+            "trans_depth": 0,
+            "response_body_len": 0,
+            "ct_srv_src": 0,
+            "ct_state_ttl": 0,
+            "ct_dst_ltm": 0,
+            "ct_src_dport_ltm": 0,
+            "ct_dst_sport_ltm": 0,
+            "ct_dst_src_ltm": 0,
+            "is_ftp_login": 0,
+            "ct_ftp_cmd": 0,
+            "ct_flw_http_mthd": 0,
+            "ct_src_ltm": 0,
+            "ct_srv_dst": 0,
+            "is_sm_ips_ports": 0
+          },
+          "conflicting_groups": 229,
+          "conflicting_rows": 940,
+          "duplicate_feature_rows": 74301,
+          "class_counts": {
+            "1": 119341,
+            "0": 56000
+          },
+          "source": {
+            "filename": "UNSW_NB15_training-set.csv",
+            "sha256": "bec7dd5ec88dc2a0ccc7a07879d338395ed7421750f675fd0339e07dfe0648fa"
+          }
+        },
+        "test": {
+          "rows": 82332,
+          "extra_columns": [
+            "attack_cat",
+            "id",
+            "label"
+          ],
+          "missing": {
+            "dur": 0,
+            "proto": 0,
+            "service": 0,
+            "state": 0,
+            "spkts": 0,
+            "dpkts": 0,
+            "sbytes": 0,
+            "dbytes": 0,
+            "rate": 0,
+            "sttl": 0,
+            "dttl": 0,
+            "sload": 0,
+            "dload": 0,
+            "sloss": 0,
+            "dloss": 0,
+            "sinpkt": 0,
+            "dinpkt": 0,
+            "sjit": 0,
+            "djit": 0,
+            "swin": 0,
+            "stcpb": 0,
+            "dtcpb": 0,
+            "dwin": 0,
+            "tcprtt": 0,
+            "synack": 0,
+            "ackdat": 0,
+            "smean": 0,
+            "dmean": 0,
+            "trans_depth": 0,
+            "response_body_len": 0,
+            "ct_srv_src": 0,
+            "ct_state_ttl": 0,
+            "ct_dst_ltm": 0,
+            "ct_src_dport_ltm": 0,
+            "ct_dst_sport_ltm": 0,
+            "ct_dst_src_ltm": 0,
+            "is_ftp_login": 0,
+            "ct_ftp_cmd": 0,
+            "ct_flw_http_mthd": 0,
+            "ct_src_ltm": 0,
+            "ct_srv_dst": 0,
+            "is_sm_ips_ports": 0
+          },
+          "infinite": {
+            "dur": 0,
+            "spkts": 0,
+            "dpkts": 0,
+            "sbytes": 0,
+            "dbytes": 0,
+            "rate": 0,
+            "sttl": 0,
+            "dttl": 0,
+            "sload": 0,
+            "dload": 0,
+            "sloss": 0,
+            "dloss": 0,
+            "sinpkt": 0,
+            "dinpkt": 0,
+            "sjit": 0,
+            "djit": 0,
+            "swin": 0,
+            "stcpb": 0,
+            "dtcpb": 0,
+            "dwin": 0,
+            "tcprtt": 0,
+            "synack": 0,
+            "ackdat": 0,
+            "smean": 0,
+            "dmean": 0,
+            "trans_depth": 0,
+            "response_body_len": 0,
+            "ct_srv_src": 0,
+            "ct_state_ttl": 0,
+            "ct_dst_ltm": 0,
+            "ct_src_dport_ltm": 0,
+            "ct_dst_sport_ltm": 0,
+            "ct_dst_src_ltm": 0,
+            "is_ftp_login": 0,
+            "ct_ftp_cmd": 0,
+            "ct_flw_http_mthd": 0,
+            "ct_src_ltm": 0,
+            "ct_srv_dst": 0,
+            "is_sm_ips_ports": 0
+          },
+          "conflicting_groups": 6,
+          "conflicting_rows": 14,
+          "duplicate_feature_rows": 28386,
+          "class_counts": {
+            "1": 45332,
+            "0": 37000
+          },
+          "source": {
+            "filename": "UNSW_NB15_testing-set.csv",
+            "sha256": "734fe6642edf758f7c94d7d9149426b49d202fe8e7bf0bef47392489c3c0a559"
+          }
+        },
+        "removed_cross_split_rows": 9768
+      },
+      "splits": {
+        "train": {
+          "rows": 4000,
+          "class_counts": {
+            "1": 2687,
+            "0": 1313
+          },
+          "sha256": "9ca6d00e9d1574765685576b1c5e708713efed180eb83b71a18c91fede6a42a2"
+        },
+        "validation": {
+          "rows": 1000,
+          "class_counts": {
+            "1": 672,
+            "0": 328
+          },
+          "sha256": "9d140629ae1a90cf80e28c3de26fc346dc83115dc970769c4674e94bce73fe2d"
+        },
+        "test": {
+          "rows": 82332,
+          "class_counts": {
+            "1": 45332,
+            "0": 37000
+          },
+          "sha256": "adaf3c1cc75bc9a3674b707df24b4bf71d9d5feb80cce4aaab6762a78caf015b"
+        }
+      }
+    },
+    "validation_metrics": {
+      "rows": 1000,
+      "accuracy": 0.901,
+      "precision": 0.8951724137931034,
+      "recall": 0.9657738095238095,
+      "f1": 0.9291338582677166,
+      "false_positive_rate": 0.23170731707317074,
+      "roc_auc": 0.9198515534262486,
+      "average_precision": 0.9492228905258038,
+      "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+      "confusion_matrix": [
+        [
+          252,
+          76
+        ],
+        [
+          23,
+          649
+        ]
+      ],
+      "class_order": [
+        "normal",
+        "attack"
+      ],
+      "per_class": {
+        "normal": {
+          "precision": 0.9163636363636364,
+          "recall": 0.7682926829268293,
+          "f1": 0.835820895522388,
+          "support": 328
+        },
+        "attack": {
+          "precision": 0.8951724137931034,
+          "recall": 0.9657738095238095,
+          "f1": 0.9291338582677166,
+          "support": 672
+        }
+      },
+      "macro": {
+        "precision": 0.90576802507837,
+        "recall": 0.8670332462253194,
+        "f1": 0.8824773768950522
+      },
+      "threshold": 0.5,
+      "undefined_reasons": {}
+    },
+    "validation_performance": {
+      "model_load_seconds": 0.190647000039462,
+      "read_validate_seconds": 0.08180720795644447,
+      "prediction_seconds_trials": [
+        0.2407865000423044,
+        0.1277938749990426,
+        0.13660158403217793
+      ],
+      "prediction_seconds_median": 0.13660158403217793,
+      "rows_per_second": 7320.559326489505,
+      "batch_size": 256,
+      "threads": 2,
+      "warmup": "one batch, once",
+      "prediction_resources": {
+        "seconds": 0.5211332080070861,
+        "peak_rss_bytes": 473841664,
+        "memory_sampling_incomplete": false,
+        "memory_method": "process + children RSS sampled every 50ms; shared pages may repeat"
+      },
+      "end_to_end": {
+        "seconds": 2.2982781659811735,
+        "peak_rss_bytes": 493338624,
+        "memory_sampling_incomplete": false,
+        "memory_method": "process + children RSS sampled every 50ms; shared pages may repeat"
+      },
+      "input_sha256": "9d140629ae1a90cf80e28c3de26fc346dc83115dc970769c4674e94bce73fe2d",
+      "model_sha256": "4c988ee593e546160f213be36ba7d04bce68552562c7b31d84a4bba7ca9cf87e",
+      "model_artifacts": {
+        "preprocess.joblib": "98ba3da6548fa6fbaa9dca52f471db9dc1c39abafbf859c18f5a6aae3c595557",
+        "weights.pt": "5006d6e7d18e4a64d35f8b5e2b12b85968458b37853f72505d36c3a9e9f360ec"
+      },
+      "runtime": {
+        "device": "mps",
+        "name": "mps",
+        "torch_version": "2.15.0",
+        "cuda_build": null,
+        "hip_build": null,
+        "dtype": "float32",
+        "torch_threads": 2,
+        "memory_note": "RSS measures host process memory, not accelerator peak allocation"
+      },
+      "prediction_scope": "CPU preprocessing + transfers + synchronized Torch inference",
+      "audit": {
+        "rows": 1000,
+        "extra_columns": [
+          "attack_cat",
+          "label",
+          "source_file",
+          "source_row"
+        ],
+        "missing": {
+          "dur": 0,
+          "proto": 0,
+          "service": 0,
+          "state": 0,
+          "spkts": 0,
+          "dpkts": 0,
+          "sbytes": 0,
+          "dbytes": 0,
+          "rate": 0,
+          "sttl": 0,
+          "dttl": 0,
+          "sload": 0,
+          "dload": 0,
+          "sloss": 0,
+          "dloss": 0,
+          "sinpkt": 0,
+          "dinpkt": 0,
+          "sjit": 0,
+          "djit": 0,
+          "swin": 0,
+          "stcpb": 0,
+          "dtcpb": 0,
+          "dwin": 0,
+          "tcprtt": 0,
+          "synack": 0,
+          "ackdat": 0,
+          "smean": 0,
+          "dmean": 0,
+          "trans_depth": 0,
+          "response_body_len": 0,
+          "ct_srv_src": 0,
+          "ct_state_ttl": 0,
+          "ct_dst_ltm": 0,
+          "ct_src_dport_ltm": 0,
+          "ct_dst_sport_ltm": 0,
+          "ct_dst_src_ltm": 0,
+          "is_ftp_login": 0,
+          "ct_ftp_cmd": 0,
+          "ct_flw_http_mthd": 0,
+          "ct_src_ltm": 0,
+          "ct_srv_dst": 0,
+          "is_sm_ips_ports": 0
+        },
+        "infinite": {
+          "dur": 0,
+          "spkts": 0,
+          "dpkts": 0,
+          "sbytes": 0,
+          "dbytes": 0,
+          "rate": 0,
+          "sttl": 0,
+          "dttl": 0,
+          "sload": 0,
+          "dload": 0,
+          "sloss": 0,
+          "dloss": 0,
+          "sinpkt": 0,
+          "dinpkt": 0,
+          "sjit": 0,
+          "djit": 0,
+          "swin": 0,
+          "stcpb": 0,
+          "dtcpb": 0,
+          "dwin": 0,
+          "tcprtt": 0,
+          "synack": 0,
+          "ackdat": 0,
+          "smean": 0,
+          "dmean": 0,
+          "trans_depth": 0,
+          "response_body_len": 0,
+          "ct_srv_src": 0,
+          "ct_state_ttl": 0,
+          "ct_dst_ltm": 0,
+          "ct_src_dport_ltm": 0,
+          "ct_dst_sport_ltm": 0,
+          "ct_dst_src_ltm": 0,
+          "is_ftp_login": 0,
+          "ct_ftp_cmd": 0,
+          "ct_flw_http_mthd": 0,
+          "ct_src_ltm": 0,
+          "ct_srv_dst": 0,
+          "is_sm_ips_ports": 0
+        }
+      },
+      "unknown_categories": {
+        "proto": 17,
+        "service": 0,
+        "state": 0
+      },
+      "spec": {
+        "name": "mlp-64x32-balancedFalse",
+        "family": "mlp",
+        "params": {
+          "hidden_dims": [
+            64,
+            32
+          ],
+          "balanced": false
+        }
+      }
+    },
+    "validation_run": {
+      "run_id": "torch-smoke-20261104-v2-validation",
+      "kind": "evaluate",
+      "status": "completed",
+      "started_at": "2026-11-04T15:40:49.619301+00:00",
+      "config": {
+        "batch_size": 256,
+        "device": "mps"
+      },
+      "environment": {
+        "python": "3.12.13",
+        "platform": "macOS-27.2-arm64-arm-64bit",
+        "architecture": "arm64",
+        "logical_cpus": 8,
+        "memory_bytes": 17179869184,
+        "versions": {
+          "numpy": "2.5.4",
+          "pandas": "3.1.0",
+          "scipy": "1.18.1",
+          "scikit-learn": "1.9.1",
+          "joblib": "1.6.0",
+          "psutil": "7.2.2",
+          "pyyaml": "6.0.3",
+          "torch": "2.15.0"
+        },
+        "git_commit": "c2e94b3ab39be6c0a0bd7f7eb92a23a53747cf75",
+        "git_dirty": true,
+        "source_sha256": {
+          "src/ml_network_intrusion_detection/__init__.py": "e5764db342a05c937154e2052054cd38dc7374c71ab9e5bb040f8c31b4cdee5e",
+          "src/ml_network_intrusion_detection/__main__.py": "e1f66018e1bd993671b0e3510ccd20bc5e5ecb7affb80200ae3d3a11814309e3",
+          "src/ml_network_intrusion_detection/cli.py": "6e516370e5eb3ba598f720cd374713b4664b5bf8e0297f36f93b292367ebdc7f",
+          "src/ml_network_intrusion_detection/common.py": "4b0c792a5911671127018ab249097f60f088c674a758ff762c77232043c0e2e6",
+          "src/ml_network_intrusion_detection/data/__init__.py": "6e12368e5de366189653eb43ec47070c95a46f48158e8c74caaae6f42586190d",
+          "src/ml_network_intrusion_detection/data/prepare.py": "6853cf5a27cb52ff3e3ce96f0c3e70840cbee9ab1ac60cba34642233f1edc0b4",
+          "src/ml_network_intrusion_detection/data/schema.py": "3d938aeb2994d5b97c9425eb3979d4dbd49eace1654d1e892ff851754d8be922",
+          "src/ml_network_intrusion_detection/device.py": "a6efa0dbc7147c0248ee958347d9e856cc5e9c1dc880b69897511da19487c49f",
+          "src/ml_network_intrusion_detection/inference/__init__.py": "d55c8efc3d0b972027d6e23d18e94e01cbf4daaf8a316ee534b274c97f41c620",
+          "src/ml_network_intrusion_detection/inference/predict.py": "d1f5afa2e8d78b4b2d4a6fa2b14ccbd9d5794757cd15c397461b0d5934a64172",
+          "src/ml_network_intrusion_detection/training/__init__.py": "4a557475d0c315b92ec3718f045600e78b33cc8cec678a46a4c29752565fe054",
+          "src/ml_network_intrusion_detection/training/artifacts.py": "57ce95d7813e0e977afd4b8f25bfcfe9a36b3f1f59fe87323c04ae0cf40e429a",
+          "src/ml_network_intrusion_detection/training/evaluate.py": "104aded9f0bf97eea0673d1ab497594a56a5fa0e664e0b088e7816a7653bc5b1",
+          "src/ml_network_intrusion_detection/training/metrics.py": "476231009f21d40f53687766053b1a93034eeaa128b40acd398cd4c8343bab96",
+          "src/ml_network_intrusion_detection/training/models.py": "0f30a2d3756b524d577c963719519211627a632c3d1d6495dbf526dffdde2b2f",
+          "src/ml_network_intrusion_detection/training/train.py": "33db1a02e9fdda4b3bf149e7404ddacffc6c1a9ee47d21e91c5b06ded8e5baad"
+        },
+        "lock_sha256": "ad44c97e6183dd571afbcbca1ff749599762d4ad909b7531446ef7d404191266"
+      },
+      "elapsed_seconds": 2.541076499968767
+    },
+    "cpu_verification": {
+      "status": "passed",
+      "rows": 1000,
+      "input_has_labels": false,
+      "independent_process": true,
+      "probability_atol": 1e-06,
+      "probability_rtol": 1e-05,
+      "labels_identical": true,
+      "row_order_identical": true,
+      "model_sha256": "4c988ee593e546160f213be36ba7d04bce68552562c7b31d84a4bba7ca9cf87e",
+      "model_artifacts": {
+        "preprocess.joblib": "98ba3da6548fa6fbaa9dca52f471db9dc1c39abafbf859c18f5a6aae3c595557",
+        "weights.pt": "5006d6e7d18e4a64d35f8b5e2b12b85968458b37853f72505d36c3a9e9f360ec"
+      },
+      "device": "cpu",
+      "input_sha256": "a05c682764549ea89f60bd8a24c812b26173beb637839df4be7d42134c02bae2",
+      "prediction_sha256": "653aa25ec0b87f78a07ac413b4eca5b1c23b8a034b2eedb39c3eab3ac9e5fb36"
+    },
+    "cpu_prediction": {
+      "batch_size": 10000,
+      "rows": 1000,
+      "extra_columns": [],
+      "model_load_seconds": 0.010539458016864955,
+      "runtime": {
+        "device": "cpu",
+        "name": "cpu",
+        "torch_version": "2.15.0",
+        "cuda_build": null,
+        "hip_build": null,
+        "dtype": "float32",
+        "torch_threads": 2,
+        "memory_note": "RSS measures host process memory, not accelerator peak allocation"
+      },
+      "requested_device": "cpu",
+      "prediction_scope": "CPU preprocessing + transfers + synchronized Torch inference; no warmup",
+      "threads": 2,
+      "prediction_seconds": 0.022007624967955053,
+      "unknown_categories": {
+        "proto": 17,
+        "service": 0,
+        "state": 0
+      },
+      "missing": {
+        "dur": 0,
+        "proto": 0,
+        "service": 0,
+        "state": 0,
+        "spkts": 0,
+        "dpkts": 0,
+        "sbytes": 0,
+        "dbytes": 0,
+        "rate": 0,
+        "sttl": 0,
+        "dttl": 0,
+        "sload": 0,
+        "dload": 0,
+        "sloss": 0,
+        "dloss": 0,
+        "sinpkt": 0,
+        "dinpkt": 0,
+        "sjit": 0,
+        "djit": 0,
+        "swin": 0,
+        "stcpb": 0,
+        "dtcpb": 0,
+        "dwin": 0,
+        "tcprtt": 0,
+        "synack": 0,
+        "ackdat": 0,
+        "smean": 0,
+        "dmean": 0,
+        "trans_depth": 0,
+        "response_body_len": 0,
+        "ct_srv_src": 0,
+        "ct_state_ttl": 0,
+        "ct_dst_ltm": 0,
+        "ct_src_dport_ltm": 0,
+        "ct_dst_sport_ltm": 0,
+        "ct_dst_src_ltm": 0,
+        "is_ftp_login": 0,
+        "ct_ftp_cmd": 0,
+        "ct_flw_http_mthd": 0,
+        "ct_src_ltm": 0,
+        "ct_srv_dst": 0,
+        "is_sm_ips_ports": 0
+      },
+      "infinite": {
+        "dur": 0,
+        "spkts": 0,
+        "dpkts": 0,
+        "sbytes": 0,
+        "dbytes": 0,
+        "rate": 0,
+        "sttl": 0,
+        "dttl": 0,
+        "sload": 0,
+        "dload": 0,
+        "sloss": 0,
+        "dloss": 0,
+        "sinpkt": 0,
+        "dinpkt": 0,
+        "sjit": 0,
+        "djit": 0,
+        "swin": 0,
+        "stcpb": 0,
+        "dtcpb": 0,
+        "dwin": 0,
+        "tcprtt": 0,
+        "synack": 0,
+        "ackdat": 0,
+        "smean": 0,
+        "dmean": 0,
+        "trans_depth": 0,
+        "response_body_len": 0,
+        "ct_srv_src": 0,
+        "ct_state_ttl": 0,
+        "ct_dst_ltm": 0,
+        "ct_src_dport_ltm": 0,
+        "ct_dst_sport_ltm": 0,
+        "ct_dst_src_ltm": 0,
+        "is_ftp_login": 0,
+        "ct_ftp_cmd": 0,
+        "ct_flw_http_mthd": 0,
+        "ct_src_ltm": 0,
+        "ct_srv_dst": 0,
+        "is_sm_ips_ports": 0
+      },
+      "performance": {
+        "seconds": 0.08125866600312293,
+        "peak_rss_bytes": 324354048,
+        "memory_sampling_incomplete": true,
+        "memory_method": "process RSS sampled every 50ms; child enumeration unavailable"
+      },
+      "io_validation_seconds": 0.04871158301830292,
+      "score": "P(label=1 | features); uncalibrated model probability",
+      "model_artifacts": {
+        "preprocess.joblib": "98ba3da6548fa6fbaa9dca52f471db9dc1c39abafbf859c18f5a6aae3c595557",
+        "weights.pt": "5006d6e7d18e4a64d35f8b5e2b12b85968458b37853f72505d36c3a9e9f360ec"
+      },
+      "model_sha256": "4c988ee593e546160f213be36ba7d04bce68552562c7b31d84a4bba7ca9cf87e",
+      "rows_per_second": 45438.79684682395,
+      "status": "completed"
+    }
+  },
+  "sources": {
+    "training_run": {
+      "path": "models/torch-smoke-20261104-v2/run.json",
+      "sha256": "6c5b263691ac3128b3cba9c22a68aad6b1b5fa5a631bce083b95a6a6771f1499"
+    },
+    "candidates": {
+      "path": "models/torch-smoke-20261104-v2/candidates.json",
+      "sha256": "241c09a8eb0b91fbaf35bd5825ffd0ec73768b1b82dff79623f1867f7df63035"
+    },
+    "selection": {
+      "path": "models/torch-smoke-20261104-v2/selection.json",
+      "sha256": "4a88393f2e293f2e750fd2977161caa3f1ada91b4b7596653d027f9ffa774f41"
+    },
+    "model_metadata": {
+      "path": "models/torch-smoke-20261104-v2/best/metadata.json",
+      "sha256": "4c988ee593e546160f213be36ba7d04bce68552562c7b31d84a4bba7ca9cf87e"
+    },
+    "data_manifest": {
+      "path": "data/processed/torch-smoke-20261104/manifest.json",
+      "sha256": "b2a8387174b56ff5473af76918c1a42538dd599c7be93b03c54bd64c6c47bd31"
+    },
+    "validation_metrics": {
+      "path": "outputs/torch-smoke-20261104-v2-validation/metrics.json",
+      "sha256": "c32dd8a329ecadffc19d2ff76903191d50a290fae27dbdfe32991b4ee4979098"
+    },
+    "validation_performance": {
+      "path": "outputs/torch-smoke-20261104-v2-validation/performance.json",
+      "sha256": "593a9884067d0152dd6001acadd50b53954033e984f502b3c8ed1da1c0e00b5c"
+    },
+    "validation_run": {
+      "path": "outputs/torch-smoke-20261104-v2-validation/run.json",
+      "sha256": "3bc930c8271f211fab73830e1559c77fe61adcb7b9548c80cfcd0a69c4713ba0"
+    },
+    "cpu_verification": {
+      "path": "outputs/torch-smoke-20261104-v2-cpu-verification/verification.json",
+      "sha256": "b8b0cd200c60bfa88efe287ba1ccf9770998c548787d9088475aebcd08b80d9e"
+    },
+    "cpu_prediction": {
+      "path": "outputs/torch-smoke-20261104-v2-cpu-verification/predictions.csv.json",
+      "sha256": "066f47583da1148a7edaff7832c99a841f095ed59dae3cea40537fbeb970274f"
+    }
+  }
+}
