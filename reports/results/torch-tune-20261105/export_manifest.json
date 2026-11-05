@@ -1,0 +1,205 @@
+{
+  "note": "JSON local absolute paths normalized; hashes refer to original source files",
+  "sources": {
+    "training/run.json": {
+      "source": "models/torch-tune-20261105/run.json",
+      "sha256": "7d703a0ef342aa32ab81ddeb2e747a1dc66fa0c214e8fed34afc8f1095d786be"
+    },
+    "training/candidates.json": {
+      "source": "models/torch-tune-20261105/candidates.json",
+      "sha256": "a688702b29987f2243a25cc6ff451b2cf2e4adbf5a177f07375ff52823645248"
+    },
+    "training/selection.json": {
+      "source": "models/torch-tune-20261105/selection.json",
+      "sha256": "f4d8c034774d5e6aeaacad4364128eb27a64b90a8b5496bf7d6094da14775276"
+    },
+    "training/threadpools.json": {
+      "source": "models/torch-tune-20261105/threadpools.json",
+      "sha256": "d8906ae3f05e64d6319420714f0f6136e9358e36a809e9afc6570be6b002b15a"
+    },
+    "training/search_plan.json": {
+      "source": "models/torch-tune-20261105/search_plan.json",
+      "sha256": "83d4f0e3d142c96459499d38ba9b13c10b2a0ef3e275e878e7916b341e225280"
+    },
+    "data/audit.json": {
+      "source": "data/processed/torch-full-20261105/audit.json",
+      "sha256": "d5466f0fbf17e48c9d1a11fc0022204ad2a8349a5a7e3feb0a775f0ff265c1da"
+    },
+    "data/manifest.json": {
+      "source": "data/processed/torch-full-20261105/manifest.json",
+      "sha256": "5d871f82883afaaddff2e9f71acf8d20d7fdc2539753a41e87608fe45a218b47"
+    },
+    "data/run.json": {
+      "source": "data/processed/torch-full-20261105/run.json",
+      "sha256": "1bedea2d6f7d30a49de25593fff21bc02c16ce61cad1e37e84d5d090094c2d53"
+    },
+    "evaluation/run.json": {
+      "source": "outputs/torch-tune-20261105/run.json",
+      "sha256": "85c616c9ef25811de5ab3f2e7542fc4c05bfa1d9ffef192b9f3dc35d554f83cd"
+    },
+    "evaluation/frozen_selection.json": {
+      "source": "outputs/torch-tune-20261105/frozen_selection.json",
+      "sha256": "c5206aff817595e88cac8cb805c72c78a6b627a61b67bd9a74686fc037c12920"
+    },
+    "source_manifest.json": {
+      "source": "data/raw/source_manifest.json",
+      "sha256": "9e1ae5a8c8e5a07c9943fda0fabaccaffea42a4f4466554251c96d34b64cb0b7"
+    },
+    "environment.json": {
+      "source": "outputs/torch-tune-20261105/environment-v2.json",
+      "sha256": "cca024bcdf8134905a51823cf12558b0ca0786b9d438f0196cff64b235d575d3"
+    },
+    "evaluation/dummy/metrics.json": {
+      "source": "outputs/torch-tune-20261105/dummy/metrics.json",
+      "sha256": "b95824b2ffeffc34244f3e57bfa0c27ca040b2e44bff3f59a00c39137e18f1f7"
+    },
+    "evaluation/dummy/performance.json": {
+      "source": "outputs/torch-tune-20261105/dummy/performance.json",
+      "sha256": "20ad1f1abc06a59bdb5821c019817a12956cb4dd34c33457d2cfb1cf0a041ab3"
+    },
+    "evaluation/dummy/run.json": {
+      "source": "outputs/torch-tune-20261105/dummy/run.json",
+      "sha256": "27d79b3fbd31f14bb69687018679f637d28cf6d4bcae8a9e4c23211f3ec8096c"
+    },
+    "evaluation/dummy/model_metadata.json": {
+      "source": "models/torch-tune-20261105/dummy/metadata.json",
+      "sha256": "69cb1ee4401e28ff52ae2f4caaaeee1c893e16a597e66bf5016a8c10b36aee61"
+    },
+    "evaluation/dummy/confusion_matrix.png": {
+      "source": "outputs/torch-tune-20261105/dummy/confusion_matrix.png",
+      "sha256": "8ea9289d3782234e2558b024721f859b23bded1d47b2b76896af96d2a22c6e30"
+    },
+    "evaluation/dummy/roc.png": {
+      "source": "outputs/torch-tune-20261105/dummy/roc.png",
+      "sha256": "b74545b43a6adf718d2d4d2093455323c8bed78d0aa0d5cb642209d95dc6b3a3"
+    },
+    "evaluation/dummy/precision_recall.png": {
+      "source": "outputs/torch-tune-20261105/dummy/precision_recall.png",
+      "sha256": "332b052c8279eb23508ac1344dffd0003d7c5bbe207fd4abec8bf49b60d15941"
+    },
+    "evaluation/dummy/category_breakdown.csv": {
+      "source": "outputs/torch-tune-20261105/dummy/category_breakdown.csv",
+      "sha256": "9ef9c2dbb9fb39fedde5b81a32a1fd274b6c8a7a2da073b39c3bf5ca5a0fbd96"
+    },
+    "evaluation/linear/metrics.json": {
+      "source": "outputs/torch-tune-20261105/linear/metrics.json",
+      "sha256": "405630752b8b959fac2fd66c9b175256d04c3ff4f9fcc9533a73c6f4241bf05a"
+    },
+    "evaluation/linear/performance.json": {
+      "source": "outputs/torch-tune-20261105/linear/performance.json",
+      "sha256": "80a4d849fcf76f149d65204995785b2669505c138d920fc04bf93d200717d486"
+    },
+    "evaluation/linear/run.json": {
+      "source": "outputs/torch-tune-20261105/linear/run.json",
+      "sha256": "eee9245920202efd90ba1d4c5c83ee6f3ad390aa81b35ccd3e22d3720dccc0d6"
+    },
+    "evaluation/linear/model_metadata.json": {
+      "source": "models/torch-tune-20261105/linear-lr01-wd001-e40/metadata.json",
+      "sha256": "9d324d21aca12ab7a6b47c62ec2532d74ae1a3393705c82c44e261148dba2376"
+    },
+    "evaluation/linear/confusion_matrix.png": {
+      "source": "outputs/torch-tune-20261105/linear/confusion_matrix.png",
+      "sha256": "6e1bf31532117abd791fccc4791b3e50ad00b9eaebdbf32f296979987831ede8"
+    },
+    "evaluation/linear/roc.png": {
+      "source": "outputs/torch-tune-20261105/linear/roc.png",
+      "sha256": "ea60f266f4ca41b01800d8096ea0274dcf494f3500c7e9774040bf38230281bf"
+    },
+    "evaluation/linear/precision_recall.png": {
+      "source": "outputs/torch-tune-20261105/linear/precision_recall.png",
+      "sha256": "99457ee658d15a7deabab6d648fff2126a880a49a91e7e1bcf1c2338fa7bb239"
+    },
+    "evaluation/linear/category_breakdown.csv": {
+      "source": "outputs/torch-tune-20261105/linear/category_breakdown.csv",
+      "sha256": "bd62ef73e0d97732cb909fd6d9a12496daaa3a987c0c4207668291c9ba8ea4e3"
+    },
+    "evaluation/mlp/metrics.json": {
+      "source": "outputs/torch-tune-20261105/mlp/metrics.json",
+      "sha256": "0dff7770bc2b2a7f237d0202ca7b13ba76bbb3500eeea5c2fd9b01a2596cf3e8"
+    },
+    "evaluation/mlp/performance.json": {
+      "source": "outputs/torch-tune-20261105/mlp/performance.json",
+      "sha256": "39b5ae16d145242e71f70d5c8a03cfa3eb0b3be4e46d1860e3e5ee21e2927104"
+    },
+    "evaluation/mlp/run.json": {
+      "source": "outputs/torch-tune-20261105/mlp/run.json",
+      "sha256": "7a0083e6d3ca95acbf4d1df455523065fdfda26095b82b809fff76db881813de"
+    },
+    "evaluation/mlp/model_metadata.json": {
+      "source": "models/torch-tune-20261105/mlp128-drop01-e40/metadata.json",
+      "sha256": "d8d5ce50f41072b0a74d3af73eb866c74b8b5563f9cfe45ef2ae05e9f1f7e26c"
+    },
+    "evaluation/mlp/confusion_matrix.png": {
+      "source": "outputs/torch-tune-20261105/mlp/confusion_matrix.png",
+      "sha256": "2edafbbdde02b97a3f359c857262adc465ed640052a43cd9d6b918237ecb2409"
+    },
+    "evaluation/mlp/roc.png": {
+      "source": "outputs/torch-tune-20261105/mlp/roc.png",
+      "sha256": "70a0be31f27d0611af85f7605690cf6b7c2afdc968558e90d2f1d6f6f8512c9a"
+    },
+    "evaluation/mlp/precision_recall.png": {
+      "source": "outputs/torch-tune-20261105/mlp/precision_recall.png",
+      "sha256": "665542e3013f69ef3275504a249c3d3b5d82c1d8f475c718c8f86766ab2a43d0"
+    },
+    "evaluation/mlp/category_breakdown.csv": {
+      "source": "outputs/torch-tune-20261105/mlp/category_breakdown.csv",
+      "sha256": "d0bc9af079ae317d94fbdb55ef4b3d5c36a7515819b848ab94c7e3183378b791"
+    },
+    "evaluation/transformer/metrics.json": {
+      "source": "outputs/torch-tune-20261105/transformer/metrics.json",
+      "sha256": "85ec26fc63170dc66f272ddeb7c71c70cec019be8f31caed3fcfcef304f5890f"
+    },
+    "evaluation/transformer/performance.json": {
+      "source": "outputs/torch-tune-20261105/transformer/performance.json",
+      "sha256": "c6dfc60914d41fe0ab80cb732e603832d645bf247af826b08b32fadd533f24ad"
+    },
+    "evaluation/transformer/run.json": {
+      "source": "outputs/torch-tune-20261105/transformer/run.json",
+      "sha256": "fecfec5de6a09e8a2bda94b43bb447b1579f841838ffbd5b2cecf2b2df8e9941"
+    },
+    "evaluation/transformer/model_metadata.json": {
+      "source": "models/torch-tune-20261105/transformer32-l2/metadata.json",
+      "sha256": "7cf2e1b4352760cf0efecf4a2bc853d8a34c5c78da8f17331254eaf0351c728c"
+    },
+    "evaluation/transformer/confusion_matrix.png": {
+      "source": "outputs/torch-tune-20261105/transformer/confusion_matrix.png",
+      "sha256": "f60299253cdd51b2481a418e6e6eb927991b985b52dfbc38c0156fa9a342a5b8"
+    },
+    "evaluation/transformer/roc.png": {
+      "source": "outputs/torch-tune-20261105/transformer/roc.png",
+      "sha256": "97efdf92e8b3a7573c8634ebd6ac2c5e85c8f0ddc7fd2f6bf5d51b837451f567"
+    },
+    "evaluation/transformer/precision_recall.png": {
+      "source": "outputs/torch-tune-20261105/transformer/precision_recall.png",
+      "sha256": "bfc67915b793184b4f421a5e18497395f32fb66ece5622b62dd1d9b5c2ca3384"
+    },
+    "evaluation/transformer/category_breakdown.csv": {
+      "source": "outputs/torch-tune-20261105/transformer/category_breakdown.csv",
+      "sha256": "2660a267832cb512620e710c31fa5372eebd562269d0cc44ebfb005efefdbee4"
+    },
+    "verification/transformer/verification.json": {
+      "source": "outputs/torch-tune-20261105-transformer-verification/verification.json",
+      "sha256": "00e8dc95acf68721b5f51971f39631186b99084dded6a49bb4680cbeeae0fe50"
+    },
+    "verification/transformer/predictions.csv.json": {
+      "source": "outputs/torch-tune-20261105-transformer-verification/predictions.csv.json",
+      "sha256": "100fcd28d1c4851bd2e8ebdb85147f80ad9505d733e93866695e1006d3d17c20"
+    },
+    "verification/mlp/verification.json": {
+      "source": "outputs/torch-tune-20261105-mlp-verification/verification.json",
+      "sha256": "e3d587ae696e40c29a6bc780456f08a97c8b3632d9f3e528b1ade7d7a0da2c04"
+    },
+    "verification/mlp/predictions.csv.json": {
+      "source": "outputs/torch-tune-20261105-mlp-verification/predictions.csv.json",
+      "sha256": "4871a119b9c95c889789ffb80faaaff21af525e52abf124ec03eddb6ea62b661"
+    },
+    "smoke/transformer_result.json": {
+      "source": "models/transformer-smoke-20261105/transformer-smoke/result.json",
+      "sha256": "344ff3314edbbea97972dd38281cc15f30f3efb89bab9be6c9e0c12a1908414d"
+    },
+    "smoke/verification.json": {
+      "source": "outputs/transformer-smoke-20261105-verification/verification.json",
+      "sha256": "f06172ba7138f67c16d24018535079467201e5e9ed9dfb2aa9a6482fb08656d5"
+    }
+  }
+}

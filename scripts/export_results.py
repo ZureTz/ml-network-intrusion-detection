@@ -46,6 +46,8 @@ def main() -> None:
 
     for filename in ("run.json", "candidates.json", "selection.json", "threadpools.json"):
         export_json(args.training / filename, f"training/{filename}")
+    if (args.training / "search_plan.json").exists():
+        export_json(args.training / "search_plan.json", "training/search_plan.json")
     for filename in ("audit.json", "manifest.json", "run.json"):
         export_json(args.data / filename, f"data/{filename}")
     for filename in ("run.json", "frozen_selection.json"):

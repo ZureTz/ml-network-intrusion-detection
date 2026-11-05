@@ -1,0 +1,12 @@
+{
+  "best": "mlp128-drop01-e40",
+  "family_winners": {
+    "dummy": "dummy",
+    "linear": "linear-lr01-wd001-e40",
+    "mlp": "mlp128-drop01-e40",
+    "transformer": "transformer32-l2"
+  },
+  "criterion": "validation attack F1 desc, FPR asc, recall desc, candidate order asc",
+  "threshold": 0.5,
+  "refit_train_validation": false
+}

@@ -88,6 +88,7 @@ def evaluate(
                 "prediction_seconds_median": median,
                 "rows_per_second": len(x) / median,
                 "batch_size": batch_size,
+                "network_batch_size": model.named_steps["classifier"].network_batch_size(),
                 "threads": metadata["config"]["threads"],
                 "warmup": "one batch, once",
                 "prediction_resources": prediction_resources.result,

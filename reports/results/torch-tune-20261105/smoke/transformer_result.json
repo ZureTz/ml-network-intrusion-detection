@@ -1,0 +1,85 @@
+{
+  "order": 3,
+  "spec": {
+    "name": "transformer-smoke",
+    "family": "transformer",
+    "params": {
+      "d_model": 16,
+      "n_heads": 2,
+      "n_layers": 1,
+      "dropout": 0.1
+    }
+  },
+  "training": {
+    "seconds": 1.871851209027227,
+    "peak_rss_bytes": 650690560,
+    "memory_sampling_incomplete": false,
+    "memory_method": "process + children RSS sampled every 50ms; shared pages may repeat"
+  },
+  "runtime": {
+    "device": "mps",
+    "name": "mps",
+    "torch_version": "2.15.0",
+    "cuda_build": null,
+    "hip_build": null,
+    "dtype": "float32",
+    "torch_threads": 2,
+    "memory_note": "RSS measures host process memory, not accelerator peak allocation",
+    "network_batch_size": 256,
+    "cuda_peak_allocated_bytes": null
+  },
+  "loss_history": [
+    0.5583052368164062,
+    0.3396897888183594,
+    0.27918603515625
+  ],
+  "positive_weight": 1.0,
+  "warnings": [],
+  "validation": {
+    "rows": 1000,
+    "accuracy": 0.926,
+    "precision": 0.904054054054054,
+    "recall": 0.9955357142857143,
+    "f1": 0.9475920679886686,
+    "false_positive_rate": 0.21646341463414634,
+    "roc_auc": 0.949490962543554,
+    "average_precision": 0.9692244173086098,
+    "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+    "confusion_matrix": [
+      [
+        257,
+        71
+      ],
+      [
+        3,
+        669
+      ]
+    ],
+    "class_order": [
+      "normal",
+      "attack"
+    ],
+    "per_class": {
+      "normal": {
+        "precision": 0.9884615384615385,
+        "recall": 0.7835365853658537,
+        "f1": 0.8741496598639455,
+        "support": 328
+      },
+      "attack": {
+        "precision": 0.904054054054054,
+        "recall": 0.9955357142857143,
+        "f1": 0.9475920679886686,
+        "support": 672
+      }
+    },
+    "macro": {
+      "precision": 0.9462577962577963,
+      "recall": 0.889536149825784,
+      "f1": 0.910870863926307
+    },
+    "threshold": 0.5,
+    "undefined_reasons": {}
+  },
+  "status": "completed"
+}

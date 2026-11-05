@@ -1,0 +1,46 @@
+{
+  "rows": 82332,
+  "accuracy": 0.8869333916338726,
+  "precision": 0.839295469529999,
+  "recall": 0.9828377305214859,
+  "f1": 0.905412682768221,
+  "false_positive_rate": 0.23056756756756758,
+  "roc_auc": 0.9850543995530869,
+  "average_precision": 0.9887776586990484,
+  "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+  "confusion_matrix": [
+    [
+      28469,
+      8531
+    ],
+    [
+      778,
+      44554
+    ]
+  ],
+  "class_order": [
+    "normal",
+    "attack"
+  ],
+  "per_class": {
+    "normal": {
+      "precision": 0.9733989810920778,
+      "recall": 0.7694324324324324,
+      "f1": 0.8594804293024589,
+      "support": 37000
+    },
+    "attack": {
+      "precision": 0.839295469529999,
+      "recall": 0.9828377305214859,
+      "f1": 0.905412682768221,
+      "support": 45332
+    }
+  },
+  "macro": {
+    "precision": 0.9063472253110384,
+    "recall": 0.8761350814769592,
+    "f1": 0.88244655603534
+  },
+  "threshold": 0.5,
+  "undefined_reasons": {}
+}

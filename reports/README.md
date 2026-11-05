@@ -1,5 +1,7 @@
 # 基于 Torch 的网络流量入侵检测系统
 
+最新追加实验见 [Transformer 与当前 Torch 模型调参](transformer-tuning-20261105.md)。该轮 Transformer 测试 F1 为 90.54%，但按验证集整体选出的调参 MLP 测试效果下降；下文保留原 7 候选实验，避免混淆两轮结果。
+
 2026-11-05 已完成完整 Torch 实验：7 个候选训练、验证选优、82,332 行测试集独立评估，以及完整测试集的 CPU 无标签推理验证。获选 MLP 128/64 的测试 Accuracy 为 **87.05%**、攻击类 F1 为 **89.16%**、误报率为 **24.70%**。正式证据保存在 [results/torch-full-20261105](results/torch-full-20261105/)。
 
 本次使用 Apple MPS；CUDA 路径已实现，但没有 NVIDIA 硬件实测。[原 scikit-learn 实验报告](sklearn-20261103.md) 与 [历史证据](results/full-20261103/) 保留供比较，不将旧模型指标描述为 Torch 结果。

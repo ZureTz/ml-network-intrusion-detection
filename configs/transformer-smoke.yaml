@@ -1,0 +1,13 @@
+seed: 42
+threads: 2
+batch_size: 10000
+device: auto
+epochs: 3
+train_batch_size: 512
+learning_rate: 0.001
+weight_decay: 0.0001
+sample_size: 5000
+profile: transformer_smoke
+conflict_policy: quarantine_development
+train_csv: ../data/raw/UNSW_NB15_training-set.csv
+test_csv: ../data/raw/UNSW_NB15_testing-set.csv

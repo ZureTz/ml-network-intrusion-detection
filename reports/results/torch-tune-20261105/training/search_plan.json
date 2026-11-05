@@ -1,0 +1,116 @@
+[
+  {
+    "name": "dummy",
+    "family": "dummy",
+    "params": {}
+  },
+  {
+    "name": "linear-original",
+    "family": "linear",
+    "params": {
+      "epochs": 20
+    }
+  },
+  {
+    "name": "linear-lr003-e40",
+    "family": "linear",
+    "params": {
+      "learning_rate": 0.003,
+      "epochs": 40
+    }
+  },
+  {
+    "name": "linear-lr01-wd001-e40",
+    "family": "linear",
+    "params": {
+      "learning_rate": 0.01,
+      "weight_decay": 0.001,
+      "epochs": 40
+    }
+  },
+  {
+    "name": "mlp-original",
+    "family": "mlp",
+    "params": {
+      "hidden_dims": [
+        128,
+        64
+      ],
+      "epochs": 20
+    }
+  },
+  {
+    "name": "mlp128-lr0005-wd001-e40",
+    "family": "mlp",
+    "params": {
+      "hidden_dims": [
+        128,
+        64
+      ],
+      "learning_rate": 0.0005,
+      "weight_decay": 0.001,
+      "epochs": 40
+    }
+  },
+  {
+    "name": "mlp128-drop01-e40",
+    "family": "mlp",
+    "params": {
+      "hidden_dims": [
+        128,
+        64
+      ],
+      "dropout": 0.1,
+      "epochs": 40
+    }
+  },
+  {
+    "name": "mlp256-drop01-e40",
+    "family": "mlp",
+    "params": {
+      "hidden_dims": [
+        256,
+        128
+      ],
+      "dropout": 0.1,
+      "epochs": 40
+    }
+  },
+  {
+    "name": "mlp64-lr003-e40",
+    "family": "mlp",
+    "params": {
+      "hidden_dims": [
+        64,
+        32
+      ],
+      "learning_rate": 0.003,
+      "epochs": 40
+    }
+  },
+  {
+    "name": "transformer16-l1",
+    "family": "transformer",
+    "params": {
+      "d_model": 16,
+      "n_heads": 2,
+      "n_layers": 1,
+      "dropout": 0.1,
+      "epochs": 15,
+      "batch_size": 256
+    }
+  },
+  {
+    "name": "transformer32-l2",
+    "family": "transformer",
+    "params": {
+      "d_model": 32,
+      "n_heads": 4,
+      "n_layers": 2,
+      "dropout": 0.1,
+      "learning_rate": 0.0003,
+      "epochs": 15,
+      "batch_size": 256
+    }
+  }
+]

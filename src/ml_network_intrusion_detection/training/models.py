@@ -15,6 +15,7 @@ from torch import nn
 
 from ml_network_intrusion_detection.data.schema import CATEGORICAL, NUMERIC
 from ml_network_intrusion_detection.device import device_info, resolve_device, synchronize
+from ml_network_intrusion_detection.training.transformer import TabularTransformer
 
 
 class MajorityNetwork(nn.Module):
@@ -28,10 +29,22 @@ class MajorityNetwork(nn.Module):
         return self.probability.expand(x.shape[0])
 
 
-def build_network(input_dim: int, family: str, hidden_dims: tuple[int, ...]) -> nn.Module:
+def build_network(
+    input_dim: int,
+    family: str,
+    hidden_dims: tuple[int, ...],
+    dropout: float = 0.0,
+    d_model: int = 32,
+    n_heads: int = 4,
+    n_layers: int = 2,
+) -> nn.Module:
     """按已记录架构构建网络；神经分类器输出 logits，基线直接输出概率。"""
     if family == "dummy":
         return MajorityNetwork()
+    if not 0 <= dropout < 1:
+        raise ValueError("dropout 必须在 [0, 1) 内")
+    if family == "transformer":
+        return TabularTransformer(input_dim, len(NUMERIC), d_model, n_heads, n_layers, dropout)
     if family not in ("linear", "mlp"):
         raise ValueError(f"未知模型: {family}")
     widths = (input_dim,) + (hidden_dims if family == "mlp" else ()) + (1,)
@@ -40,6 +53,8 @@ def build_network(input_dim: int, family: str, hidden_dims: tuple[int, ...]) -> 
         layers.append(nn.Linear(widths[index], widths[index + 1]))
         if index < len(widths) - 2:
             layers.append(nn.ReLU())
+            if dropout:
+                layers.append(nn.Dropout(dropout))
     layers.append(nn.Flatten(start_dim=0))
     return nn.Sequential(*layers)
 
@@ -63,6 +78,10 @@ class TorchClassifier(ClassifierMixin, BaseEstimator):
         batch_size: int = 512,
         learning_rate: float = 0.001,
         weight_decay: float = 0.0001,
+        dropout: float = 0.0,
+        d_model: int = 32,
+        n_heads: int = 4,
+        n_layers: int = 2,
     ) -> None:
         self.family = family
         self.hidden_dims = hidden_dims
@@ -74,6 +93,10 @@ class TorchClassifier(ClassifierMixin, BaseEstimator):
         self.batch_size = batch_size
         self.learning_rate = learning_rate
         self.weight_decay = weight_decay
+        self.dropout = dropout
+        self.d_model = d_model
+        self.n_heads = n_heads
+        self.n_layers = n_layers
 
     def initialize(self, input_dim: int) -> TorchClassifier:
         """分配网络；加载权重和训练共用架构，默认在 CPU 初始化再转设备。"""
@@ -81,10 +104,20 @@ class TorchClassifier(ClassifierMixin, BaseEstimator):
         torch.set_num_threads(self.threads)
         self.n_features_in_ = input_dim
         self.classes_ = np.array([0, 1])
-        self.network_ = build_network(input_dim, self.family, tuple(self.hidden_dims)).to(
-            self.device_
-        )
+        self.network_ = build_network(
+            input_dim,
+            self.family,
+            tuple(self.hidden_dims),
+            self.dropout,
+            self.d_model,
+            self.n_heads,
+            self.n_layers,
+        ).to(self.device_)
         return self
+
+    def network_batch_size(self) -> int:
+        """限制注意力的二次方内存；CSV 批量可大于网络批量。"""
+        return min(self.batch_size, 256) if self.family == "transformer" else self.batch_size
 
     def _tensor(self, x) -> torch.Tensor:
         if sparse.issparse(x):
@@ -126,8 +159,9 @@ class TorchClassifier(ClassifierMixin, BaseEstimator):
             for _ in range(self.epochs):
                 indices = rng.permutation(len(labels))
                 total = torch.zeros((), device=self.device_)
-                for start in range(0, len(indices), self.batch_size):
-                    batch = indices[start : start + self.batch_size]
+                batch_size = self.network_batch_size()
+                for start in range(0, len(indices), batch_size):
+                    batch = indices[start : start + batch_size]
                     features = self._tensor(x[batch])
                     target = torch.from_numpy(labels[batch]).to(self.device_)
                     optimizer.zero_grad(set_to_none=True)
@@ -139,9 +173,13 @@ class TorchClassifier(ClassifierMixin, BaseEstimator):
                 if not np.isfinite(value):
                     raise ValueError("训练损失为非有限值；请检查输入或减小学习率")
                 self.loss_history_.append(value)
+                print(
+                    f"  epoch {len(self.loss_history_)}/{self.epochs}: loss={value:.6f}", flush=True
+                )
         self.network_.eval()
         synchronize(self.device_)
         self.runtime_ = device_info(self.device_)
+        self.runtime_["network_batch_size"] = self.network_batch_size()
         self.runtime_["cuda_peak_allocated_bytes"] = (
             torch.cuda.max_memory_allocated(self.device_) if self.device_.type == "cuda" else None
         )
@@ -155,8 +193,9 @@ class TorchClassifier(ClassifierMixin, BaseEstimator):
         self.network_.eval()
         batches = []
         with torch.inference_mode():
-            for start in range(0, x.shape[0], self.batch_size):
-                values = self.network_(self._tensor(x[start : start + self.batch_size]))
+            batch_size = self.network_batch_size()
+            for start in range(0, x.shape[0], batch_size):
+                values = self.network_(self._tensor(x[start : start + batch_size]))
                 scores = values if self.family == "dummy" else torch.sigmoid(values)
                 batches.append(scores.cpu().numpy())
         synchronize(self.device_)
@@ -171,6 +210,10 @@ class TorchClassifier(ClassifierMixin, BaseEstimator):
 
 def candidates(profile: str) -> list[dict]:
     """smoke 比较三个模型族；full 比较 7 个固定候选。"""
+    if profile in ("tune", "transformer_smoke"):
+        from ml_network_intrusion_detection.training.search import search_candidates
+
+        return search_candidates(profile)
     result = [{"name": "dummy", "family": "dummy", "params": {}}]
     for balanced in [False] if profile == "smoke" else [False, True]:
         result.append(
@@ -213,7 +256,6 @@ def build_pipeline(spec: dict, seed: int, threads: int, **training_options) -> P
         ],
         sparse_threshold=1.0,
     )
-    model = TorchClassifier(
-        family=spec["family"], seed=seed, threads=threads, **training_options, **spec["params"]
-    )
+    options = training_options | spec["params"]
+    model = TorchClassifier(family=spec["family"], seed=seed, threads=threads, **options)
     return Pipeline([("preprocess", transform), ("classifier", model)])

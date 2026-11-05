@@ -1,0 +1,1220 @@
+[
+  {
+    "order": 0,
+    "spec": {
+      "name": "dummy",
+      "family": "dummy",
+      "params": {}
+    },
+    "training": {
+      "seconds": 1.0106714160065167,
+      "peak_rss_bytes": 1019428864,
+      "memory_sampling_incomplete": false,
+      "memory_method": "process + children RSS sampled every 50ms; shared pages may repeat"
+    },
+    "runtime": {
+      "device": "mps",
+      "name": "mps",
+      "torch_version": "2.15.0",
+      "cuda_build": null,
+      "hip_build": null,
+      "dtype": "float32",
+      "torch_threads": 4,
+      "memory_note": "RSS measures host process memory, not accelerator peak allocation",
+      "network_batch_size": 512,
+      "cuda_peak_allocated_bytes": null
+    },
+    "loss_history": [],
+    "positive_weight": 1.0,
+    "warnings": [],
+    "validation": {
+      "rows": 32927,
+      "accuracy": 0.6717283688158654,
+      "precision": 0.6717283688158654,
+      "recall": 1.0,
+      "f1": 0.803633390862022,
+      "false_positive_rate": 1.0,
+      "roc_auc": 0.5,
+      "average_precision": 0.6717283688158654,
+      "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+      "confusion_matrix": [
+        [
+          0,
+          10809
+        ],
+        [
+          0,
+          22118
+        ]
+      ],
+      "class_order": [
+        "normal",
+        "attack"
+      ],
+      "per_class": {
+        "normal": {
+          "precision": null,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 10809
+        },
+        "attack": {
+          "precision": 0.6717283688158654,
+          "recall": 1.0,
+          "f1": 0.803633390862022,
+          "support": 22118
+        }
+      },
+      "macro": {
+        "precision": null,
+        "recall": 0.5,
+        "f1": 0.401816695431011
+      },
+      "threshold": 0.5,
+      "undefined_reasons": {
+        "normal.precision": "zero denominator",
+        "macro.precision": "one or more class metrics undefined"
+      }
+    },
+    "status": "completed"
+  },
+  {
+    "order": 1,
+    "spec": {
+      "name": "linear-original",
+      "family": "linear",
+      "params": {
+        "epochs": 20
+      }
+    },
+    "training": {
+      "seconds": 10.089123208017554,
+      "peak_rss_bytes": 1155121152,
+      "memory_sampling_incomplete": false,
+      "memory_method": "process + children RSS sampled every 50ms; shared pages may repeat"
+    },
+    "runtime": {
+      "device": "mps",
+      "name": "mps",
+      "torch_version": "2.15.0",
+      "cuda_build": null,
+      "hip_build": null,
+      "dtype": "float32",
+      "torch_threads": 4,
+      "memory_note": "RSS measures host process memory, not accelerator peak allocation",
+      "network_batch_size": 512,
+      "cuda_peak_allocated_bytes": null
+    },
+    "loss_history": [
+      0.4763020655380165,
+      0.33966861442341273,
+      0.2872641349388031,
+      0.25421873576374654,
+      0.23225117342319257,
+      0.2170513035425493,
+      0.2058946186250057,
+      0.19738951006408212,
+      0.19067302362838442,
+      0.185140252010159,
+      0.18057505625692832,
+      0.17668912257698965,
+      0.17336175423386177,
+      0.1704245037242039,
+      0.16785422230669067,
+      0.16560326302047743,
+      0.16363060766024326,
+      0.1618627763968612,
+      0.16028814295666105,
+      0.15888425558156044
+    ],
+    "positive_weight": 1.0,
+    "warnings": [],
+    "validation": {
+      "rows": 32927,
+      "accuracy": 0.932274425243721,
+      "precision": 0.9170091419944645,
+      "recall": 0.9886517768333484,
+      "f1": 0.9514837699068837,
+      "false_positive_rate": 0.18308816726801738,
+      "roc_auc": 0.9815440975209534,
+      "average_precision": 0.9903990246524621,
+      "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+      "confusion_matrix": [
+        [
+          8830,
+          1979
+        ],
+        [
+          251,
+          21867
+        ]
+      ],
+      "class_order": [
+        "normal",
+        "attack"
+      ],
+      "per_class": {
+        "normal": {
+          "precision": 0.9723598722607643,
+          "recall": 0.8169118327319826,
+          "f1": 0.8878833584715937,
+          "support": 10809
+        },
+        "attack": {
+          "precision": 0.9170091419944645,
+          "recall": 0.9886517768333484,
+          "f1": 0.9514837699068837,
+          "support": 22118
+        }
+      },
+      "macro": {
+        "precision": 0.9446845071276144,
+        "recall": 0.9027818047826655,
+        "f1": 0.9196835641892387
+      },
+      "threshold": 0.5,
+      "undefined_reasons": {}
+    },
+    "status": "completed"
+  },
+  {
+    "order": 2,
+    "spec": {
+      "name": "linear-lr003-e40",
+      "family": "linear",
+      "params": {
+        "learning_rate": 0.003,
+        "epochs": 40
+      }
+    },
+    "training": {
+      "seconds": 17.172565957996994,
+      "peak_rss_bytes": 1158348800,
+      "memory_sampling_incomplete": false,
+      "memory_method": "process + children RSS sampled every 50ms; shared pages may repeat"
+    },
+    "runtime": {
+      "device": "mps",
+      "name": "mps",
+      "torch_version": "2.15.0",
+      "cuda_build": null,
+      "hip_build": null,
+      "dtype": "float32",
+      "torch_threads": 4,
+      "memory_note": "RSS measures host process memory, not accelerator peak allocation",
+      "network_batch_size": 512,
+      "cuda_peak_allocated_bytes": null
+    },
+    "loss_history": [
+      0.36658174741469635,
+      0.2362259798813266,
+      0.20112915141014837,
+      0.18480430608704235,
+      0.17510860185280094,
+      0.1686226834056535,
+      0.1639103055527083,
+      0.1603040697652347,
+      0.15771913687018815,
+      0.15542671449573292,
+      0.15382168072259425,
+      0.15252776840557758,
+      0.1514961293999514,
+      0.1505669914193355,
+      0.14980707207245683,
+      0.14920231305901022,
+      0.1487099314714212,
+      0.14830246320403018,
+      0.14785043249738053,
+      0.14750363143099024,
+      0.14715610372249555,
+      0.146918491754362,
+      0.14669226878900735,
+      0.14642444927053438,
+      0.1462074798699376,
+      0.14602271999282493,
+      0.1459021715506507,
+      0.14565472766996188,
+      0.1455596858485946,
+      0.14545883089039224,
+      0.14529010162786812,
+      0.14521221745782273,
+      0.1449672500920611,
+      0.1449074874863332,
+      0.14491494668997615,
+      0.14472944534132842,
+      0.14468939104900308,
+      0.14457603488071918,
+      0.1444638947257528,
+      0.1445796087735183
+    ],
+    "positive_weight": 1.0,
+    "warnings": [],
+    "validation": {
+      "rows": 32927,
+      "accuracy": 0.933701825249795,
+      "precision": 0.9196312044794341,
+      "recall": 0.9876118998101094,
+      "f1": 0.9524100194022367,
+      "false_positive_rate": 0.17661208252382274,
+      "roc_auc": 0.9837506745102473,
+      "average_precision": 0.9915946258421838,
+      "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+      "confusion_matrix": [
+        [
+          8900,
+          1909
+        ],
+        [
+          274,
+          21844
+        ]
+      ],
+      "class_order": [
+        "normal",
+        "attack"
+      ],
+      "per_class": {
+        "normal": {
+          "precision": 0.9701329845214738,
+          "recall": 0.8233879174761772,
+          "f1": 0.8907571435720363,
+          "support": 10809
+        },
+        "attack": {
+          "precision": 0.9196312044794341,
+          "recall": 0.9876118998101094,
+          "f1": 0.9524100194022367,
+          "support": 22118
+        }
+      },
+      "macro": {
+        "precision": 0.9448820945004539,
+        "recall": 0.9054999086431433,
+        "f1": 0.9215835814871365
+      },
+      "threshold": 0.5,
+      "undefined_reasons": {}
+    },
+    "status": "completed"
+  },
+  {
+    "order": 3,
+    "spec": {
+      "name": "linear-lr01-wd001-e40",
+      "family": "linear",
+      "params": {
+        "learning_rate": 0.01,
+        "weight_decay": 0.001,
+        "epochs": 40
+      }
+    },
+    "training": {
+      "seconds": 17.170847167028114,
+      "peak_rss_bytes": 1144045568,
+      "memory_sampling_incomplete": false,
+      "memory_method": "process + children RSS sampled every 50ms; shared pages may repeat"
+    },
+    "runtime": {
+      "device": "mps",
+      "name": "mps",
+      "torch_version": "2.15.0",
+      "cuda_build": null,
+      "hip_build": null,
+      "dtype": "float32",
+      "torch_threads": 4,
+      "memory_note": "RSS measures host process memory, not accelerator peak allocation",
+      "network_batch_size": 512,
+      "cuda_peak_allocated_bytes": null
+    },
+    "loss_history": [
+      0.2600198311010888,
+      0.17431576116976447,
+      0.16050469713319818,
+      0.1546609078648657,
+      0.15162772576799843,
+      0.1500455589770018,
+      0.14895627797423808,
+      0.14793934976386802,
+      0.14728642475950224,
+      0.1465069157346666,
+      0.14631266502190485,
+      0.14606200315475376,
+      0.14589752993884106,
+      0.1456558547066952,
+      0.14530232107876634,
+      0.14499007258591104,
+      0.14494002325729277,
+      0.14481870368472202,
+      0.1445218184820737,
+      0.1444327825801406,
+      0.14413706890251773,
+      0.1439499659753542,
+      0.14401631284831368,
+      0.14407398450431264,
+      0.1437458833500372,
+      0.1435762198333789,
+      0.14350702570972468,
+      0.14338965076572063,
+      0.14339666508644253,
+      0.14325363522732448,
+      0.14324447063915083,
+      0.1431557758141239,
+      0.1428869330649325,
+      0.1429407787278104,
+      0.14288295877750445,
+      0.14286719509266851,
+      0.1430252768239488,
+      0.14272714594912153,
+      0.14264106110389807,
+      0.14308367512205214
+    ],
+    "positive_weight": 1.0,
+    "warnings": [],
+    "validation": {
+      "rows": 32927,
+      "accuracy": 0.9342788592948037,
+      "precision": 0.9181825802665773,
+      "recall": 0.9904150465684058,
+      "f1": 0.952931964503219,
+      "false_positive_rate": 0.18059024886668518,
+      "roc_auc": 0.9836082873137966,
+      "average_precision": 0.9914637541081464,
+      "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+      "confusion_matrix": [
+        [
+          8857,
+          1952
+        ],
+        [
+          212,
+          21906
+        ]
+      ],
+      "class_order": [
+        "normal",
+        "attack"
+      ],
+      "per_class": {
+        "normal": {
+          "precision": 0.9766236630278973,
+          "recall": 0.8194097511333148,
+          "f1": 0.8911359291679244,
+          "support": 10809
+        },
+        "attack": {
+          "precision": 0.9181825802665773,
+          "recall": 0.9904150465684058,
+          "f1": 0.952931964503219,
+          "support": 22118
+        }
+      },
+      "macro": {
+        "precision": 0.9474031216472373,
+        "recall": 0.9049123988508603,
+        "f1": 0.9220339468355717
+      },
+      "threshold": 0.5,
+      "undefined_reasons": {}
+    },
+    "status": "completed"
+  },
+  {
+    "order": 4,
+    "spec": {
+      "name": "mlp-original",
+      "family": "mlp",
+      "params": {
+        "hidden_dims": [
+          128,
+          64
+        ],
+        "epochs": 20
+      }
+    },
+    "training": {
+      "seconds": 14.791231459006667,
+      "peak_rss_bytes": 1078886400,
+      "memory_sampling_incomplete": false,
+      "memory_method": "process + children RSS sampled every 50ms; shared pages may repeat"
+    },
+    "runtime": {
+      "device": "mps",
+      "name": "mps",
+      "torch_version": "2.15.0",
+      "cuda_build": null,
+      "hip_build": null,
+      "dtype": "float32",
+      "torch_threads": 4,
+      "memory_note": "RSS measures host process memory, not accelerator peak allocation",
+      "network_batch_size": 512,
+      "cuda_peak_allocated_bytes": null
+    },
+    "loss_history": [
+      0.21070573082756291,
+      0.12722580857174312,
+      0.12291057028770519,
+      0.12144016550119205,
+      0.11956250747403308,
+      0.11835582186840386,
+      0.11750121660649476,
+      0.11686549374174297,
+      0.11596448719116821,
+      0.11507799123853507,
+      0.11478964778797093,
+      0.11428963645828588,
+      0.11370437073149667,
+      0.11318453245296342,
+      0.1125122402121012,
+      0.11161451838042687,
+      0.11148576184835922,
+      0.11152245727463062,
+      0.11047234079835011,
+      0.11040927864429108
+    ],
+    "positive_weight": 1.0,
+    "warnings": [],
+    "validation": {
+      "rows": 32927,
+      "accuracy": 0.9448476933823307,
+      "precision": 0.958325808199386,
+      "recall": 0.959625644271634,
+      "f1": 0.9589752857723761,
+      "false_positive_rate": 0.08539180312702378,
+      "roc_auc": 0.9899597074475794,
+      "average_precision": 0.9950026601847883,
+      "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+      "confusion_matrix": [
+        [
+          9886,
+          923
+        ],
+        [
+          893,
+          21225
+        ]
+      ],
+      "class_order": [
+        "normal",
+        "attack"
+      ],
+      "per_class": {
+        "normal": {
+          "precision": 0.917153724835328,
+          "recall": 0.9146081968729762,
+          "f1": 0.9158791921437835,
+          "support": 10809
+        },
+        "attack": {
+          "precision": 0.958325808199386,
+          "recall": 0.959625644271634,
+          "f1": 0.9589752857723761,
+          "support": 22118
+        }
+      },
+      "macro": {
+        "precision": 0.937739766517357,
+        "recall": 0.9371169205723051,
+        "f1": 0.9374272389580798
+      },
+      "threshold": 0.5,
+      "undefined_reasons": {}
+    },
+    "status": "completed"
+  },
+  {
+    "order": 5,
+    "spec": {
+      "name": "mlp128-lr0005-wd001-e40",
+      "family": "mlp",
+      "params": {
+        "hidden_dims": [
+          128,
+          64
+        ],
+        "learning_rate": 0.0005,
+        "weight_decay": 0.001,
+        "epochs": 40
+      }
+    },
+    "training": {
+      "seconds": 32.357232916983776,
+      "peak_rss_bytes": 1033912320,
+      "memory_sampling_incomplete": false,
+      "memory_method": "process + children RSS sampled every 50ms; shared pages may repeat"
+    },
+    "runtime": {
+      "device": "mps",
+      "name": "mps",
+      "torch_version": "2.15.0",
+      "cuda_build": null,
+      "hip_build": null,
+      "dtype": "float32",
+      "torch_threads": 4,
+      "memory_note": "RSS measures host process memory, not accelerator peak allocation",
+      "network_batch_size": 512,
+      "cuda_peak_allocated_bytes": null
+    },
+    "loss_history": [
+      0.2678592316883817,
+      0.13473162111540096,
+      0.12661032787989918,
+      0.12372640400304466,
+      0.12186476917575889,
+      0.1207780165909298,
+      0.11973460301732647,
+      0.11898582798762015,
+      0.11808565188516469,
+      0.11741843130960244,
+      0.11730694364958696,
+      0.11666915949396763,
+      0.11617210663570757,
+      0.11560571135948627,
+      0.1153645106691229,
+      0.11450576058133266,
+      0.11457563685879914,
+      0.11395284525761924,
+      0.11312104766012938,
+      0.11307651487973214,
+      0.11270546769414454,
+      0.11198668518803244,
+      0.11208349912636859,
+      0.11217462597803061,
+      0.11134563855765872,
+      0.11085937411023415,
+      0.11074292600564895,
+      0.1104056380190538,
+      0.11011647894980107,
+      0.11039539829715427,
+      0.10975773277698055,
+      0.10901678768668474,
+      0.10912740782500417,
+      0.10894436074713756,
+      0.10874438587412494,
+      0.1084330049029657,
+      0.10865440088862695,
+      0.10815056356582084,
+      0.10770489468494222,
+      0.10809587262539293
+    ],
+    "positive_weight": 1.0,
+    "warnings": [],
+    "validation": {
+      "rows": 32927,
+      "accuracy": 0.9431165912473046,
+      "precision": 0.9333076495013056,
+      "recall": 0.9857582059860747,
+      "f1": 0.9588161569075837,
+      "false_positive_rate": 0.14413914330650385,
+      "roc_auc": 0.9900805238684333,
+      "average_precision": 0.9950774881399421,
+      "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+      "confusion_matrix": [
+        [
+          9251,
+          1558
+        ],
+        [
+          315,
+          21803
+        ]
+      ],
+      "class_order": [
+        "normal",
+        "attack"
+      ],
+      "per_class": {
+        "normal": {
+          "precision": 0.9670708760192348,
+          "recall": 0.8558608566934962,
+          "f1": 0.9080736196319018,
+          "support": 10809
+        },
+        "attack": {
+          "precision": 0.9333076495013056,
+          "recall": 0.9857582059860747,
+          "f1": 0.9588161569075837,
+          "support": 22118
+        }
+      },
+      "macro": {
+        "precision": 0.9501892627602702,
+        "recall": 0.9208095313397855,
+        "f1": 0.9334448882697428
+      },
+      "threshold": 0.5,
+      "undefined_reasons": {}
+    },
+    "status": "completed"
+  },
+  {
+    "order": 6,
+    "spec": {
+      "name": "mlp128-drop01-e40",
+      "family": "mlp",
+      "params": {
+        "hidden_dims": [
+          128,
+          64
+        ],
+        "dropout": 0.1,
+        "epochs": 40
+      }
+    },
+    "training": {
+      "seconds": 21.248406334023457,
+      "peak_rss_bytes": 944766976,
+      "memory_sampling_incomplete": false,
+      "memory_method": "process + children RSS sampled every 50ms; shared pages may repeat"
+    },
+    "runtime": {
+      "device": "mps",
+      "name": "mps",
+      "torch_version": "2.15.0",
+      "cuda_build": null,
+      "hip_build": null,
+      "dtype": "float32",
+      "torch_threads": 4,
+      "memory_note": "RSS measures host process memory, not accelerator peak allocation",
+      "network_batch_size": 512,
+      "cuda_peak_allocated_bytes": null
+    },
+    "loss_history": [
+      0.2140211763084066,
+      0.1298811960920535,
+      0.12548056253131976,
+      0.12324731700007972,
+      0.12116460501989279,
+      0.12011514845327852,
+      0.11883248425944908,
+      0.11828718384840098,
+      0.11735167662729869,
+      0.11607397287803897,
+      0.11572833592195876,
+      0.1152633442928758,
+      0.11523413772910877,
+      0.11426895681717233,
+      0.11377799885493067,
+      0.11285084801802879,
+      0.11266312966949114,
+      0.1122502041716019,
+      0.11166570216049383,
+      0.11133315217700789,
+      0.11085149968253155,
+      0.1101629321414742,
+      0.11044410556229405,
+      0.1103446223264316,
+      0.11007641724276039,
+      0.10920908832930921,
+      0.10931403621038525,
+      0.10891392334062229,
+      0.10889125655579472,
+      0.10876112830138718,
+      0.10823495044122895,
+      0.10750289559463881,
+      0.10776290741784733,
+      0.10771127134014395,
+      0.10729790837404901,
+      0.10698430298828451,
+      0.10674912304678602,
+      0.10631697860670736,
+      0.10640009756579047,
+      0.10643416818282767
+    ],
+    "positive_weight": 1.0,
+    "warnings": [],
+    "validation": {
+      "rows": 32927,
+      "accuracy": 0.9453032465757585,
+      "precision": 0.9374703931785884,
+      "recall": 0.9842209964734605,
+      "f1": 0.960277024195505,
+      "false_positive_rate": 0.13433250069386624,
+      "roc_auc": 0.9903885170659384,
+      "average_precision": 0.9952409802978408,
+      "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+      "confusion_matrix": [
+        [
+          9357,
+          1452
+        ],
+        [
+          349,
+          21769
+        ]
+      ],
+      "class_order": [
+        "normal",
+        "attack"
+      ],
+      "per_class": {
+        "normal": {
+          "precision": 0.9640428600865444,
+          "recall": 0.8656674993061337,
+          "f1": 0.9122105776261272,
+          "support": 10809
+        },
+        "attack": {
+          "precision": 0.9374703931785884,
+          "recall": 0.9842209964734605,
+          "f1": 0.960277024195505,
+          "support": 22118
+        }
+      },
+      "macro": {
+        "precision": 0.9507566266325664,
+        "recall": 0.9249442478897971,
+        "f1": 0.936243800910816
+      },
+      "threshold": 0.5,
+      "undefined_reasons": {}
+    },
+    "status": "completed"
+  },
+  {
+    "order": 7,
+    "spec": {
+      "name": "mlp256-drop01-e40",
+      "family": "mlp",
+      "params": {
+        "hidden_dims": [
+          256,
+          128
+        ],
+        "dropout": 0.1,
+        "epochs": 40
+      }
+    },
+    "training": {
+      "seconds": 27.110854334023315,
+      "peak_rss_bytes": 964100096,
+      "memory_sampling_incomplete": false,
+      "memory_method": "process + children RSS sampled every 50ms; shared pages may repeat"
+    },
+    "runtime": {
+      "device": "mps",
+      "name": "mps",
+      "torch_version": "2.15.0",
+      "cuda_build": null,
+      "hip_build": null,
+      "dtype": "float32",
+      "torch_threads": 4,
+      "memory_note": "RSS measures host process memory, not accelerator peak allocation",
+      "network_batch_size": 512,
+      "cuda_peak_allocated_bytes": null
+    },
+    "loss_history": [
+      0.1830633457520918,
+      0.12663808857417277,
+      0.12260761243318452,
+      0.12081159042203848,
+      0.11898312161651708,
+      0.11750649588382459,
+      0.11678711278576906,
+      0.11576520930139857,
+      0.11519134740681898,
+      0.11403143382562297,
+      0.11395395005020652,
+      0.11312864774336401,
+      0.11250198566077096,
+      0.11211286139915798,
+      0.11142353755713483,
+      0.11063042252963039,
+      0.1100704409821876,
+      0.11014916301506765,
+      0.10936059320807329,
+      0.1093187074810563,
+      0.10870138052508997,
+      0.10824942396559382,
+      0.10798747690167874,
+      0.10787845092715974,
+      0.10727518227149864,
+      0.10695487398305696,
+      0.10670502031987912,
+      0.10650817445674457,
+      0.10641428191625667,
+      0.10602925057751734,
+      0.10577376173067286,
+      0.10487809377515071,
+      0.10485560494349157,
+      0.10514714413637193,
+      0.1046712380462925,
+      0.10400511484860218,
+      0.10412988226381106,
+      0.10344542247505809,
+      0.10315508446606457,
+      0.1032704426074932
+    ],
+    "positive_weight": 1.0,
+    "warnings": [],
+    "validation": {
+      "rows": 32927,
+      "accuracy": 0.9446351018920642,
+      "precision": 0.938772862887534,
+      "recall": 0.9815986978931187,
+      "f1": 0.9597082550558073,
+      "false_positive_rate": 0.13100194282542327,
+      "roc_auc": 0.9904404634421532,
+      "average_precision": 0.9952716149134291,
+      "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+      "confusion_matrix": [
+        [
+          9393,
+          1416
+        ],
+        [
+          407,
+          21711
+        ]
+      ],
+      "class_order": [
+        "normal",
+        "attack"
+      ],
+      "per_class": {
+        "normal": {
+          "precision": 0.958469387755102,
+          "recall": 0.8689980571745768,
+          "f1": 0.9115435004124411,
+          "support": 10809
+        },
+        "attack": {
+          "precision": 0.938772862887534,
+          "recall": 0.9815986978931187,
+          "f1": 0.9597082550558073,
+          "support": 22118
+        }
+      },
+      "macro": {
+        "precision": 0.948621125321318,
+        "recall": 0.9252983775338477,
+        "f1": 0.9356258777341242
+      },
+      "threshold": 0.5,
+      "undefined_reasons": {}
+    },
+    "status": "completed"
+  },
+  {
+    "order": 8,
+    "spec": {
+      "name": "mlp64-lr003-e40",
+      "family": "mlp",
+      "params": {
+        "hidden_dims": [
+          64,
+          32
+        ],
+        "learning_rate": 0.003,
+        "epochs": 40
+      }
+    },
+    "training": {
+      "seconds": 21.876532667025458,
+      "peak_rss_bytes": 972947456,
+      "memory_sampling_incomplete": false,
+      "memory_method": "process + children RSS sampled every 50ms; shared pages may repeat"
+    },
+    "runtime": {
+      "device": "mps",
+      "name": "mps",
+      "torch_version": "2.15.0",
+      "cuda_build": null,
+      "hip_build": null,
+      "dtype": "float32",
+      "torch_threads": 4,
+      "memory_note": "RSS measures host process memory, not accelerator peak allocation",
+      "network_batch_size": 512,
+      "cuda_peak_allocated_bytes": null
+    },
+    "loss_history": [
+      0.18207551288475848,
+      0.12469169613571136,
+      0.12186106923279881,
+      0.12049403299299197,
+      0.11840255681926032,
+      0.11677199418116867,
+      0.11602368627852945,
+      0.11539382845362019,
+      0.11467512009466159,
+      0.1135027275475301,
+      0.11338191217560324,
+      0.11275107560826765,
+      0.11227520659176499,
+      0.11211087425544394,
+      0.11121747520281916,
+      0.1104064684671731,
+      0.11025170111365465,
+      0.11018023808710309,
+      0.10950256276289615,
+      0.10893131084812005,
+      0.1090194643989264,
+      0.1081830993367804,
+      0.10832638871093572,
+      0.10792460753021882,
+      0.10729296275891,
+      0.10737947024290845,
+      0.1070058798099555,
+      0.10640592553205624,
+      0.10704253816265015,
+      0.10670364118282387,
+      0.10609307644725753,
+      0.1057874418804952,
+      0.10568262746429548,
+      0.10530920015508026,
+      0.10521072532050552,
+      0.10458463417099449,
+      0.10505206524142788,
+      0.10397286825154131,
+      0.10381477910554568,
+      0.10407135791554675
+    ],
+    "positive_weight": 1.0,
+    "warnings": [],
+    "validation": {
+      "rows": 32927,
+      "accuracy": 0.9451817657241778,
+      "precision": 0.9436121423891679,
+      "recall": 0.976761009132833,
+      "f1": 0.9599004731966321,
+      "false_positive_rate": 0.11943750578221853,
+      "roc_auc": 0.9904118697206132,
+      "average_precision": 0.9952231398804724,
+      "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+      "confusion_matrix": [
+        [
+          9518,
+          1291
+        ],
+        [
+          514,
+          21604
+        ]
+      ],
+      "class_order": [
+        "normal",
+        "attack"
+      ],
+      "per_class": {
+        "normal": {
+          "precision": 0.9487639553429027,
+          "recall": 0.8805624942177814,
+          "f1": 0.9133918717911809,
+          "support": 10809
+        },
+        "attack": {
+          "precision": 0.9436121423891679,
+          "recall": 0.976761009132833,
+          "f1": 0.9599004731966321,
+          "support": 22118
+        }
+      },
+      "macro": {
+        "precision": 0.9461880488660352,
+        "recall": 0.9286617516753073,
+        "f1": 0.9366461724939065
+      },
+      "threshold": 0.5,
+      "undefined_reasons": {}
+    },
+    "status": "completed"
+  },
+  {
+    "order": 9,
+    "spec": {
+      "name": "transformer16-l1",
+      "family": "transformer",
+      "params": {
+        "d_model": 16,
+        "n_heads": 2,
+        "n_layers": 1,
+        "dropout": 0.1,
+        "epochs": 15,
+        "batch_size": 256
+      }
+    },
+    "training": {
+      "seconds": 114.61002116696909,
+      "peak_rss_bytes": 1020084224,
+      "memory_sampling_incomplete": false,
+      "memory_method": "process + children RSS sampled every 50ms; shared pages may repeat"
+    },
+    "runtime": {
+      "device": "mps",
+      "name": "mps",
+      "torch_version": "2.15.0",
+      "cuda_build": null,
+      "hip_build": null,
+      "dtype": "float32",
+      "torch_threads": 4,
+      "memory_note": "RSS measures host process memory, not accelerator peak allocation",
+      "network_batch_size": 256,
+      "cuda_peak_allocated_bytes": null
+    },
+    "loss_history": [
+      0.1879393663728304,
+      0.1367775338633016,
+      0.13273784864584756,
+      0.13016784898751765,
+      0.1295151315951817,
+      0.12917309077604666,
+      0.1280947538931408,
+      0.12642611669172246,
+      0.1262777185786904,
+      0.12536599034971832,
+      0.12486881885601263,
+      0.12496516566728168,
+      0.12403632427527979,
+      0.12394326218291118,
+      0.12378220715077522
+    ],
+    "positive_weight": 1.0,
+    "warnings": [],
+    "validation": {
+      "rows": 32927,
+      "accuracy": 0.9416284508154402,
+      "precision": 0.9452773613193404,
+      "recall": 0.9692105977032281,
+      "f1": 0.9570943834270917,
+      "false_positive_rate": 0.11481173096493663,
+      "roc_auc": 0.9887221108631455,
+      "average_precision": 0.9943881685657695,
+      "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+      "confusion_matrix": [
+        [
+          9568,
+          1241
+        ],
+        [
+          681,
+          21437
+        ]
+      ],
+      "class_order": [
+        "normal",
+        "attack"
+      ],
+      "per_class": {
+        "normal": {
+          "precision": 0.9335544931212801,
+          "recall": 0.8851882690350634,
+          "f1": 0.908728274290056,
+          "support": 10809
+        },
+        "attack": {
+          "precision": 0.9452773613193404,
+          "recall": 0.9692105977032281,
+          "f1": 0.9570943834270917,
+          "support": 22118
+        }
+      },
+      "macro": {
+        "precision": 0.9394159272203102,
+        "recall": 0.9271994333691458,
+        "f1": 0.9329113288585739
+      },
+      "threshold": 0.5,
+      "undefined_reasons": {}
+    },
+    "status": "completed"
+  },
+  {
+    "order": 10,
+    "spec": {
+      "name": "transformer32-l2",
+      "family": "transformer",
+      "params": {
+        "d_model": 32,
+        "n_heads": 4,
+        "n_layers": 2,
+        "dropout": 0.1,
+        "learning_rate": 0.0003,
+        "epochs": 15,
+        "batch_size": 256
+      }
+    },
+    "training": {
+      "seconds": 182.9829488749965,
+      "peak_rss_bytes": 1059700736,
+      "memory_sampling_incomplete": false,
+      "memory_method": "process + children RSS sampled every 50ms; shared pages may repeat"
+    },
+    "runtime": {
+      "device": "mps",
+      "name": "mps",
+      "torch_version": "2.15.0",
+      "cuda_build": null,
+      "hip_build": null,
+      "dtype": "float32",
+      "torch_threads": 4,
+      "memory_note": "RSS measures host process memory, not accelerator peak allocation",
+      "network_batch_size": 256,
+      "cuda_peak_allocated_bytes": null
+    },
+    "loss_history": [
+      0.20546770897396474,
+      0.13344856394165794,
+      0.12750890240383886,
+      0.12554871859482483,
+      0.1245190074151899,
+      0.12162384282986348,
+      0.12082550042803669,
+      0.11898608008794208,
+      0.11845437826484746,
+      0.11588274736914035,
+      0.11542872951877667,
+      0.11454525135529132,
+      0.11387035654934095,
+      0.11304376408202739,
+      0.1132596583488983
+    ],
+    "positive_weight": 1.0,
+    "warnings": [],
+    "validation": {
+      "rows": 32927,
+      "accuracy": 0.9443010295502171,
+      "precision": 0.961881774296384,
+      "recall": 0.9549235916448142,
+      "f1": 0.9583900535438787,
+      "false_positive_rate": 0.07743547044129892,
+      "roc_auc": 0.9905510654294202,
+      "average_precision": 0.9953235534858542,
+      "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+      "confusion_matrix": [
+        [
+          9972,
+          837
+        ],
+        [
+          997,
+          21121
+        ]
+      ],
+      "class_order": [
+        "normal",
+        "attack"
+      ],
+      "per_class": {
+        "normal": {
+          "precision": 0.9091074847296927,
+          "recall": 0.922564529558701,
+          "f1": 0.9157865736063918,
+          "support": 10809
+        },
+        "attack": {
+          "precision": 0.961881774296384,
+          "recall": 0.9549235916448142,
+          "f1": 0.9583900535438787,
+          "support": 22118
+        }
+      },
+      "macro": {
+        "precision": 0.9354946295130384,
+        "recall": 0.9387440606017576,
+        "f1": 0.9370883135751353
+      },
+      "threshold": 0.5,
+      "undefined_reasons": {}
+    },
+    "status": "completed"
+  }
+]

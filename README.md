@@ -4,6 +4,8 @@
 
 ## 当前进度
 
+- 已完成 [Transformer 与现有模型调参实验](reports/transformer-tuning-20261105.md)：测试 F1 为 Transformer 90.54%、调参线性 84.80%、调参 MLP 87.49%。MLP 验证集略升但测试下降，结果没有被写成全面提升；旧模型保留。本轮整体 `best/` 仍按预先规定的验证集选择为 MLP。
+
 - 已实现 `prepare`、`train`、`evaluate`、`predict`，固定样本测试覆盖防泄漏、输入校验及独立进程预测。
 - 已迁移为 Torch 多数类基线、线性分类器和 MLP，支持自动设备选择、批量训练及设备无关权重保存。
 - 已在 Apple MPS 完成 7 个 Torch 候选的完整实验及 82,332 行测试评估；验证集选出的 MLP 128/64 测试 Accuracy 87.05%、攻击类 F1 89.16%、误报率 24.70%。完整测试集的 CPU 独立无标签预测验证通过，见 [正式结果](reports/results/torch-full-20261105/comparison.csv)。
@@ -77,7 +79,25 @@ uv run python scripts/evaluate_selected.py --training models/my-full --data data
 uv run ml-network-intrusion-detection train --config configs/smoke.yaml --data data/processed/my-smoke --output models/my-smoke-mps --device mps
 ```
 
-### 配置字段与默认值
+### Transformer 与现有 Torch 模型参数搜索
+
+新增 `configs/transformer-smoke.yaml`（4 个模型族的小样本检查）与 `configs/tune.yaml`（11 个候选的完整搜索）。默认 `smoke/full` 仍保留原有 3/7 个候选，用于复现历史结果。
+
+Transformer 将 39 个标准化数值字段分别映射成带字段身份的 token，将类别 One-Hot 联合投影为一个上下文 token，再加入 CLS token，共 41 个 token。使用 Pre-Norm 自注意力、GELU 前馈层和 CLS 分类头；注意力作用于同一行的特征，不跨流量记录。这是轻量表格 Transformer，并非原论文 FT-Transformer 的精确复现。网络批量最多 256，避免大的 CSV 读取批量直接放大注意力内存。
+
+固定搜索空间见 `training/search.py`：原线性与 MLP 128/64 配置作对照，线性搜索学习率/权重衰减/轮数，MLP 搜索 64/32、128/64、256/128 宽度、学习率、权重衰减、Dropout 和轮数；Transformer 比较 16 维/2 头/1 层和 32 维/4 头/2 层，各 15 轮。候选参数覆盖 YAML 中的同名通用训练参数，实际参数保存到模型元数据；训练开始前将固定列表写入 `search_plan.json`。以验证 F1 选优，阈值仍为 0.5，不用测试指标调参。
+
+```bash
+# 首先按原小样本数据准备步骤创建 data/processed/my-smoke。
+uv run ml-network-intrusion-detection train --config configs/transformer-smoke.yaml --data data/processed/my-smoke --output models/my-transformer-smoke --device mps
+# 复用完整的防泄漏划分，训练并冻结各模型族的获选候选。
+uv run ml-network-intrusion-detection train --config configs/tune.yaml --data data/processed/my-full --output models/my-tune --device mps
+uv run python scripts/evaluate_selected.py --training models/my-tune --data data/processed/my-full --output outputs/my-tune --device mps
+```
+
+旧 Torch 模型的无 Dropout 网络结构和权重键保持兼容，仍可独立加载。新网络超参数由候选定义控制：`dropout` 默认 0，`d_model` 默认 32，`n_heads` 默认 4，`n_layers` 默认 2；维度必须能被头数整除。完整搜索为有限预设试验，不保证优于旧结果。旧测试集已多次使用，应将结果视为同一基准上的探索性比较，不能代替新独立测试集。
+
+### 通用配置字段与默认值
 
 YAML 使用安全读取，拒绝未知字段。文件路径相对配置文件所在目录；命令行路径相对工作目录。
 
@@ -92,7 +112,7 @@ YAML 使用安全读取，拒绝未知字段。文件路径相对配置文件所
 | `weight_decay` | `0.0001` | AdamW 有限非负权重衰减 |
 | `batch_size` | `10000` | 实验约定批量；评估/预测实际 CSV 和网络批量由 `--batch-size` 指定，默认同为 10000 |
 | `sample_size` | `null` | 开发集可选抽样行数，最少 20；正式配置不抽样 |
-| `profile` | `full` | `full` 为 7 个配置；`smoke` 为 3 个轻量配置 |
+| `profile` | `full` | `full` 为 7 个配置，`smoke` 为 3 个；`tune` 为 11 个，`transformer_smoke` 为 4 个 |
 | `conflict_policy` | `error` | 默认遇到同特征冲突标签就停止；`quarantine_development` 隔离开发集冲突组，完整保留测试集并记录冲突 |
 | `train_csv` | `../data/raw/UNSW_NB15_training-set.csv` | 原始训练文件 |
 | `test_csv` | `../data/raw/UNSW_NB15_testing-set.csv` | 原始测试文件 |

@@ -90,6 +90,7 @@ def predict(
             model, metadata = load_model(directory, device, batch_size)
             report["model_load_seconds"] = time.perf_counter() - started
             report["runtime"] = device_info(model.named_steps["classifier"].device_)
+            report["network_batch_size"] = model.named_steps["classifier"].network_batch_size()
             report["requested_device"] = device
             report["prediction_scope"] = (
                 "CPU preprocessing + transfers + synchronized Torch inference; no warmup"

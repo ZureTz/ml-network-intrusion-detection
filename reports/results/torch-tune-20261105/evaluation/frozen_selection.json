@@ -1,0 +1,16 @@
+{
+  "selection": {
+    "best": "mlp128-drop01-e40",
+    "family_winners": {
+      "dummy": "dummy",
+      "linear": "linear-lr01-wd001-e40",
+      "mlp": "mlp128-drop01-e40",
+      "transformer": "transformer32-l2"
+    },
+    "criterion": "validation attack F1 desc, FPR asc, recall desc, candidate order asc",
+    "threshold": 0.5,
+    "refit_train_validation": false
+  },
+  "selection_sha256": "f4d8c034774d5e6aeaacad4364128eb27a64b90a8b5496bf7d6094da14775276",
+  "test_sha256": "adaf3c1cc75bc9a3674b707df24b4bf71d9d5feb80cce4aaab6762a78caf015b"
+}

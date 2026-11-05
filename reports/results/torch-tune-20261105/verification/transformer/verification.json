@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "rows": 82332,
+  "input_has_labels": false,
+  "independent_process": true,
+  "probability_atol": 1e-06,
+  "probability_rtol": 1e-05,
+  "labels_identical": true,
+  "row_order_identical": true,
+  "model_sha256": "7cf2e1b4352760cf0efecf4a2bc853d8a34c5c78da8f17331254eaf0351c728c",
+  "model_artifacts": {
+    "preprocess.joblib": "38065c7bd0d210245ed818d45b11d51373a7234489ad06568d06b667961ff3de",
+    "weights.pt": "693c2edb1dcef20ed8a258f4055237f79313025bb3115b3b6d4858a049829d02"
+  },
+  "device": "cpu",
+  "input_sha256": "e5f388466f82ad85e4990c4b972829d47016f3ad53dfc827e887936dc1bb6fd8",
+  "prediction_sha256": "0a158fb715e9e3a7a6c497a2f9cd828aef4eb89960b63daa9b0d8ee89f70c605"
+}

@@ -1,8 +1,10 @@
 """检查 Torch 后端、实际训练和跨设备加载；合成数据不用于正式实验。"""
 
 import argparse
+import contextlib
 import importlib
 import json
+import sys
 import tempfile
 from importlib.metadata import version
 from pathlib import Path
@@ -38,7 +40,9 @@ def main() -> None:
     device = resolve_device(args.device)
     features, labels = make_classification(n_samples=100, n_features=8, random_state=42)
     classifier = TorchClassifier(device=str(device), threads=2, epochs=2, batch_size=32)
-    classifier.fit(features[:80], labels[:80])
+    # stdout 是可重定向的 JSON 报告；训练进度单独写入 stderr。
+    with contextlib.redirect_stdout(sys.stderr):
+        classifier.fit(features[:80], labels[:80])
     probabilities = classifier.predict_proba(features[80:])
     with tempfile.TemporaryDirectory() as directory:
         path = Path(directory) / "weights.pt"

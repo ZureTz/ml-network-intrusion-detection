@@ -57,7 +57,9 @@ def train(config: dict, data_dir: Path, output: Path) -> None:
         write_json(output / "data_manifest.json", manifest)
         write_json(output / "threadpools.json", threadpool_info())
         results = []
-        for order, spec in enumerate(candidates(config["profile"])):
+        specs = candidates(config["profile"])
+        write_json(output / "search_plan.json", specs)
+        for order, spec in enumerate(specs):
             print(f"训练 {order + 1}: {spec['name']}", flush=True)
             result = {"order": order, "spec": spec}
             model_dir = output / spec["name"]
@@ -120,7 +122,7 @@ def train(config: dict, data_dir: Path, output: Path) -> None:
         if not successful:
             raise ValueError("全部候选失败；查看 candidates.json")
         winners = {}
-        for family in ("dummy", "linear", "mlp"):
+        for family in dict.fromkeys(spec["family"] for spec in specs):
             choices = [r for r in successful if r["spec"]["family"] == family]
             if not choices:
                 raise ValueError(f"模型族 {family} 全部失败，正式比较未完成")
