@@ -1,0 +1,11 @@
+category,count,binary_accuracy
+Analysis,677,1.0
+Backdoor,583,1.0
+DoS,4089,1.0
+Exploits,11132,1.0
+Fuzzers,6062,1.0
+Generic,18871,1.0
+Normal,37000,0.0
+Reconnaissance,3496,1.0
+Shellcode,378,1.0
+Worms,44,1.0

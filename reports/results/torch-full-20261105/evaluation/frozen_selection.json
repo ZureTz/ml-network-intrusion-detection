@@ -1,0 +1,15 @@
+{
+  "selection": {
+    "best": "mlp-128x64-balancedFalse",
+    "family_winners": {
+      "dummy": "dummy",
+      "linear": "linear-balancedFalse",
+      "mlp": "mlp-128x64-balancedFalse"
+    },
+    "criterion": "validation attack F1 desc, FPR asc, recall desc, candidate order asc",
+    "threshold": 0.5,
+    "refit_train_validation": false
+  },
+  "selection_sha256": "88fca83730ab4020ddb3df6e8484953775ccd0c074125e318c5124df28e42742",
+  "test_sha256": "adaf3c1cc75bc9a3674b707df24b4bf71d9d5feb80cce4aaab6762a78caf015b"
+}

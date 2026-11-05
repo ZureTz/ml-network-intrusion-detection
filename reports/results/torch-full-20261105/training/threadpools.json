@@ -1,0 +1,18 @@
+[
+  {
+    "user_api": "openmp",
+    "internal_api": "openmp",
+    "num_threads": 4,
+    "prefix": "libomp",
+    "filepath": ".venv/lib/python3.12/site-packages/torch/lib/libomp.dylib",
+    "version": null
+  },
+  {
+    "user_api": "openmp",
+    "internal_api": "openmp",
+    "num_threads": 4,
+    "prefix": "libomp",
+    "filepath": ".venv/lib/python3.12/site-packages/sklearn/.dylibs/libomp.dylib",
+    "version": null
+  }
+]

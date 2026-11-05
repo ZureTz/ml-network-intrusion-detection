@@ -1,0 +1,163 @@
+{
+  "python": "3.12.13",
+  "platform": "macOS-27.2-arm64-arm-64bit",
+  "architecture": "arm64",
+  "logical_cpus": 8,
+  "memory_bytes": 17179869184,
+  "versions": {
+    "numpy": "2.5.4",
+    "pandas": "3.1.0",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1",
+    "joblib": "1.6.0",
+    "psutil": "7.2.2",
+    "pyyaml": "6.0.3",
+    "torch": "2.15.0"
+  },
+  "git_commit": "40ae60151fe68049b9a7a7ae2f754a37a169224a",
+  "git_dirty": false,
+  "source_sha256": {
+    "src/ml_network_intrusion_detection/__init__.py": "e5764db342a05c937154e2052054cd38dc7374c71ab9e5bb040f8c31b4cdee5e",
+    "src/ml_network_intrusion_detection/__main__.py": "e1f66018e1bd993671b0e3510ccd20bc5e5ecb7affb80200ae3d3a11814309e3",
+    "src/ml_network_intrusion_detection/cli.py": "6e516370e5eb3ba598f720cd374713b4664b5bf8e0297f36f93b292367ebdc7f",
+    "src/ml_network_intrusion_detection/common.py": "4b0c792a5911671127018ab249097f60f088c674a758ff762c77232043c0e2e6",
+    "src/ml_network_intrusion_detection/data/__init__.py": "6e12368e5de366189653eb43ec47070c95a46f48158e8c74caaae6f42586190d",
+    "src/ml_network_intrusion_detection/data/prepare.py": "6853cf5a27cb52ff3e3ce96f0c3e70840cbee9ab1ac60cba34642233f1edc0b4",
+    "src/ml_network_intrusion_detection/data/schema.py": "3d938aeb2994d5b97c9425eb3979d4dbd49eace1654d1e892ff851754d8be922",
+    "src/ml_network_intrusion_detection/device.py": "a6efa0dbc7147c0248ee958347d9e856cc5e9c1dc880b69897511da19487c49f",
+    "src/ml_network_intrusion_detection/inference/__init__.py": "d55c8efc3d0b972027d6e23d18e94e01cbf4daaf8a316ee534b274c97f41c620",
+    "src/ml_network_intrusion_detection/inference/predict.py": "d1f5afa2e8d78b4b2d4a6fa2b14ccbd9d5794757cd15c397461b0d5934a64172",
+    "src/ml_network_intrusion_detection/training/__init__.py": "4a557475d0c315b92ec3718f045600e78b33cc8cec678a46a4c29752565fe054",
+    "src/ml_network_intrusion_detection/training/artifacts.py": "57ce95d7813e0e977afd4b8f25bfcfe9a36b3f1f59fe87323c04ae0cf40e429a",
+    "src/ml_network_intrusion_detection/training/evaluate.py": "104aded9f0bf97eea0673d1ab497594a56a5fa0e664e0b088e7816a7653bc5b1",
+    "src/ml_network_intrusion_detection/training/metrics.py": "476231009f21d40f53687766053b1a93034eeaa128b40acd398cd4c8343bab96",
+    "src/ml_network_intrusion_detection/training/models.py": "0f30a2d3756b524d577c963719519211627a632c3d1d6495dbf526dffdde2b2f",
+    "src/ml_network_intrusion_detection/training/train.py": "33db1a02e9fdda4b3bf149e7404ddacffc6c1a9ee47d21e91c5b06ded8e5baad"
+  },
+  "lock_sha256": "ad44c97e6183dd571afbcbca1ff749599762d4ad909b7531446ef7d404191266",
+  "accelerators": {
+    "cuda_available": false,
+    "cuda_device_count": 0,
+    "mps_built": true,
+    "mps_available": true
+  },
+  "runtime": {
+    "device": "mps",
+    "name": "mps",
+    "torch_version": "2.15.0",
+    "cuda_build": null,
+    "hip_build": null,
+    "dtype": "float32",
+    "torch_threads": 2,
+    "memory_note": "RSS measures host process memory, not accelerator peak allocation"
+  },
+  "numpy_build_config": {
+    "Compilers": {
+      "c": {
+        "name": "clang",
+        "linker": "ld64",
+        "version": "15.0.0",
+        "commands": "cc"
+      },
+      "cython": {
+        "name": "cython",
+        "linker": "cython",
+        "version": "3.3.0",
+        "commands": "cython"
+      },
+      "c++": {
+        "name": "clang",
+        "linker": "ld64",
+        "version": "15.0.0",
+        "commands": "c++"
+      }
+    },
+    "Machine Information": {
+      "host": {
+        "cpu": "aarch64",
+        "family": "aarch64",
+        "endian": "little",
+        "system": "darwin"
+      },
+      "build": {
+        "cpu": "aarch64",
+        "family": "aarch64",
+        "endian": "little",
+        "system": "darwin"
+      }
+    },
+    "Build Dependencies": {
+      "blas": {
+        "name": "accelerate",
+        "found": true,
+        "version": "unknown",
+        "detection method": "system",
+        "include directory": "unknown",
+        "lib directory": "unknown",
+        "openblas configuration": "unknown",
+        "pc file directory": "unknown"
+      },
+      "lapack": {
+        "name": "accelerate",
+        "found": true,
+        "version": "unknown",
+        "detection method": "system",
+        "include directory": "unknown",
+        "lib directory": "unknown",
+        "openblas configuration": "unknown",
+        "pc file directory": "unknown"
+      }
+    },
+    "Python Information": {
+      "path": "python",
+      "version": "3.12"
+    },
+    "SIMD Extensions": {
+      "baseline": [
+        "NEON",
+        "NEON_FP16",
+        "NEON_VFPV4",
+        "ASIMD"
+      ],
+      "found": [
+        "ASIMDHP",
+        "ASIMDDP"
+      ],
+      "not found": [
+        "ASIMDFHM"
+      ]
+    }
+  },
+  "threadpools": [
+    {
+      "user_api": "openmp",
+      "internal_api": "openmp",
+      "num_threads": 2,
+      "prefix": "libomp",
+      "filepath": ".venv/lib/python3.12/site-packages/torch/lib/libomp.dylib",
+      "version": null
+    },
+    {
+      "user_api": "openmp",
+      "internal_api": "openmp",
+      "num_threads": 8,
+      "prefix": "libomp",
+      "filepath": ".venv/lib/python3.12/site-packages/sklearn/.dylibs/libomp.dylib",
+      "version": null
+    }
+  ],
+  "dependencies": {
+    "numpy": "2.5.4",
+    "pandas": "3.1.0",
+    "scikit-learn": "1.9.1",
+    "scipy": "1.18.1",
+    "matplotlib": "3.11.2",
+    "seaborn": "0.13.2",
+    "joblib": "1.6.0",
+    "pyyaml": "6.0.3",
+    "psutil": "7.2.2",
+    "torch": "2.15.0"
+  },
+  "smoke_check": "passed: Torch fit, predict, CPU state_dict save/load, probability consistency",
+  "note": "合成数据仅用于环境检查，不代表入侵检测性能；不保证跨设备逐位一致。"
+}

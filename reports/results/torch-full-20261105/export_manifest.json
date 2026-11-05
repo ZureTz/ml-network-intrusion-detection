@@ -1,0 +1,153 @@
+{
+  "note": "JSON local absolute paths normalized; hashes refer to original source files",
+  "sources": {
+    "training/run.json": {
+      "source": "models/torch-full-20261105/run.json",
+      "sha256": "41ba7f5ed970aa49e1e34fa36305601a3a3864ef0fbb45b3d49841ec4310d8b7"
+    },
+    "training/candidates.json": {
+      "source": "models/torch-full-20261105/candidates.json",
+      "sha256": "074f383e9b2d2778088eeee90efae9ec90b36c5b24231a9d1aa8b504fa2df55a"
+    },
+    "training/selection.json": {
+      "source": "models/torch-full-20261105/selection.json",
+      "sha256": "88fca83730ab4020ddb3df6e8484953775ccd0c074125e318c5124df28e42742"
+    },
+    "training/threadpools.json": {
+      "source": "models/torch-full-20261105/threadpools.json",
+      "sha256": "d8906ae3f05e64d6319420714f0f6136e9358e36a809e9afc6570be6b002b15a"
+    },
+    "data/audit.json": {
+      "source": "data/processed/torch-full-20261105/audit.json",
+      "sha256": "d5466f0fbf17e48c9d1a11fc0022204ad2a8349a5a7e3feb0a775f0ff265c1da"
+    },
+    "data/manifest.json": {
+      "source": "data/processed/torch-full-20261105/manifest.json",
+      "sha256": "5d871f82883afaaddff2e9f71acf8d20d7fdc2539753a41e87608fe45a218b47"
+    },
+    "data/run.json": {
+      "source": "data/processed/torch-full-20261105/run.json",
+      "sha256": "1bedea2d6f7d30a49de25593fff21bc02c16ce61cad1e37e84d5d090094c2d53"
+    },
+    "evaluation/run.json": {
+      "source": "outputs/torch-full-20261105/run.json",
+      "sha256": "64e0e3700ca13fdb86fd67c3a7abb95f0ae2863c04556316439a17192ee30a33"
+    },
+    "evaluation/frozen_selection.json": {
+      "source": "outputs/torch-full-20261105/frozen_selection.json",
+      "sha256": "bd9ded00317507aa2d3d2b50482d565f8eba9ead26a1a4a0064ae70a31d41874"
+    },
+    "source_manifest.json": {
+      "source": "data/raw/source_manifest.json",
+      "sha256": "9e1ae5a8c8e5a07c9943fda0fabaccaffea42a4f4466554251c96d34b64cb0b7"
+    },
+    "environment.json": {
+      "source": "outputs/torch-full-20261105/environment.json",
+      "sha256": "462ef4ff9a0b695973ea00ad6a16df54aa39646f82a222a0f7a513df1545dd1d"
+    },
+    "evaluation/dummy/metrics.json": {
+      "source": "outputs/torch-full-20261105/dummy/metrics.json",
+      "sha256": "b95824b2ffeffc34244f3e57bfa0c27ca040b2e44bff3f59a00c39137e18f1f7"
+    },
+    "evaluation/dummy/performance.json": {
+      "source": "outputs/torch-full-20261105/dummy/performance.json",
+      "sha256": "7be7d17c989f4ad1558826d31c422ff98d4d7f8c5c91255783e8ff9fcdccbfe5"
+    },
+    "evaluation/dummy/run.json": {
+      "source": "outputs/torch-full-20261105/dummy/run.json",
+      "sha256": "5a3fae060665d0c278f506c2a1e697553b1a76dbcf83509662e7d0f7e25f257e"
+    },
+    "evaluation/dummy/model_metadata.json": {
+      "source": "models/torch-full-20261105/dummy/metadata.json",
+      "sha256": "b519c19c6bed1476c54a9940116d025feed2b158048b03689ff368d736af5662"
+    },
+    "evaluation/dummy/confusion_matrix.png": {
+      "source": "outputs/torch-full-20261105/dummy/confusion_matrix.png",
+      "sha256": "8ea9289d3782234e2558b024721f859b23bded1d47b2b76896af96d2a22c6e30"
+    },
+    "evaluation/dummy/roc.png": {
+      "source": "outputs/torch-full-20261105/dummy/roc.png",
+      "sha256": "b74545b43a6adf718d2d4d2093455323c8bed78d0aa0d5cb642209d95dc6b3a3"
+    },
+    "evaluation/dummy/precision_recall.png": {
+      "source": "outputs/torch-full-20261105/dummy/precision_recall.png",
+      "sha256": "332b052c8279eb23508ac1344dffd0003d7c5bbe207fd4abec8bf49b60d15941"
+    },
+    "evaluation/dummy/category_breakdown.csv": {
+      "source": "outputs/torch-full-20261105/dummy/category_breakdown.csv",
+      "sha256": "9ef9c2dbb9fb39fedde5b81a32a1fd274b6c8a7a2da073b39c3bf5ca5a0fbd96"
+    },
+    "evaluation/linear/metrics.json": {
+      "source": "outputs/torch-full-20261105/linear/metrics.json",
+      "sha256": "55b21252d52873646a2d56b224e25d74a85855aaedcea8835a4050e8ea52a9ec"
+    },
+    "evaluation/linear/performance.json": {
+      "source": "outputs/torch-full-20261105/linear/performance.json",
+      "sha256": "07c718777ad5e07c9126aa75510b9499bc65c68f851bc268377cba87e972cd59"
+    },
+    "evaluation/linear/run.json": {
+      "source": "outputs/torch-full-20261105/linear/run.json",
+      "sha256": "0d03c5f38f46a6e0c6fd9cf8fdb520e1c670d2b1d1b20926ca0c5dfea0790bb0"
+    },
+    "evaluation/linear/model_metadata.json": {
+      "source": "models/torch-full-20261105/linear-balancedFalse/metadata.json",
+      "sha256": "5fcfc655e52b9c906503e389f30be69db25152e366b2172fb5fa0cc49736a3af"
+    },
+    "evaluation/linear/confusion_matrix.png": {
+      "source": "outputs/torch-full-20261105/linear/confusion_matrix.png",
+      "sha256": "99875fad8c135279c5ad6c1524048744e1a9c6c9a6b53a8f7711b1eebb062a1e"
+    },
+    "evaluation/linear/roc.png": {
+      "source": "outputs/torch-full-20261105/linear/roc.png",
+      "sha256": "fb6a6f75a2d4839432f59a5e50b943cd9c81aee4875190efa57b3924a3b9208d"
+    },
+    "evaluation/linear/precision_recall.png": {
+      "source": "outputs/torch-full-20261105/linear/precision_recall.png",
+      "sha256": "9ebf747a7f04852e110742d4816f6133768a6fc730e48be337b6812b2c7f568f"
+    },
+    "evaluation/linear/category_breakdown.csv": {
+      "source": "outputs/torch-full-20261105/linear/category_breakdown.csv",
+      "sha256": "a64b5d413e99aa25bc8f9efb5bf8f6a3a57a2e40aeeec464c6ef4900668fd29b"
+    },
+    "evaluation/mlp/metrics.json": {
+      "source": "outputs/torch-full-20261105/mlp/metrics.json",
+      "sha256": "7ceb5736ab7e980cbc3143efbcf3684f3e79e46c67c06fc870ce625ae08e0e3a"
+    },
+    "evaluation/mlp/performance.json": {
+      "source": "outputs/torch-full-20261105/mlp/performance.json",
+      "sha256": "445cf09cc8f48d50eacc2426c0b999f5e3a3eda61113890ce181a203febe4454"
+    },
+    "evaluation/mlp/run.json": {
+      "source": "outputs/torch-full-20261105/mlp/run.json",
+      "sha256": "5c73cc1d637db66cbc521df3bd6a2d0e671a1e48604037bd0b677ef4406f72ae"
+    },
+    "evaluation/mlp/model_metadata.json": {
+      "source": "models/torch-full-20261105/mlp-128x64-balancedFalse/metadata.json",
+      "sha256": "3e4bda281c72e9fb9ba21eef8cc99282a3a1fca5c98eceec172412aa0604c153"
+    },
+    "evaluation/mlp/confusion_matrix.png": {
+      "source": "outputs/torch-full-20261105/mlp/confusion_matrix.png",
+      "sha256": "e9687c0ee0748a82c8f3335a84ffa803dd298f881c1fd2e0693ddf5be224d29a"
+    },
+    "evaluation/mlp/roc.png": {
+      "source": "outputs/torch-full-20261105/mlp/roc.png",
+      "sha256": "3bf40252e363ab55a1feb2f54387d471fde7eaa6270c86d320199bc1db752989"
+    },
+    "evaluation/mlp/precision_recall.png": {
+      "source": "outputs/torch-full-20261105/mlp/precision_recall.png",
+      "sha256": "0b9ffa80506c5f288ee28c7b14f630163024e8b1efa4c01e3fbea5220cd46094"
+    },
+    "evaluation/mlp/category_breakdown.csv": {
+      "source": "outputs/torch-full-20261105/mlp/category_breakdown.csv",
+      "sha256": "17470e71eb9b507711056b5811a1651c5cd6109a563581beb31a8e3fd2453af9"
+    },
+    "verification/verification.json": {
+      "source": "outputs/torch-full-20261105-cpu-verification/verification.json",
+      "sha256": "63756d05b26fdbf8c1f61b02d730bc7ac437425f81661ba17cf08c9f0ba9d302"
+    },
+    "verification/predictions.csv.json": {
+      "source": "outputs/torch-full-20261105-cpu-verification/predictions.csv.json",
+      "sha256": "ebaa982718a87c0c319a82fbb57bc004b21b8e03fe66d00348202ab61013f802"
+    }
+  }
+}

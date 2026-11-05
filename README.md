@@ -6,6 +6,7 @@
 
 - 已实现 `prepare`、`train`、`evaluate`、`predict`，固定样本测试覆盖防泄漏、输入校验及独立进程预测。
 - 已迁移为 Torch 多数类基线、线性分类器和 MLP，支持自动设备选择、批量训练及设备无关权重保存。
+- 已在 Apple MPS 完成 7 个 Torch 候选的完整实验及 82,332 行测试评估；验证集选出的 MLP 128/64 测试 Accuracy 87.05%、攻击类 F1 89.16%、误报率 24.70%。完整测试集的 CPU 独立无标签预测验证通过，见 [正式结果](reports/results/torch-full-20261105/comparison.csv)。
 - Torch 的验证记录与正式实验进度见 [实验报告](reports/README.md)；[原 scikit-learn 报告](reports/sklearn-20261103.md) 及精简证据保留，旧指标不代表 Torch 模型效果。
 - 不包含实时抓包、Web 服务、多分类或线上部署；CSV 必须包含相同语义和单位的网络流量特征，不能直接输入任意日志。
 

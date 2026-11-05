@@ -1,0 +1,11 @@
+{
+  "best": "mlp-128x64-balancedFalse",
+  "family_winners": {
+    "dummy": "dummy",
+    "linear": "linear-balancedFalse",
+    "mlp": "mlp-128x64-balancedFalse"
+  },
+  "criterion": "validation attack F1 desc, FPR asc, recall desc, candidate order asc",
+  "threshold": 0.5,
+  "refit_train_validation": false
+}
