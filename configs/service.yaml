@@ -1,0 +1,15 @@
+# 路径相对本配置；复用已完成的真实数据划分和可信 Torch 模型。
+# 如尚未完成首次 prepare/train，请先按 README 完成离线流程。
+model: ../models/torch-full-20261105/best
+data: ../data/processed/torch-full-20261105
+training_config: service-training.yaml
+output: ../outputs/service
+rate: 100
+batch_size: 32
+max_wait_ms: 100
+queue_size: 1000
+# 第一次在启动 24 小时后训练；之后按间隔执行，重启保留下一次计划。
+training_interval_seconds: 86400
+training_timeout_seconds: 7200
+log_max_bytes: 10000000
+log_backups: 5

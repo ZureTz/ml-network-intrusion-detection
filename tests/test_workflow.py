@@ -7,35 +7,10 @@ import pandas as pd
 import pytest
 
 from ml_network_intrusion_detection.common import read_json, write_json
-from ml_network_intrusion_detection.data.prepare import prepare
 from ml_network_intrusion_detection.data.schema import FEATURES, read_frame, validate_features
 from ml_network_intrusion_detection.inference.predict import load_model, predict
 from ml_network_intrusion_detection.training.evaluate import evaluate
 from ml_network_intrusion_detection.training.train import train
-
-
-@pytest.fixture(scope="module")
-def trained(tmp_path_factory):
-    from .conftest import fixed_frame
-
-    root = tmp_path_factory.mktemp("workflow")
-    fixed_frame().to_csv(root / "train.csv", index=False)
-    fixed_frame(40, 1000).to_csv(root / "test.csv", index=False)
-    config = {
-        "seed": 42,
-        "threads": 1,
-        "device": "cpu",
-        "epochs": 4,
-        "train_batch_size": 32,
-        "batch_size": 17,
-        "sample_size": None,
-        "profile": "smoke",
-        "train_csv": str(root / "train.csv"),
-        "test_csv": str(root / "test.csv"),
-    }
-    prepare(config, root / "data")
-    train(config, root / "data", root / "models")
-    return root
 
 
 def test_end_to_end_subprocess_and_chunk_consistency(trained):

@@ -7,9 +7,13 @@ from pathlib import Path
 
 
 def main() -> None:
-    """执行 prepare/train/evaluate/predict；用户输入错误返回非零退出码。"""
-    parser = argparse.ArgumentParser(description="离线网络流量入侵检测（UNSW-NB15 二分类）")
+    """执行离线命令或常驻模拟服务；用户输入错误返回非零退出码。"""
+    parser = argparse.ArgumentParser(description="网络流量入侵检测（UNSW-NB15 二分类）")
     sub = parser.add_subparsers(dest="command", required=True)
+    serve = sub.add_parser("serve", help="启动持续学习模拟与本地 Web Dashboard")
+    serve.add_argument("--config", required=True, type=Path)
+    service = sub.add_parser("service", help="持续回放与定时训练；支持 macOS/Linux")
+    service.add_argument("--config", required=True, type=Path)
     for name in ("prepare", "train"):
         command = sub.add_parser(name)
         command.add_argument("--config", required=True, type=Path)
@@ -28,6 +32,19 @@ def main() -> None:
     try:
         from ml_network_intrusion_detection.common import load_config, read_json
 
+        if args.command == "serve":
+            from ml_network_intrusion_detection.simulation.web import serve
+
+            serve(args.config)
+            return
+        if args.command == "service":
+            from ml_network_intrusion_detection.inference.service import (
+                load_service_config,
+                run_service,
+            )
+
+            run_service(load_service_config(args.config))
+            return
         if args.command in ("prepare", "train"):
             config = load_config(args.config)
             if args.command == "train" and args.device is not None:

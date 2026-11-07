@@ -1,0 +1,8 @@
+# 后台训练使用独立进程，CPU 2 线程；训练集/验证集复用现有固定划分。
+seed: 42
+threads: 2
+device: cpu
+epochs: 20
+train_batch_size: 512
+profile: full
+conflict_policy: quarantine_development

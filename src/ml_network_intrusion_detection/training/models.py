@@ -210,6 +210,8 @@ class TorchClassifier(ClassifierMixin, BaseEstimator):
 
 def candidates(profile: str) -> list[dict]:
     """smoke 比较三个模型族；full 比较 7 个固定候选。"""
+    if profile == "simulation":
+        return [{"name": "mlp-64x32", "family": "mlp", "params": {"hidden_dims": (64, 32)}}]
     if profile in ("tune", "transformer_smoke"):
         from ml_network_intrusion_detection.training.search import search_candidates
 

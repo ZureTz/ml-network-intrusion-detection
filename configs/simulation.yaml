@@ -1,0 +1,15 @@
+# 所有路径相对本文件；首次使用需先完成 prepare。
+data: ../data/processed/torch-full-20261105
+output: ../outputs/simulation
+seed: 42
+pool_size: 10000
+initial_size: 2000
+validation_size: 2000
+rate: 20
+label_delay: 10
+training_interval: 60
+min_new_samples: 500
+epochs: 5
+threads: 2
+scenario: original
+port: 8000

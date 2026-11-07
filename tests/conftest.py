@@ -44,3 +44,28 @@ def raw_data(tmp_path: Path) -> tuple[dict, Path]:
         "train_csv": str(tmp_path / "train.csv"),
         "test_csv": str(tmp_path / "test.csv"),
     }, tmp_path
+
+
+@pytest.fixture(scope="module")
+def trained(tmp_path_factory):
+    from ml_network_intrusion_detection.data.prepare import prepare
+    from ml_network_intrusion_detection.training.train import train
+
+    root = tmp_path_factory.mktemp("workflow")
+    fixed_frame().to_csv(root / "train.csv", index=False)
+    fixed_frame(40, 1000).to_csv(root / "test.csv", index=False)
+    config = {
+        "seed": 42,
+        "threads": 1,
+        "device": "cpu",
+        "epochs": 4,
+        "train_batch_size": 32,
+        "batch_size": 17,
+        "sample_size": None,
+        "profile": "smoke",
+        "train_csv": str(root / "train.csv"),
+        "test_csv": str(root / "test.csv"),
+    }
+    prepare(config, root / "data")
+    train(config, root / "data", root / "models")
+    return root

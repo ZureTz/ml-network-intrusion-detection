@@ -64,8 +64,8 @@ def load_config(path: Path) -> dict[str, Any]:
     size = config["sample_size"]
     if size is not None and (type(size) is not int or size < 20):
         raise ValueError("sample_size 必须为空或 >= 20 的整数")
-    if config["profile"] not in ("smoke", "full", "tune", "transformer_smoke"):
-        raise ValueError("profile 必须为 smoke、full、tune 或 transformer_smoke")
+    if config["profile"] not in ("smoke", "full", "tune", "transformer_smoke", "simulation"):
+        raise ValueError("profile 必须为 smoke、full、tune 、transformer_smoke 或 simulation")
     if config["conflict_policy"] not in ("error", "quarantine_development"):
         raise ValueError("conflict_policy 必须为 error 或 quarantine_development")
     config["threads"] = min(config["threads"], os.cpu_count() or 1)
