@@ -1,0 +1,23 @@
+{
+  "checked_on": "2026-11-13",
+  "checks": {
+    "offline_models_and_main_table": 8,
+    "identical_split_manifests": 3,
+    "confusion_matrices": 4,
+    "simulation_jobs": 8,
+    "local_links": 91,
+    "public_text_files_privacy_checked": 15,
+    "pdf_pages": 17,
+    "pdf_author_empty": true,
+    "latex_no_overflow_missing_glyph_or_undefined_reference": true,
+    "no_bold_fonts": true,
+    "tracked_powerpoint_files": 0
+  },
+  "sha256": {
+    "reports/README.md": "12732652d5ee63b21853ce1d399f61bffbd3f728e91f3e5aafd492f3ac51dd1c",
+    "reports/final/report.tex": "a4136e945b1512c4a62334a75ee4cb2bf5532d12e26801c6645ea11b8c4f782c",
+    "reports/final/report.pdf": "8d81b3dc49294c1ea2131c41858c61465818eb18a5c6d4895044fb28231b60c6",
+    "reports/final/comparison.csv": "8f1019082c75a09941f33abdcfaef2b580219ccb90228c663a50fecceaa9eba3"
+  },
+  "note": "Documentation-only verification; no new model training. Visual page review performed separately."
+}

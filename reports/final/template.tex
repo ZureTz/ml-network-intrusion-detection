@@ -1,0 +1,74 @@
+\documentclass[UTF8,a4paper,11pt,fontset=fandol]{ctexart}
+\usepackage[margin=23mm,headheight=15pt]{geometry}
+\usepackage{amsmath,amssymb,booktabs,longtable,array,calc,graphicx,xcolor}
+\usepackage{fancyhdr,fvextra,upquote,xurl,caption,etoolbox,needspace,float}
+\newcounter{none}
+\usepackage[unicode,colorlinks=true,linkcolor=ReportBlue,urlcolor=ReportBlue]{hyperref}
+\definecolor{ReportBlue}{HTML}{24516A}
+\setmainfont{texgyretermes-regular.otf}[BoldFont=texgyretermes-regular.otf]
+\setsansfont{texgyreheros-regular.otf}[BoldFont=texgyreheros-regular.otf]
+\setmonofont{lmmono10-regular.otf}[Scale=0.85,BoldFont=lmmono10-regular.otf]
+\setCJKmainfont{FandolSong-Regular.otf}[BoldFont=FandolSong-Regular.otf]
+\setCJKsansfont{FandolHei-Regular.otf}[BoldFont=FandolHei-Regular.otf]
+\ctexset{section={format=\Large\normalfont\color{ReportBlue}},
+ subsection={format=\large\normalfont\color{ReportBlue}},
+ subsubsection={format=\normalsize\normalfont}}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{4pt}
+\linespread{1.16}
+\setlength{\emergencystretch}{3em}
+\widowpenalty=10000
+\clubpenalty=10000
+\setlength{\LTpre}{6pt}
+\setlength{\LTpost}{6pt}
+\AtBeginEnvironment{longtable}{\small\renewcommand{\arraystretch}{1.2}}
+\DefineVerbatimEnvironment{verbatim}{Verbatim}{breaklines,breakanywhere,fontsize=\footnotesize}
+\providecommand{\tightlist}{\setlength{\itemsep}{2pt}\setlength{\parskip}{0pt}}
+\providecommand{\pandocbounded}[1]{#1}
+\makeatletter
+\def\fps@figure{H}
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>0.72\textheight0.72\textheight\else\Gin@nat@height\fi}
+\makeatother
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\captionsetup{font=small,labelfont=normalfont,margin=8mm}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\fancypagestyle{plain}{
+ \fancyhf{}
+ \fancyfoot[C]{\small\thepage}
+ \renewcommand{\headrulewidth}{0pt}
+}
+\hypersetup{pdftitle={基于机器学习的网络流量入侵检测系统的设计与实现},
+ pdfauthor={},pdfsubject={课程实验报告：离线模型比较与持续学习模拟},pdfkeywords={UNSW-NB15,MLP,Transformer}}
+\begin{document}
+\begin{titlepage}
+\vspace*{18mm}
+{\large\color{ReportBlue}课程设计 · 最终实验报告\par}
+\vspace{24mm}
+{\fontsize{25}{38}\selectfont 基于机器学习的网络流量\par 入侵检测系统的设计与实现\par}
+\vspace{14mm}
+{\large 模型结构与实验比较\quad /\quad 实时推理与定时训练模拟\par}
+\vspace{5mm}
+{\large Web Dashboard 与可复现证据\par}
+\vfill
+\noindent\rule{\textwidth}{0.5pt}
+\vspace{5mm}
+\noindent 数据集：UNSW-NB15\par
+\noindent 实验：2026 年 11 月 3 日至 6 日\par
+\noindent 整理与验证：2026 年 11 月 13 日\par
+\noindent 公开版本：不含个人姓名、学号或演示文稿\par
+\vspace{12mm}
+\end{titlepage}
+\pagenumbering{roman}
+\begingroup
+\small\linespread{1}\selectfont
+\setlength{\parskip}{0pt}
+\tableofcontents
+\endgroup
+\clearpage
+\pagenumbering{arabic}
+$body$
+\end{document}

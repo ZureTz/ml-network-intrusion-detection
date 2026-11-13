@@ -1,0 +1,777 @@
+{
+  "clock": 842.4465127500589,
+  "rate": 150,
+  "scenario": "original",
+  "processed": 20412,
+  "trained": 10007,
+  "confusion": [
+    4976,
+    1173,
+    149,
+    12609
+  ],
+  "dropped": 0,
+  "confirmed_events": 18907,
+  "pending_events": 1505,
+  "jobs": [
+    {
+      "path": "outputs/simulation/training/1793959450430590000",
+      "count": 2060,
+      "started": 1793959450.471339,
+      "status": "accepted",
+      "decision": {
+        "accepted": true
+      }
+    },
+    {
+      "path": "outputs/simulation/training/1793959529310432000",
+      "count": 3059,
+      "started": 1793959529.3746262,
+      "status": "rejected",
+      "decision": {
+        "accepted": false,
+        "criterion": "validation F1 strictly increases and false positive rate does not increase",
+        "current_model": "outputs/simulation/training/1793959450430590000/model/best",
+        "candidate_model": "outputs/simulation/training/1793959529310432000/model/best",
+        "validation_sha256": "f31ec00824132e144571a43a8e7623cac89fb5c08fb05f24198957d9d2c27443",
+        "metrics": {
+          "current": {
+            "rows": 2000,
+            "accuracy": 0.9115,
+            "precision": 0.892328398384926,
+            "recall": 0.9873417721518988,
+            "f1": 0.9374337221633086,
+            "false_positive_rate": 0.243531202435312,
+            "roc_auc": 0.9338154543939996,
+            "average_precision": 0.9589888203849236,
+            "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+            "confusion_matrix": [
+              [
+                497,
+                160
+              ],
+              [
+                17,
+                1326
+              ]
+            ],
+            "class_order": [
+              "normal",
+              "attack"
+            ],
+            "per_class": {
+              "normal": {
+                "precision": 0.9669260700389105,
+                "recall": 0.756468797564688,
+                "f1": 0.8488471391972673,
+                "support": 657
+              },
+              "attack": {
+                "precision": 0.892328398384926,
+                "recall": 0.9873417721518988,
+                "f1": 0.9374337221633086,
+                "support": 1343
+              }
+            },
+            "macro": {
+              "precision": 0.9296272342119183,
+              "recall": 0.8719052848582933,
+              "f1": 0.8931404306802879
+            },
+            "threshold": 0.5,
+            "undefined_reasons": {}
+          },
+          "candidate": {
+            "rows": 2000,
+            "accuracy": 0.9125,
+            "precision": 0.8898531375166889,
+            "recall": 0.992553983618764,
+            "f1": 0.9384019711369236,
+            "false_positive_rate": 0.2511415525114155,
+            "roc_auc": 0.9356106583434485,
+            "average_precision": 0.9618976534293606,
+            "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+            "confusion_matrix": [
+              [
+                492,
+                165
+              ],
+              [
+                10,
+                1333
+              ]
+            ],
+            "class_order": [
+              "normal",
+              "attack"
+            ],
+            "per_class": {
+              "normal": {
+                "precision": 0.9800796812749004,
+                "recall": 0.7488584474885844,
+                "f1": 0.8490077653149266,
+                "support": 657
+              },
+              "attack": {
+                "precision": 0.8898531375166889,
+                "recall": 0.992553983618764,
+                "f1": 0.9384019711369236,
+                "support": 1343
+              }
+            },
+            "macro": {
+              "precision": 0.9349664093957947,
+              "recall": 0.8707062155536742,
+              "f1": 0.8937048682259251
+            },
+            "threshold": 0.5,
+            "undefined_reasons": {}
+          }
+        }
+      }
+    },
+    {
+      "path": "outputs/simulation/training/1793959589308792000",
+      "count": 4260,
+      "started": 1793959589.373926,
+      "status": "accepted",
+      "decision": {
+        "accepted": true,
+        "criterion": "validation F1 strictly increases and false positive rate does not increase",
+        "current_model": "outputs/simulation/training/1793959450430590000/model/best",
+        "candidate_model": "outputs/simulation/training/1793959589308792000/model/best",
+        "validation_sha256": "f31ec00824132e144571a43a8e7623cac89fb5c08fb05f24198957d9d2c27443",
+        "metrics": {
+          "current": {
+            "rows": 2000,
+            "accuracy": 0.9115,
+            "precision": 0.892328398384926,
+            "recall": 0.9873417721518988,
+            "f1": 0.9374337221633086,
+            "false_positive_rate": 0.243531202435312,
+            "roc_auc": 0.9338154543939996,
+            "average_precision": 0.9589888203849236,
+            "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+            "confusion_matrix": [
+              [
+                497,
+                160
+              ],
+              [
+                17,
+                1326
+              ]
+            ],
+            "class_order": [
+              "normal",
+              "attack"
+            ],
+            "per_class": {
+              "normal": {
+                "precision": 0.9669260700389105,
+                "recall": 0.756468797564688,
+                "f1": 0.8488471391972673,
+                "support": 657
+              },
+              "attack": {
+                "precision": 0.892328398384926,
+                "recall": 0.9873417721518988,
+                "f1": 0.9374337221633086,
+                "support": 1343
+              }
+            },
+            "macro": {
+              "precision": 0.9296272342119183,
+              "recall": 0.8719052848582933,
+              "f1": 0.8931404306802879
+            },
+            "threshold": 0.5,
+            "undefined_reasons": {}
+          },
+          "candidate": {
+            "rows": 2000,
+            "accuracy": 0.9245,
+            "precision": 0.9,
+            "recall": 0.9985107967237528,
+            "f1": 0.9466996117190257,
+            "false_positive_rate": 0.2267884322678843,
+            "roc_auc": 0.9693455325601716,
+            "average_precision": 0.9838973369825321,
+            "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+            "confusion_matrix": [
+              [
+                508,
+                149
+              ],
+              [
+                2,
+                1341
+              ]
+            ],
+            "class_order": [
+              "normal",
+              "attack"
+            ],
+            "per_class": {
+              "normal": {
+                "precision": 0.996078431372549,
+                "recall": 0.7732115677321156,
+                "f1": 0.8706083976006855,
+                "support": 657
+              },
+              "attack": {
+                "precision": 0.9,
+                "recall": 0.9985107967237528,
+                "f1": 0.9466996117190257,
+                "support": 1343
+              }
+            },
+            "macro": {
+              "precision": 0.9480392156862745,
+              "recall": 0.8858611822279342,
+              "f1": 0.9086540046598557
+            },
+            "threshold": 0.5,
+            "undefined_reasons": {}
+          }
+        }
+      }
+    },
+    {
+      "path": "outputs/simulation/training/1793959649353161000",
+      "count": 5460,
+      "started": 1793959649.4326699,
+      "status": "accepted",
+      "decision": {
+        "accepted": true,
+        "criterion": "validation F1 strictly increases and false positive rate does not increase",
+        "current_model": "outputs/simulation/training/1793959589308792000/model/best",
+        "candidate_model": "outputs/simulation/training/1793959649353161000/model/best",
+        "validation_sha256": "f31ec00824132e144571a43a8e7623cac89fb5c08fb05f24198957d9d2c27443",
+        "metrics": {
+          "current": {
+            "rows": 2000,
+            "accuracy": 0.9245,
+            "precision": 0.9,
+            "recall": 0.9985107967237528,
+            "f1": 0.9466996117190257,
+            "false_positive_rate": 0.2267884322678843,
+            "roc_auc": 0.9693455325601716,
+            "average_precision": 0.9838973369825321,
+            "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+            "confusion_matrix": [
+              [
+                508,
+                149
+              ],
+              [
+                2,
+                1341
+              ]
+            ],
+            "class_order": [
+              "normal",
+              "attack"
+            ],
+            "per_class": {
+              "normal": {
+                "precision": 0.996078431372549,
+                "recall": 0.7732115677321156,
+                "f1": 0.8706083976006855,
+                "support": 657
+              },
+              "attack": {
+                "precision": 0.9,
+                "recall": 0.9985107967237528,
+                "f1": 0.9466996117190257,
+                "support": 1343
+              }
+            },
+            "macro": {
+              "precision": 0.9480392156862745,
+              "recall": 0.8858611822279342,
+              "f1": 0.9086540046598557
+            },
+            "threshold": 0.5,
+            "undefined_reasons": {}
+          },
+          "candidate": {
+            "rows": 2000,
+            "accuracy": 0.929,
+            "precision": 0.9054692775151925,
+            "recall": 0.9985107967237528,
+            "f1": 0.9497167138810199,
+            "false_positive_rate": 0.213089802130898,
+            "roc_auc": 0.9747900778715046,
+            "average_precision": 0.9867362209651587,
+            "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+            "confusion_matrix": [
+              [
+                517,
+                140
+              ],
+              [
+                2,
+                1341
+              ]
+            ],
+            "class_order": [
+              "normal",
+              "attack"
+            ],
+            "per_class": {
+              "normal": {
+                "precision": 0.9961464354527938,
+                "recall": 0.786910197869102,
+                "f1": 0.8792517006802721,
+                "support": 657
+              },
+              "attack": {
+                "precision": 0.9054692775151925,
+                "recall": 0.9985107967237528,
+                "f1": 0.9497167138810199,
+                "support": 1343
+              }
+            },
+            "macro": {
+              "precision": 0.9508078564839931,
+              "recall": 0.8927104972964274,
+              "f1": 0.914484207280646
+            },
+            "threshold": 0.5,
+            "undefined_reasons": {}
+          }
+        }
+      }
+    },
+    {
+      "path": "outputs/simulation/training/1793959709365941000",
+      "count": 6661,
+      "started": 1793959709.4654222,
+      "status": "accepted",
+      "decision": {
+        "accepted": true,
+        "criterion": "validation F1 strictly increases and false positive rate does not increase",
+        "current_model": "outputs/simulation/training/1793959649353161000/model/best",
+        "candidate_model": "outputs/simulation/training/1793959709365941000/model/best",
+        "validation_sha256": "f31ec00824132e144571a43a8e7623cac89fb5c08fb05f24198957d9d2c27443",
+        "metrics": {
+          "current": {
+            "rows": 2000,
+            "accuracy": 0.929,
+            "precision": 0.9054692775151925,
+            "recall": 0.9985107967237528,
+            "f1": 0.9497167138810199,
+            "false_positive_rate": 0.213089802130898,
+            "roc_auc": 0.9747900778715046,
+            "average_precision": 0.9867362209651587,
+            "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+            "confusion_matrix": [
+              [
+                517,
+                140
+              ],
+              [
+                2,
+                1341
+              ]
+            ],
+            "class_order": [
+              "normal",
+              "attack"
+            ],
+            "per_class": {
+              "normal": {
+                "precision": 0.9961464354527938,
+                "recall": 0.786910197869102,
+                "f1": 0.8792517006802721,
+                "support": 657
+              },
+              "attack": {
+                "precision": 0.9054692775151925,
+                "recall": 0.9985107967237528,
+                "f1": 0.9497167138810199,
+                "support": 1343
+              }
+            },
+            "macro": {
+              "precision": 0.9508078564839931,
+              "recall": 0.8927104972964274,
+              "f1": 0.914484207280646
+            },
+            "threshold": 0.5,
+            "undefined_reasons": {}
+          },
+          "candidate": {
+            "rows": 2000,
+            "accuracy": 0.932,
+            "precision": 0.9113837764144512,
+            "recall": 0.9955323901712584,
+            "f1": 0.9516014234875445,
+            "false_positive_rate": 0.197869101978691,
+            "roc_auc": 0.9777242843267588,
+            "average_precision": 0.9882900761376847,
+            "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+            "confusion_matrix": [
+              [
+                527,
+                130
+              ],
+              [
+                6,
+                1337
+              ]
+            ],
+            "class_order": [
+              "normal",
+              "attack"
+            ],
+            "per_class": {
+              "normal": {
+                "precision": 0.9887429643527205,
+                "recall": 0.802130898021309,
+                "f1": 0.8857142857142857,
+                "support": 657
+              },
+              "attack": {
+                "precision": 0.9113837764144512,
+                "recall": 0.9955323901712584,
+                "f1": 0.9516014234875445,
+                "support": 1343
+              }
+            },
+            "macro": {
+              "precision": 0.9500633703835859,
+              "recall": 0.8988316440962837,
+              "f1": 0.9186578546009151
+            },
+            "threshold": 0.5,
+            "undefined_reasons": {}
+          }
+        }
+      }
+    },
+    {
+      "path": "outputs/simulation/training/1793959843090518000",
+      "count": 7862,
+      "started": 1793959843.199098,
+      "status": "accepted",
+      "decision": {
+        "accepted": true,
+        "criterion": "validation F1 strictly increases and false positive rate does not increase",
+        "current_model": "outputs/simulation/training/1793959709365941000/model/best",
+        "candidate_model": "outputs/simulation/training/1793959843090518000/model/best",
+        "validation_sha256": "f31ec00824132e144571a43a8e7623cac89fb5c08fb05f24198957d9d2c27443",
+        "metrics": {
+          "current": {
+            "rows": 2000,
+            "accuracy": 0.932,
+            "precision": 0.9113837764144512,
+            "recall": 0.9955323901712584,
+            "f1": 0.9516014234875445,
+            "false_positive_rate": 0.197869101978691,
+            "roc_auc": 0.9777242843267588,
+            "average_precision": 0.9882900761376847,
+            "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+            "confusion_matrix": [
+              [
+                527,
+                130
+              ],
+              [
+                6,
+                1337
+              ]
+            ],
+            "class_order": [
+              "normal",
+              "attack"
+            ],
+            "per_class": {
+              "normal": {
+                "precision": 0.9887429643527205,
+                "recall": 0.802130898021309,
+                "f1": 0.8857142857142857,
+                "support": 657
+              },
+              "attack": {
+                "precision": 0.9113837764144512,
+                "recall": 0.9955323901712584,
+                "f1": 0.9516014234875445,
+                "support": 1343
+              }
+            },
+            "macro": {
+              "precision": 0.9500633703835859,
+              "recall": 0.8988316440962837,
+              "f1": 0.9186578546009151
+            },
+            "threshold": 0.5,
+            "undefined_reasons": {}
+          },
+          "candidate": {
+            "rows": 2000,
+            "accuracy": 0.9385,
+            "precision": 0.9242002781641169,
+            "recall": 0.9895755770662695,
+            "f1": 0.9557713052858684,
+            "false_positive_rate": 0.1659056316590563,
+            "roc_auc": 0.9812455587402292,
+            "average_precision": 0.9903643800979669,
+            "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+            "confusion_matrix": [
+              [
+                548,
+                109
+              ],
+              [
+                14,
+                1329
+              ]
+            ],
+            "class_order": [
+              "normal",
+              "attack"
+            ],
+            "per_class": {
+              "normal": {
+                "precision": 0.9750889679715302,
+                "recall": 0.8340943683409436,
+                "f1": 0.8990976210008204,
+                "support": 657
+              },
+              "attack": {
+                "precision": 0.9242002781641169,
+                "recall": 0.9895755770662695,
+                "f1": 0.9557713052858684,
+                "support": 1343
+              }
+            },
+            "macro": {
+              "precision": 0.9496446230678235,
+              "recall": 0.9118349727036066,
+              "f1": 0.9274344631433444
+            },
+            "threshold": 0.5,
+            "undefined_reasons": {}
+          }
+        }
+      }
+    },
+    {
+      "path": "outputs/simulation/training/1793960829945316000",
+      "count": 9062,
+      "started": 1793960830.0914712,
+      "status": "rejected",
+      "decision": {
+        "accepted": false,
+        "criterion": "validation F1 strictly increases and false positive rate does not increase",
+        "current_model": "outputs/simulation/training/1793959843090518000/model/best",
+        "candidate_model": "outputs/simulation/training/1793960829945316000/model/best",
+        "validation_sha256": "f31ec00824132e144571a43a8e7623cac89fb5c08fb05f24198957d9d2c27443",
+        "metrics": {
+          "current": {
+            "rows": 2000,
+            "accuracy": 0.9385,
+            "precision": 0.9242002781641169,
+            "recall": 0.9895755770662695,
+            "f1": 0.9557713052858684,
+            "false_positive_rate": 0.1659056316590563,
+            "roc_auc": 0.9812455587402292,
+            "average_precision": 0.9903643800979669,
+            "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+            "confusion_matrix": [
+              [
+                548,
+                109
+              ],
+              [
+                14,
+                1329
+              ]
+            ],
+            "class_order": [
+              "normal",
+              "attack"
+            ],
+            "per_class": {
+              "normal": {
+                "precision": 0.9750889679715302,
+                "recall": 0.8340943683409436,
+                "f1": 0.8990976210008204,
+                "support": 657
+              },
+              "attack": {
+                "precision": 0.9242002781641169,
+                "recall": 0.9895755770662695,
+                "f1": 0.9557713052858684,
+                "support": 1343
+              }
+            },
+            "macro": {
+              "precision": 0.9496446230678235,
+              "recall": 0.9118349727036066,
+              "f1": 0.9274344631433444
+            },
+            "threshold": 0.5,
+            "undefined_reasons": {}
+          },
+          "candidate": {
+            "rows": 2000,
+            "accuracy": 0.9345,
+            "precision": 0.9225941422594143,
+            "recall": 0.9851079672375279,
+            "f1": 0.9528267915016204,
+            "false_positive_rate": 0.1689497716894977,
+            "roc_auc": 0.982511494858622,
+            "average_precision": 0.9910883508648414,
+            "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+            "confusion_matrix": [
+              [
+                546,
+                111
+              ],
+              [
+                20,
+                1323
+              ]
+            ],
+            "class_order": [
+              "normal",
+              "attack"
+            ],
+            "per_class": {
+              "normal": {
+                "precision": 0.9646643109540636,
+                "recall": 0.8310502283105022,
+                "f1": 0.892886345053148,
+                "support": 657
+              },
+              "attack": {
+                "precision": 0.9225941422594143,
+                "recall": 0.9851079672375279,
+                "f1": 0.9528267915016204,
+                "support": 1343
+              }
+            },
+            "macro": {
+              "precision": 0.943629226606739,
+              "recall": 0.9080790977740151,
+              "f1": 0.9228565682773842
+            },
+            "threshold": 0.5,
+            "undefined_reasons": {}
+          }
+        }
+      }
+    },
+    {
+      "path": "outputs/simulation/training/1793960889983026000",
+      "count": 10007,
+      "started": 1793960890.126425,
+      "status": "rejected",
+      "decision": {
+        "accepted": false,
+        "criterion": "validation F1 strictly increases and false positive rate does not increase",
+        "current_model": "outputs/simulation/training/1793959843090518000/model/best",
+        "candidate_model": "outputs/simulation/training/1793960889983026000/model/best",
+        "validation_sha256": "f31ec00824132e144571a43a8e7623cac89fb5c08fb05f24198957d9d2c27443",
+        "metrics": {
+          "current": {
+            "rows": 2000,
+            "accuracy": 0.9385,
+            "precision": 0.9242002781641169,
+            "recall": 0.9895755770662695,
+            "f1": 0.9557713052858684,
+            "false_positive_rate": 0.1659056316590563,
+            "roc_auc": 0.9812455587402292,
+            "average_precision": 0.9903643800979669,
+            "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+            "confusion_matrix": [
+              [
+                548,
+                109
+              ],
+              [
+                14,
+                1329
+              ]
+            ],
+            "class_order": [
+              "normal",
+              "attack"
+            ],
+            "per_class": {
+              "normal": {
+                "precision": 0.9750889679715302,
+                "recall": 0.8340943683409436,
+                "f1": 0.8990976210008204,
+                "support": 657
+              },
+              "attack": {
+                "precision": 0.9242002781641169,
+                "recall": 0.9895755770662695,
+                "f1": 0.9557713052858684,
+                "support": 1343
+              }
+            },
+            "macro": {
+              "precision": 0.9496446230678235,
+              "recall": 0.9118349727036066,
+              "f1": 0.9274344631433444
+            },
+            "threshold": 0.5,
+            "undefined_reasons": {}
+          },
+          "candidate": {
+            "rows": 2000,
+            "accuracy": 0.9355,
+            "precision": 0.9180440771349863,
+            "recall": 0.992553983618764,
+            "f1": 0.9538461538461539,
+            "false_positive_rate": 0.1811263318112633,
+            "roc_auc": 0.9811492251949621,
+            "average_precision": 0.9902887773538579,
+            "average_precision_definition": "sum of recall increments weighted by precision (AP)",
+            "confusion_matrix": [
+              [
+                538,
+                119
+              ],
+              [
+                10,
+                1333
+              ]
+            ],
+            "class_order": [
+              "normal",
+              "attack"
+            ],
+            "per_class": {
+              "normal": {
+                "precision": 0.9817518248175182,
+                "recall": 0.8188736681887366,
+                "f1": 0.8929460580912864,
+                "support": 657
+              },
+              "attack": {
+                "precision": 0.9180440771349863,
+                "recall": 0.992553983618764,
+                "f1": 0.9538461538461539,
+                "support": 1343
+              }
+            },
+            "macro": {
+              "precision": 0.9498979509762522,
+              "recall": 0.9057138259037503,
+              "f1": 0.9233961059687201
+            },
+            "threshold": 0.5,
+            "undefined_reasons": {}
+          }
+        }
+      }
+    }
+  ],
+  "note": "历史演示快照；含重复回放，非独立测试指标。停止后数据库的 paused 字段与界面暂停状态不作等同解释。"
+}

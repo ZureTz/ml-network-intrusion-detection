@@ -4,6 +4,8 @@
 
 ## 当前进度
 
+- 已整理公开版[最终实验报告](reports/README.md)、[LaTeX 源文件](reports/final/report.tex)和 [PDF](reports/final/report.pdf)，覆盖各模型结构、历史对比、MLP 调参结果、持续学习模拟与实际 Dashboard。重建方式见[报告构建说明](reports/final/README.md)。PPT 为本地私人材料，不随仓库上传。
+
 - 新增常驻 NB15 特征回放与定时训练服务：支持 CLI 启动本地 Web Dashboard、延迟标签、累计新样本重训、验证后切换和轮转日志。它模拟已提取的流特征到达，不执行实时抓包。
 
 - 已完成 [Transformer 与现有模型调参实验](reports/transformer-tuning-20261105.md)：测试 F1 为 Transformer 90.54%、调参线性 84.80%、调参 MLP 87.49%。MLP 验证集略升但测试下降，结果没有被写成全面提升；旧模型保留。本轮整体 `best/` 仍按预先规定的验证集选择为 MLP。

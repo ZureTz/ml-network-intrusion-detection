@@ -1,0 +1,29 @@
+{
+  "exported_on": "2026-11-13",
+  "method": "Read-only SQLite state/jobs snapshot; each job source count and promotion decision cross-checked against saved training artifacts. Absolute workspace prefix removed recursively. No data rows, model binaries or PPT copied.",
+  "source_sha256": {
+    "outputs/simulation/experiment.json": "4ad415ca0836781e5354903be6f3759ee1feb82419ae0293215051d9acebf5b8",
+    "outputs/simulation/pool.csv": "9ad247c300a6684b748ea4876a7fd122bcbc236208576de71e4c378225b9fb81",
+    "outputs/simulation/validation.csv": "f31ec00824132e144571a43a8e7623cac89fb5c08fb05f24198957d9d2c27443",
+    "outputs/presentation-20261113/simulation-evidence.json": "811b29d196ec54e47d8bb3b0f2b529bfa0429c1ed708a6ddf6972c7f12d20cce",
+    "outputs/simulation/training/1793959450430590000/data/manifest.json": "fec934dde0f425cd12d32b6126d51a4f20a7dc67f40b3d8e6017fd42cc907706",
+    "outputs/simulation/training/1793959529310432000/data/manifest.json": "1d35be6c7a2317964519cc3e2652462436d1380427bc6e8e66859a61db8fa85c",
+    "outputs/simulation/training/1793959529310432000/model/promotion.json": "5cf01d94805626dd5dd4a16df6592de0d0a57c1cbf085e1a5a8d0e00b00f8490",
+    "outputs/simulation/training/1793959589308792000/data/manifest.json": "8d393e2eb5b9110064108fc40eebbd224cb097b4e2b3087160095a44edf2d1ca",
+    "outputs/simulation/training/1793959589308792000/model/promotion.json": "a364520e651625d22c7bd42e1e9651fc1d81302e8ee2ce89e5f2719e3c65b051",
+    "outputs/simulation/training/1793959649353161000/data/manifest.json": "e4e32a313ab28ead828808bb94263778777e7f25a1f44b3055f9188d4aac4f77",
+    "outputs/simulation/training/1793959649353161000/model/promotion.json": "1c55c1639e2120da0db2c3ad0d1612f04fcb1a662a9f2fe9a13d0206461bc01d",
+    "outputs/simulation/training/1793959709365941000/data/manifest.json": "b5c462d4b5e9134abffb5afc27b3f3bc103c195fd10531099a907da18b0b0809",
+    "outputs/simulation/training/1793959709365941000/model/promotion.json": "b1333c696b64ecb5ca9b7a4257410c6c4e14596235bcfee3d921043df702f88c",
+    "outputs/simulation/training/1793959843090518000/data/manifest.json": "5c5d432042bcb57bf7a7e81df228700c550204c97fd9835612843d6ff58da2cb",
+    "outputs/simulation/training/1793959843090518000/model/promotion.json": "ed064a7100f7d8fc9ca598a36cbf340fedef335fcfe8ba792e98c63f6f2d008c",
+    "outputs/simulation/training/1793960829945316000/data/manifest.json": "d0e5fc8ae6fed6326b7bc542c56b7174408b3d18c8045033c5c6a2daf48ad8f1",
+    "outputs/simulation/training/1793960829945316000/model/promotion.json": "cd89701efc870e514de81dd6a938ba8e00d6fed7292ae16524737f8836901cba",
+    "outputs/simulation/training/1793960889983026000/data/manifest.json": "fa7abb7911989725b94ed7022cf4948ce94466965c4042807c8e9d814930d4b8",
+    "outputs/simulation/training/1793960889983026000/model/promotion.json": "40f0df6d8732b44505dc08c8a10791f595acc23851c2aaf61489d91f0688f4b8",
+    "outputs/presentation-20261113/assets/dashboard-overview.png": "22b3d6581aefe6d5d12429d7aa791b6e5a08596861eb4c95760a57bd6dffca91",
+    "outputs/presentation-20261113/assets/dashboard-events.png": "c4a621fcb6b260f7dc728bd77cce4a4070e039b6ea500f6b13cec310f51bff76",
+    "outputs/presentation-20261113/assets/dashboard-jobs.png": "420f57a1cdb59c2a03922850faef9ed1460c2c7a8eceb81d3d25113c4d4810fd"
+  },
+  "sqlite_state_sha256": "ccd8f54ad57e090f2eff06f941b0c66b75925287061e44f11fbfe9edf42b309f"
+}

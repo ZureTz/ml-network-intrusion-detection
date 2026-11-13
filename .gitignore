@@ -22,3 +22,17 @@ build/
 !/models/.gitkeep
 /outputs/*
 !/outputs/.gitkeep
+
+# 演示材料可能包含姓名；不随公开实验报告提交。
+/reports/presentations/
+*.ppt
+*.pptx
+*.ppsx
+
+# LaTeX 中间文件；保留报告源文件和最终 PDF。
+*.aux
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+*.toc
+*.xdv
